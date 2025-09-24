@@ -14,13 +14,22 @@ body {
 }
 
 /* Dark mode (Tailwind dark mode should be set to 'class' so <html class="dark"> or similar works) */
-.dark body {
+body {
   @apply bg-slate-900 text-slate-100;
 }
 
 /* Layout */
+
+/* Navbar container */
 .nav {
-  @apply flex gap-3 mb-3; /* gap-3 == 12px, mb-3 == 12px */
+  @apply flex items-center justify-start bg-slate-800 px-6 py-3 rounded-lg shadow-md;
+}
+
+/* Nav links */
+.nav a {
+  @apply text-slate-100 font-medium rounded 
+         hover:text-indigo-300 
+         focus:outline-none focus:ring-2 focus:ring-indigo-400 mx-3;
 }
 
 .main {
