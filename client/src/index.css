@@ -1,36 +1,112 @@
+:root {
+  --gap: 16px;
+}
 
-:root { --gap: 16px; }
-body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin: 16px; }
-.nav { display: flex; gap: 12px; margin-bottom: 12px; }
-.main { max-width: 1100px; }
+/* Body / base */
+body {
+  /* keep original system font stack */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  @apply m-4 bg-slate-50 text-slate-900;
+}
 
+/* Dark mode (Tailwind dark mode should be set to 'class' so <html class="dark"> or similar works) */
+.dark body {
+  @apply bg-slate-900 text-slate-100;
+}
+
+/* Layout */
+.nav {
+  @apply flex gap-3 mb-3; /* gap-3 == 12px, mb-3 == 12px */
+}
+
+.main {
+  @apply max-w-[1100px] mx-auto;
+}
 
 /* Grid */
 .cards-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-gap: var(--gap);
+  @apply grid;
+  gap: var(--gap); /* use the CSS var for consistent gap */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* keep original responsive multi-column behavior */
 }
-
 
 /* Card */
 .movie-card {
-display: flex;
-flex-direction: column;
-border-radius: 8px;
-box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-overflow: hidden;
-background: #fff;
-border: 1px solid #eee;
+  @apply flex flex-col rounded-lg overflow-hidden shadow-sm bg-white border border-gray-200;
+  /* shadow-sm ~ 0 1px 4px rgba(0,0,0,0.08) roughly */
 }
-.poster-wrap img { width: 100%; height: 360px; object-fit: cover; display: block; }
-.card-body { padding: 12px; }
-.card-title { margin: 0 0 6px 0; font-size: 1rem; }
-.meta { font-size: 0.85rem; color: #555; margin-bottom: 8px; }
-.desc { font-size: 0.9rem; color: #333; margin: 0; }
 
+/* Card dark adjustments */
+.dark .movie-card {
+  @apply bg-gray-800 border-gray-700;
+}
 
-/* small responsive tweaks */
+/* Poster */
+.poster-wrap img {
+  @apply w-full object-cover block;
+  height: 360px; /* exact px height preserved */
+  /* If you prefer the Tailwind arbitrary height utility instead:
+     @apply h-[360px];
+     but leaving explicit height ensures non-utility fallback if needed.
+  */
+}
+
+/* Keep the small responsive tweak (<=480px) */
 @media (max-width: 480px) {
-.poster-wrap img { height: 200px; }
+  .poster-wrap img {
+    height: 200px;
+    /* or @apply h-[200px]; */
+  }
+}
+
+/* Card body and text */
+.card-body {
+  @apply p-3; /* 12px */
+}
+
+.card-title {
+  margin: 0;
+  @apply mb-1.5 text-base font-semibold; /* mb-1.5 ≈ 6px, text-base ≈ 1rem */
+}
+
+.meta {
+  @apply text-sm mb-2;
+  color: #555; /* slightly different than Tailwind default; kept explicit for parity */
+}
+
+/* Dark meta color override */
+.dark .meta {
+  @apply text-slate-400;
+  color: unset;
+}
+
+.desc {
+  margin: 0;
+  @apply text-sm;
+  color: #333;
+}
+
+/* Links (app uses Link elements) */
+a, .link {
+  @apply text-indigo-600 hover:underline;
+}
+
+/* Dark mode link color */
+.dark a, .dark .link {
+  @apply text-indigo-400;
+}
+
+/* h1 defaults for app */
+h1 {
+  @apply text-3xl font-extrabold my-4;
+}
+
+/* small accessibility / focus ring for interactive items (buttons/links inside nav etc.) */
+a:focus, button:focus {
+  @apply outline-none ring-2 ring-indigo-300;
+}
+
+/* Utility: ensure images inside cards don't inherit border radius overflow issues */
+.movie-card .poster-wrap {
+  overflow: hidden;
 }
