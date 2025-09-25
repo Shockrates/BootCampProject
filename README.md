@@ -1,4 +1,4 @@
-# Team A Bootcamp Project — SKG.Education (Team A)
+# Bootcamp Project — SKG.Education (Team A)
 
 > Full-stack mockup project built by **Team A** during the **SKG.Education** bootcamp.
 
@@ -29,21 +29,12 @@ This repository contains two top-level folders:
     npm install
 
 **3. Environment file**
-- Rename or copy the example env file to `.env` (choose the command that fits your OS):
-
-    # macOS / Linux
-    mv .env.example .env
-
-    # Windows (PowerShell)
-    Rename-Item .env.example .env
-
-    # or manually copy/rename the file in your file explorer
+- Rename or copy the example env file to `.env`:
 
 - Open `.env` and replace `MONGO_URI` with your MongoDB connection string.  
   **Important:** You must create a MongoDB cluster (for example: MongoDB Atlas) and use its connection URI. Example value:
 
     MONGO_URI="mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/<dbname>?retryWrites=true&w=majority"
-    PORT=3000
 
 > Make sure the username/password and database name are correct and the cluster IP access / network settings allow connections (or add your IP / 0.0.0.0/0 temporarily for testing in Atlas).
 
@@ -115,39 +106,7 @@ This repository contains two top-level folders:
 - **Cannot connect to MongoDB:** check `MONGO_URI`, Atlas IP access list, username/password, and network/firewall rules.
 - **Port already in use:** change `PORT` in `.env` (and update how you call the server) or stop the process using the port.
 - **Frontend not loading:** ensure `npm install` ran successfully in `client/` and run `npm run dev` inside `client/`.
-- **Windows rename issues:** use File Explorer to rename `.env.example` → `.env` if CLI commands fail.
+
 
 ---
 
-## ℹ️ Notes
-
-- This repository is an educational group project for the **SKG.Education** bootcamp — **Team A**.
-- The project is a mockup: replace placeholder environment values and sample data with real values as needed for production.
-- Add team member names, license, and screenshots to this README as the project matures.
-
----
-
-## 👥 Contributors
-
-**Team A — SKG.Education Bootcamp**  
-(Add individual names / GitHub handles here)
-
----
-
-## 📎 Useful commands summary
-
-    # from repo root (one-off)
-    cd server && npm install
-    mv .env.example .env      # edit .env -> set MONGO_URI
-    npm run dev                # runs backend
-
-    cd ../client && npm install
-    npm run dev                # runs frontend (Vite)
-
----
-
-If you'd like, I can:
-- add a **LICENSE** header,
-- include **badges** (node, license, build),
-- or generate a `README_images/` placeholder + a short template to paste screenshots into.
-Which of those do you want next?
