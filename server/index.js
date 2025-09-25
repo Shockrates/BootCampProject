@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json()); // For parsing JSON bodies
 
 // Connect to MongoDB
+// Comment the following line if no Mongodb ATLAS uri is provided
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
