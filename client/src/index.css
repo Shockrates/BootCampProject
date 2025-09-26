@@ -45,7 +45,8 @@ body {
 
 /* Card */
 .movie-card {
-  @apply flex flex-col rounded-lg overflow-hidden shadow-sm bg-white border border-gray-200;
+  @apply flex flex-col rounded-lg overflow-hidden shadow-sm bg-white border border-gray-200 transform transition duration-500 
+                                hover:scale-105;
   /* shadow-sm ~ 0 1px 4px rgba(0,0,0,0.08) roughly */
 }
 
@@ -79,7 +80,7 @@ body {
 
 .card-title {
   margin: 0;
-  @apply mb-1.5 text-base font-semibold; /* mb-1.5 ≈ 6px, text-base ≈ 1rem */
+  @apply min-h-12 leading-tight mb-1.5 text-base font-semibold text-slate-900; /* mb-1.5 ≈ 6px, text-base ≈ 1rem */
 }
 
 .meta {
@@ -113,7 +114,10 @@ a, .link {
 h1 {
   @apply text-3xl font-extrabold my-4;
 }
-
+/* h1 defaults for app */
+h3 {
+  @apply text-xl font-extrabold my-2;
+}
 /* small accessibility / focus ring for interactive items (buttons/links inside nav etc.) */
 a:focus, button:focus {
   @apply outline-none ring-2 ring-indigo-300;

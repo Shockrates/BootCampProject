@@ -1,6 +1,6 @@
 import React from 'react'
 import MovieTableItem from './MovieTableItem'
-import movies from '../data/movies.json'
+import movies from '../data/imdb_top_1000.json'
 
 
 // Minimal reactive grid: simply renders all movies as cards (no filters)
@@ -10,9 +10,12 @@ export default function MoviesTable() {
 
     return (
         <div className="cards-grid">
-            {movies.map((m, i) => (
-                <MovieTableItem key={i} movie={m} />
-            ))}
+            {
+                /* Reads only the first 36 movies */
+                movies.slice(0, 36).map((m, i) => (
+                    <MovieTableItem key={i} movie={m} index={i}/>
+                ))
+            }
         </div>
     )
 }
