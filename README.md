@@ -34,7 +34,7 @@ This repository contains two top-level folders:
 - Open `.env` and replace `MONGO_URI` with your MongoDB connection string.  
   **Important:** You must create a MongoDB cluster (for example: MongoDB Atlas) and use its connection URI. Example value:
 
-    MONGO_URI="mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    MONGO_URI="mongodb://username:password@host1:port1,host2:port2/database?option1=value1&option2=value2"
 
 > Make sure the username/password and database name are correct and the cluster IP access / network settings allow connections (or add your IP / 0.0.0.0/0 temporarily for testing in Atlas).
 
@@ -76,7 +76,7 @@ This repository contains two top-level folders:
     ├── client/   # React + Vite frontend
     └── server/   # Node.js + Express backend
 
-(Each folder contains its own package.json and README/notes specific to that part.)
+(Each folder contains its own package.json specific to that part.)
 
 ---
 
