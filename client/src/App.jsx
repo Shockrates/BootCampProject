@@ -17,13 +17,11 @@ function App() {
       </nav>
 
       <main className="main">
-        {/* <h1 class="text-3xl font-bold underline">
-          Hello world!
-        </h1> */}
+
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
-           <Route path="/movie/:id" element={<MoviePage />} />
+          <Route path="/movie/:id" element={<MoviePage />} />
         </Routes>
       </main>
     </div>

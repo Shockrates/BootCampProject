@@ -114,7 +114,7 @@ a, .link {
 h1 {
   @apply text-3xl font-extrabold my-4;
 }
-/* h1 defaults for app */
+/* h3 defaults for app */
 h3 {
   @apply text-xl font-extrabold my-2;
 }
@@ -126,4 +126,20 @@ a:focus, button:focus {
 /* Utility: ensure images inside cards don't inherit border radius overflow issues */
 .movie-card .poster-wrap {
   overflow: hidden;
+}
+
+.movie-page{
+  @apply flex gap-5 mb-4 items-start flex-wrap
+}
+
+.movie-body{
+  @apply w-3/5 sm:flex-none sm:w-40 md:sm:w-52 lg:sm:w-64 xl:sm:w-80
+}
+
+.movie-poster{
+  @apply w-full rounded-lg
+}
+
+.movie-info{
+  @apply flex-1 min-w-[24rem] w-full sm:w-auto
 }
