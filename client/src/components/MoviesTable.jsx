@@ -24,6 +24,7 @@ export default function MoviesTable() {
                 setMessage("Showing Data from Json Server");
             })
             .catch(error => {
+                console.log(error);
                 setMovies(moviesTest);
                 setMessage("Showing Data from static JSON");
             });

@@ -12,61 +12,73 @@ This repository contains two top-level folders:
 ## 🚀 Quick start
 
 1. Clone the repository and enter it:
-    
-    git clone <repository-url>
-    cd <repository-name>
+
+   git clone <repository-url>
+   cd <repository-name>
 
 ---
 
 ## 🖥 Backend — `server/`
 
 **1. Enter the server folder**
-    
+
     cd server
 
 **2. Install dependencies**
-    
+
     npm install
 
 **3. Environment file**
+
 - Rename or copy the example env file to `.env`:
 
 - Open `.env` and replace `MONGO_URI` with your MongoDB connection string.  
   **Important:** You must create a MongoDB cluster (for example: MongoDB Atlas) and use its connection URI. Example value:
 
-    MONGO_URI="mongodb://username:password@host1:port1,host2:port2/database?option1=value1&option2=value2"
+  MONGO_URI="mongodb://username:password@host1:port1,host2:port2/database?option1=value1&option2=value2"
 
 > Make sure the username/password and database name are correct and the cluster IP access / network settings allow connections (or add your IP / 0.0.0.0/0 temporarily for testing in Atlas).
 
 **4. Start the dev server**
-    
+
     npm run dev
 
 **5. Test the API**
+
 - Visit in browser or test with Postman / curl:
 
-    http://localhost:3000
+  http://localhost:3000
 
 ---
 
 ## 🌐 Frontend — `client/`
 
 **1. Enter the client folder**
-    
+
     cd client
 
 **2. Install dependencies**
-    
+
     npm install
 
 **3. Start the frontend dev server**
-    
+
     npm run dev
 
 **4. Open the app**
+
 - Visit:
 
-    http://localhost:5173/
+  http://localhost:5173/
+
+**Testing using JSON Server with dummy data**
+
+    npm install -g json-server
+    cd client/src/data
+    json-server --watch movies_db.json
+
+
+    Json server should run at http://localhost:3000
 
 ---
 
@@ -83,12 +95,13 @@ This repository contains two top-level folders:
 ## 🔧 Scripts (common)
 
 - Backend (inside `server/`):
-    - `npm install` — install backend deps
-    - `npm run dev` — start dev server (uses nodemon or equivalent)
+
+  - `npm install` — install backend deps
+  - `npm run dev` — start dev server (uses nodemon or equivalent)
 
 - Frontend (inside `client/`):
-    - `npm install` — install frontend deps
-    - `npm run dev` — start Vite dev server
+  - `npm install` — install frontend deps
+  - `npm run dev` — start Vite dev server
 
 ---
 
@@ -107,6 +120,4 @@ This repository contains two top-level folders:
 - **Port already in use:** change `PORT` in `.env` (and update how you call the server) or stop the process using the port.
 - **Frontend not loading:** ensure `npm install` ran successfully in `client/` and run `npm run dev` inside `client/`.
 
-
 ---
-
