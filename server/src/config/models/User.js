@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, hashed: true },
     age: { type: Number, required: true },
+    watchedMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
 }, { timestamps: true });
     
 
