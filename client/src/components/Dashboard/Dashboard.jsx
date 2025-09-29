@@ -1,5 +1,5 @@
 import React from 'react'
-import MoviesTable from '../components/MoviesTable'
+import MoviesTable from './MoviesTable'
 
 
 export default function Dashboard() {

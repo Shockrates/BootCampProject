@@ -20,17 +20,44 @@ body {
 
 /* Layout */
 
-/* Navbar container */
+/* Navbar outer container (full width background) */
 .nav {
-  @apply flex items-center justify-start bg-slate-800 px-6 py-3 rounded-lg shadow-md;
+  @apply bg-slate-800 shadow-md;
 }
 
-/* Nav links */
-.nav a {
-  @apply text-slate-100 font-medium rounded 
-         hover:text-indigo-300 
-         focus:outline-none focus:ring-2 focus:ring-indigo-400 mx-3;
+/* Inner wrapper (centers and constrains width) */
+.nav-inner {
+  @apply max-w-[1200px] mx-auto flex items-center justify-between px-6 py-3;
 }
+
+/* Left group (Dashboard + About) */
+.nav-left {
+  @apply flex items-center gap-4;
+}
+
+/* Right group (Profile) */
+.nav-right {
+  @apply flex items-center;
+}
+
+/* Shared link styles */
+.nav-link {
+  @apply text-slate-100 font-medium rounded px-2 py-1
+         hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400;
+}
+
+/* Optional: slightly stronger focus-visible for keyboard users */
+.nav-link:focus-visible {
+  @apply ring-offset-2;
+}
+
+/* Optional small-screen tweak: make profile center when stacked */
+@media (max-width: 639px) {
+  .nav-right {
+    @apply flex justify-center w-full;
+  }
+}
+
 
 .main {
   @apply max-w-[1100px] mx-auto;
@@ -46,7 +73,7 @@ body {
 /* Card */
 .movie-card {
   @apply flex flex-col rounded-lg overflow-hidden shadow-sm bg-white border border-gray-200 transform transition duration-500 
-                                hover:scale-105;
+                                hover:scale-105 ;
   /* shadow-sm ~ 0 1px 4px rgba(0,0,0,0.08) roughly */
 }
 
@@ -56,22 +83,20 @@ body {
 }
 
 /* Poster */
+/* Poster: 360px tall on normal & larger screens, responsive (auto height) on very small screens */
 .poster-wrap img {
-  @apply w-full object-cover block;
-  height: 360px; /* exact px height preserved */
-  /* If you prefer the Tailwind arbitrary height utility instead:
-     @apply h-[360px];
-     but leaving explicit height ensures non-utility fallback if needed.
-  */
+  /* default for most screens: fixed visual height of 360px, fill area (cover) */
+  @apply block w-full h-[360px] object-cover rounded-lg;
 }
 
-/* Keep the small responsive tweak (<=480px) */
-@media (max-width: 480px) {
+/* On very small screens (<=527px) make it responsive: do not crop, keep aspect ratio */
+@media (max-width: 527px) {
   .poster-wrap img {
-    height: 200px;
-    /* or @apply h-[200px]; */
+    @apply h-auto object-contain; /* image will scale naturally, no cropping */
+    max-width: 100%;              /* ensure it doesn't exceed container */
   }
 }
+
 
 /* Card body and text */
 .card-body {
