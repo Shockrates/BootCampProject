@@ -5,7 +5,7 @@
             "username": "Bret",
             "email": "Sincere@april.biz",
             "age": 30,
-            "password": "$2b$10$EIXIXnFh2mG9u0Z8XkE8aeTnGzV7n6fK1uV3Y5h6jXlB1rR2oK9Gq",
+            "password": "test@1",
             "createdAt": "2023-05-10T12:34:56Z",
             "updatedAt": "2023-05-10T12:34:56Z"
         },
@@ -14,7 +14,7 @@
             "username": "Antonette",
             "email": "Shanna@melissa.tv",
             "age": 25,
-            "password": "$2b$10$7JxS1K9nG5pM8o3vF2qLNeY1rVh6u4cJ5bT7dR8kQxP0nG2sH4L",
+            "password": "test@2",
             "createdAt": "2023-06-15T08:22:44Z",
             "updatedAt": "2023-06-15T08:22:44Z"
         },
@@ -23,7 +23,7 @@
             "username": "Samantha",
             "email": "Nathan@yesenia.net",
             "age": 28,
-            "password": "$2b$10$K8mN4oP9vQ3rS1xT7yU2ZcF5dWj9bL8eH0aM5qR3tN2kV1pX6Y",
+            "password": "test@3",
             "createdAt": "2023-07-20T14:10:30Z",
             "updatedAt": "2023-07-20T14:10:30Z"
         }

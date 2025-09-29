@@ -10,7 +10,7 @@ export default function MovieTableItem({ movie, index }) {
         <Link to={`/movie/${index}`} className="movie-card-link" style={{ textDecoration: 'none' }}>
             <article className="movie-card" aria-labelledby={`movie-title-${index}`}>
                 <div className="poster-wrap">
-                    <img style={{ width: 300 }} src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy' />
+                    <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy' />
                 </div>
 
 
