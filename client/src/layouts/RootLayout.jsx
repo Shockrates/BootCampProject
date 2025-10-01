@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 const RootLayout = () => {
     return (
         <>
-            <nav className="nav">
+            {/* <nav className="nav">
                 <div className="nav-inner">
                     <div className="nav-left">
                         <Link to="/">Dashboard</Link>
@@ -14,11 +14,11 @@ const RootLayout = () => {
                         <Link to="/profile">Profile</Link>
                     </div>
                 </div>
-            </nav>
+            </nav> */}
 
-            <main className="main">
-                <Outlet />
-            </main>
+
+            <Outlet />
+
         </>
     )
 }

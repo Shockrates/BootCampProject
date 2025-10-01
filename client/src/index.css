@@ -37,13 +37,12 @@ body {
 
 /* Right group (Profile) */
 .nav-right {
-  @apply flex items-center;
+  @apply flex items-center gap-4;
 }
 
 /* Shared link styles */
 .nav-link {
-  @apply text-slate-100 font-medium rounded px-2 py-1
-         hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400;
+  @apply text-slate-100 font-medium rounded px-2 py-1 hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400;
 }
 
 /* Optional: slightly stronger focus-visible for keyboard users */
@@ -66,14 +65,15 @@ body {
 /* Grid */
 .cards-grid {
   @apply grid;
-  gap: var(--gap); /* use the CSS var for consistent gap */
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* keep original responsive multi-column behavior */
+  gap: var(--gap);
+  /* use the CSS var for consistent gap */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  /* keep original responsive multi-column behavior */
 }
 
 /* Card */
 .movie-card {
-  @apply flex flex-col rounded-lg overflow-hidden shadow-sm bg-white border border-gray-200 transform transition duration-500 
-                                hover:scale-105 ;
+  @apply flex flex-col rounded-lg overflow-hidden shadow-sm bg-white border border-gray-200 transform transition duration-500 hover:scale-105;
   /* shadow-sm ~ 0 1px 4px rgba(0,0,0,0.08) roughly */
 }
 
@@ -92,25 +92,30 @@ body {
 /* On very small screens (<=527px) make it responsive: do not crop, keep aspect ratio */
 @media (max-width: 527px) {
   .poster-wrap img {
-    @apply h-auto object-contain; /* image will scale naturally, no cropping */
-    max-width: 100%;              /* ensure it doesn't exceed container */
+    @apply h-auto object-contain;
+    /* image will scale naturally, no cropping */
+    max-width: 100%;
+    /* ensure it doesn't exceed container */
   }
 }
 
 
 /* Card body and text */
 .card-body {
-  @apply p-3; /* 12px */
+  @apply p-3;
+  /* 12px */
 }
 
 .card-title {
   margin: 0;
-  @apply min-h-12 leading-tight mb-1.5 text-base font-semibold text-slate-900; /* mb-1.5 ≈ 6px, text-base ≈ 1rem */
+  @apply min-h-12 leading-tight mb-1.5 text-base font-semibold text-slate-900;
+  /* mb-1.5 ≈ 6px, text-base ≈ 1rem */
 }
 
 .meta {
   @apply text-sm mb-2;
-  color: #555; /* slightly different than Tailwind default; kept explicit for parity */
+  color: #555;
+  /* slightly different than Tailwind default; kept explicit for parity */
 }
 
 /* Dark meta color override */
@@ -126,12 +131,14 @@ body {
 }
 
 /* Links (app uses Link elements) */
-a, .link {
+a,
+.link {
   @apply text-indigo-600 hover:underline;
 }
 
 /* Dark mode link color */
-.dark a, .dark .link {
+.dark a,
+.dark .link {
   @apply text-indigo-400;
 }
 
@@ -139,12 +146,15 @@ a, .link {
 h1 {
   @apply text-3xl font-extrabold my-4;
 }
+
 /* h3 defaults for app */
 h3 {
   @apply text-xl font-extrabold my-2;
 }
+
 /* small accessibility / focus ring for interactive items (buttons/links inside nav etc.) */
-a:focus, button:focus {
+a:focus,
+button:focus {
   @apply outline-none ring-2 ring-indigo-300;
 }
 
@@ -153,18 +163,18 @@ a:focus, button:focus {
   overflow: hidden;
 }
 
-.movie-page{
+.movie-page {
   @apply flex gap-5 mb-4 items-start flex-wrap
 }
 
-.movie-body{
+.movie-body {
   @apply w-3/5 sm:flex-none sm:w-40 md:sm:w-52 lg:sm:w-64 xl:sm:w-80
 }
 
-.movie-poster{
+.movie-poster {
   @apply w-full rounded-lg
 }
 
-.movie-info{
+.movie-info {
   @apply flex-1 min-w-[24rem] w-full sm:w-auto
 }
