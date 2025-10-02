@@ -7,6 +7,7 @@ This project is a React application for browsing and managing movies. It feature
 
 ## Project Structure
 
+```
 src/
 │ App.jsx (Root app. Sets up routing with public/private routes, renders RootLayout and main page)
 │ index.css (Global CSS styles and resets)
@@ -49,7 +50,7 @@ src/
 │
 └───utils
 api.js (API helpers for fetching movies/auth data)
-
+```
 ---
 
 ## Features
@@ -65,9 +66,9 @@ api.js (API helpers for fetching movies/auth data)
 
 ## Getting Started
 
-1. Clone the repository:
+1. Go to client folder:
    ```bash
-   git clone <repo-url>
+   cd client
 
 2. Install dependencies:
 
@@ -77,6 +78,6 @@ api.js (API helpers for fetching movies/auth data)
 3. Run the app:
 
     ```bash
-    npm start
+    npm run dev
 
-4. Open in browser at http://localhost:3000.
+4. Open in browser at http://localhost:5173.
