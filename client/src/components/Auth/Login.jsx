@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
+import useAuth from './AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Login component (under construction).
@@ -14,12 +16,45 @@ const Login = () => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
 
-    const handleLogin = () => {
+    const {login } = useAuth();
+    const navigate = useNavigate();
 
+    
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        const email = credentials.email.trim();
+        const password = credentials.password;
+
+        if(!email  || !password){
+            setError("Please enter a valid email and password");
+            return;
+        }
+
+        try {
+            const user = await loginRequest(email, password);
+            if (!user) {
+                setError("Invalid email or password");
+                return;
+            }
+
+            login(user);
+            //navigate(from, { replace: true });
+        } catch (err) {
+                console.error(err);
+        setError("Login failed. Try again.");
+        }
     }
 
-    const handleChange = () => {
+        
+        
+    
 
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setCredentials((prev) => ({...prev,[name]:value}))
     }
     return (
         <div className="">
