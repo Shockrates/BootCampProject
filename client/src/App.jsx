@@ -10,7 +10,16 @@ import RootLayout from './layouts/RootLayout'
 import PrivateRoute from './layouts/PrivateRoute'
 import PublicRoute from './layouts/PublicRoute'
 
-// import './App.css'
+/**
+ * Main application component.
+ * Configures routing for the app using react-router-dom:
+ * - Wraps pages in <RootLayout>
+ * - Protects authenticated pages with <PrivateRoute>
+ * - Restricts login/register pages with <PublicRoute>
+ * - Handles 404 errors with <NotFoundPage>
+ * The RouterProvider renders all routes based on this configuration.
+ */
+
 
 function App() {
 

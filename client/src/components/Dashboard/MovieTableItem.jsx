@@ -1,6 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+/**
+ * MovieTableItem component.
+ * - Displays a single movie as a clickable card linking to its detailed page.
+ * - Shows poster, title, year, genres, runtime, and director.
+ * - Uses React Router <Link> to navigate to the corresponding MoviePage.
+ * - Optimized for lazy loading of images for performance.
+ */
+
 
 export default function MovieTableItem({ movie, index }) {
     const genres = (movie.genre || []).join(', ')

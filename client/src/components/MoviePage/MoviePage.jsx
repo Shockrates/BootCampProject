@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import movies from '../../data/imdb_top_1000.json'
+import movies from '../../data/movies.json'
 
 
 const MoviePage = () => {

@@ -1,3 +1,11 @@
+// /**
+//  * api.js – API helper functions.
+//  * - Defines the base URI for the backend (currently local JSON server).
+//  * - Provides a login function that queries the /users endpoint with username and password.
+//  * - Returns the first matching user if credentials are correct, or null if no match is found.
+//  * - Logs errors to the console if the fetch request fails.
+//  */
+
 const URI = "http://localhost:3000";
 
 

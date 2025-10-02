@@ -1,6 +1,14 @@
 import React from 'react'
 import { Outlet, Navigate, Link } from 'react-router-dom'
 import { useAuth } from "../components/Auth/AuthProvider"
+/**
+ * PublicRoute component.
+ * - Checks if a user is already authenticated via AuthProvider.
+ * - If authenticated, redirects to the dashboard to prevent access to login/register pages.
+ * - If not authenticated, renders navigation and nested public routes via <Outlet />.
+ * Ensures only unauthenticated users can access login or registration pages.
+ */
+
 
 const PublicRoute = () => {
     const { user } = useAuth();

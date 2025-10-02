@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import MovieTableItem from './MovieTableItem'
-import moviesTest from '../../data/imdb_top_1000.json'
+import moviesTest from '../../data/movies.json'
 
 
-// Minimal reactive grid: simply renders all movies as cards (no filters)
+/**
+ * MoviesTable component.
+ * - Fetches a list of movies from a local JSON server, falls back to static JSON if server fails.
+ * - Stores movies in state and displays a message indicating data source.
+ * - Renders each movie as a MovieTableItem in a simple responsive grid.
+ * - Only the first 36 movies are displayed for performance/demo purposes.
+ */
+
+
 export default function MoviesTable() {
 
     const [movies, setMovies] = useState([])

@@ -1,6 +1,14 @@
 import React from 'react'
 import { useState } from 'react';
 
+/**
+ * Login component (under construction).
+ * - Manages state for email and password inputs using useState.
+ * - Intended to handle user authentication via handleLogin function.
+ * - Displays validation errors if login fails.
+ * - Uses a controlled form with onChange handlers for inputs.
+ */
+
 const Login = () => {
 
     const [credentials, setCredentials] = useState({ email: "", password: "" });
