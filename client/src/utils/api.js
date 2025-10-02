@@ -9,11 +9,13 @@
 const URI = "http://localhost:3000";
 
 
-export const login = async (username, password) => {
+export const loginRequest = async (email, password) => {
     try {
         // json-server supports filtering via query params:
-        const res = await fetch(`${URI}/users?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+        const res = await fetch(`${URI}/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
         const users = await res.json();
+        console.log(users[0]);
+
         // if a match exists, return the first match
         return users.length ? users[0] : null;
     } catch (error) {

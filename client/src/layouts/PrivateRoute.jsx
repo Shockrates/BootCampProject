@@ -37,7 +37,7 @@ const PrivateRoute = () => {
             </nav>
 
             <main className="main">
-                {!user ? (<p>No user Found </p>) : (<p>{user} </p>)}
+                {!user ? (<p>No user Found </p>) : (<p>{user.username} </p>)}
                 <Outlet />
             </main>
         </>
