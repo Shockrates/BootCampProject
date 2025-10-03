@@ -16,7 +16,7 @@ const PrivateRoute = () => {
     const location = useLocation();
 
     //Change it to false in order to gain acces to the other pages
-    if (false) {
+    if (!user) {
         // send to login and keep where they were trying to go
         return <Navigate to="/login" replace state={{ from: location }} />;
     }
@@ -32,12 +32,12 @@ const PrivateRoute = () => {
                     </div>
                     <div className="nav-right">
                         <Link to="/profile">Profile</Link>
+                        {!user ? (<p>No user Found </p>) : (<p>{user.username} </p>)}
                     </div>
                 </div>
             </nav>
 
             <main className="main">
-                {!user ? (<p>No user Found </p>) : (<p>{user.username} </p>)}
                 <Outlet />
             </main>
         </>

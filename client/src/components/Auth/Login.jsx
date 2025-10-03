@@ -1,8 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState} from 'react';
 import useAuth from './AuthProvider';
-import { useNavigate, Link } from 'react-router-dom';
+import {  Link} from 'react-router-dom';
 import { loginRequest } from '../../utils/api'
+
 
 /**
  * Login component (under construction).
@@ -17,10 +18,7 @@ const Login = () => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
 
-    const { login } = useAuth();
-    const navigate = useNavigate();
-
-
+    const { login} = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -42,7 +40,6 @@ const Login = () => {
             }
 
             login(user);
-            //navigate(from, { replace: true });
         } catch (err) {
             console.error(err);
             setError("Login failed. Try again.");
