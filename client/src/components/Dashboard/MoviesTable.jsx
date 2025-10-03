@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import MovieTableItem from './MovieTableItem'
 import moviesTest from '../../data/movies.json'
+import { fetchTopMovies } from "../../utils/api";
+
 
 
 /**
@@ -24,19 +26,22 @@ export default function MoviesTable() {
      * if that fails data is set from static imdb_top_1000.json
      */
     useEffect(() => {
-        const fetchMovies = async () => {
+        let mounted = true;
+        const loadMovies = async () => {
+            setMessage('Loading...');
             try {
-                let response = await fetch("http://localhost:3000/movies?_start=0&_limit=36");
-                let movies = await response.json();
+                const movies = await fetchTopMovies(37, 0);
+                if (!mounted) return;
                 setMovies(movies);
                 setMessage("Showing Data from Json Server");
             } catch (error) {
                 console.log("Error:", error);
+                if (!mounted) return;
                 setMovies(moviesTest.slice(0, 36));
                 setMessage("Showing Data from static JSON");
             }
         }
-        fetchMovies();
+        loadMovies();
     }, []);
 
     if (!movies || movies.length === 0) return <p>No movies available.</p>

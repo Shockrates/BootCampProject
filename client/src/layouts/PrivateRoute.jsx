@@ -32,12 +32,12 @@ const PrivateRoute = () => {
                     </div>
                     <div className="nav-right">
                         <Link to="/profile">Profile</Link>
+                        {!user ? (<p>No user Found </p>) : (<p>{user.username} </p>)}
                     </div>
                 </div>
             </nav>
 
             <main className="main">
-                {!user ? (<p>No user Found </p>) : (<p>{user} </p>)}
                 <Outlet />
             </main>
         </>

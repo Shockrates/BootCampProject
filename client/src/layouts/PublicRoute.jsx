@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, Navigate, Link } from 'react-router-dom'
+import { Outlet, Navigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from "../components/Auth/AuthProvider"
 /**
  * PublicRoute component.
@@ -12,9 +12,13 @@ import { useAuth } from "../components/Auth/AuthProvider"
 
 const PublicRoute = () => {
     const { user } = useAuth();
+    const location = useLocation();
+
+  // Get the original intended route from state, fallback to dashboard
+  const from = location.state?.from?.pathname || "/";
     if (user) {
         // if already logged in, send to dashboard
-        return <Navigate to="/" replace />;
+        return <Navigate to={from} replace />;
     }
     return (
         <div>

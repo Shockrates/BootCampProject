@@ -1,7 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState} from 'react';
 import useAuth from './AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import {  Link} from 'react-router-dom';
+import { loginRequest } from '../../utils/api'
+
 
 /**
  * Login component (under construction).
@@ -16,10 +18,7 @@ const Login = () => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
 
-    const {login } = useAuth();
-    const navigate = useNavigate();
-
-    
+    const { login} = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -28,7 +27,7 @@ const Login = () => {
         const email = credentials.email.trim();
         const password = credentials.password;
 
-        if(!email  || !password){
+        if (!email || !password) {
             setError("Please enter a valid email and password");
             return;
         }
@@ -41,55 +40,75 @@ const Login = () => {
             }
 
             login(user);
-            //navigate(from, { replace: true });
         } catch (err) {
-                console.error(err);
-        setError("Login failed. Try again.");
+            console.error(err);
+            setError("Login failed. Try again.");
         }
     }
 
-        
-        
-    
+
+
+
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setCredentials((prev) => ({...prev,[name]:value}))
+        const { name, value } = e.target;
+        setCredentials((prev) => ({ ...prev, [name]: value }))
     }
     return (
-        <div className="">
-            <h2>Login</h2>
-            <form action=""
-                onSubmit={handleLogin}
-            >
-                <div className="">
-                    <label htmlFor="">Email:
-                        <input
-                            name="email"
-                            type='email'
-                            value={credentials.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
+        <div className="login-container">
+            <div className="login-title">
+                <h2>Sign in to your account</h2>
+            </div>
 
-                <div style={{ marginBottom: 8 }}>
-                    <label>
-                        Password
-                        <input
-                            name="password"
-                            type="password"
-                            value={credentials.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
+            <div className="login-form">
+                <form action=""
+                    onSubmit={handleLogin}
+                    className="space-y-6"
+                >
+                    <div>
+                        <label htmlFor="email" className="form-label">Email address </label>
+                        <div className="mt-2">
+                            <input
+                                name="email"
+                                type='email'
+                                value={credentials.email}
+                                onChange={handleChange}
+                                required
+                                className='form-input'
+                            />
+                        </div>
+                    </div>
 
-                {error && <div style={{ color: "red", marginBottom: 8 }}>{error}</div>}
-                <button type="submit">Log in</button>
-            </form>
+                    <div>
+                        <label htmlFor="password" className="form-label"> Password </label>
+                        <div className="mt-2">
+                            <input
+                                name="password"
+                                type="password"
+                                value={credentials.password}
+                                onChange={handleChange}
+                                required
+                                className='form-input'
+                            />
+                        </div>
+                    </div>
+
+                    {error && <div className="form-error">{error}</div>}
+                    <div className="">
+                        <button type="submit" className='login-btn'>Sign in</button>
+                    </div>
+
+
+                </form>
+
+                <p className="register-text">
+                    Don’t have an account?{" "}
+                    <Link to="/register" className="register-link">
+                        Register here
+                    </Link>
+                </p>
+            </div>
+
         </div>
     )
 }
