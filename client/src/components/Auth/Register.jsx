@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 /**
  * Register component (under construction).
- * - Will manage state for user registration inputs (e.g., email, password, username).
+ * - Will manage state for user registration inputs (e.g., email, password, username,age).
  * - Intended to handle creating new users via a registration function.
  * - Will display validation errors and success messages as needed.
  * - Uses a controlled form similar to Login component.

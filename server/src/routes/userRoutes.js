@@ -9,41 +9,52 @@ const router = express.Router();
 //     .catch(err => res.json(err));
 // });
 
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  User.findOne({ email: email })
-    .then(user => {
-      if (user) {//if user exists
-        if (user.password === String(password).trim()) {
-          res.json("Success");
-        }
-        else {
-          res.json("The password was incorrect")
-        }
-      }
-      else {
-        res.json("No record existed for this email")
-      }
+router.post("/login", async (req, res) => {
+const { email, password } = req.body;
 
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
-    )
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ message: 'Login successful', token });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
-router.post("/register", (req, res) => {
+
+router.post("/register", async  (req, res) => {
   const { username, email, password, age } = req.body;
 
-  // Έλεγχος όλων των πεδίων
-  if (!username || !email || !password || !age) {
-    return res.status(400).json({ error: "All fields are required" });
+  try {
+    if (!username || !email || !password || !age) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const usernameExists = await User.findOne({ username });
+    if (usernameExists) {
+      return res.status(400).json({ message: 'User with that username already exists' });
+    }
+
+    const newUser = await User.create({ username, email, password , age});
+    res.status(201).json({ message: 'User registered successfully', user: newUser });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
   }
-
-  // Δημιουργία χρήστη
-  User.create(req.body)
-    .then(user => res.status(201).json(user))
-    .catch(err => res.status(500).json({ error: err.message }));
 });
-
-
 
 // router.get("/:id", getNoteById);
 // router.post("/", createNote);
