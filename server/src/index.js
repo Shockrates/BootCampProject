@@ -7,7 +7,7 @@ import { connectDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 
 const app = express();
-//const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 connectDB();
 
@@ -23,6 +23,6 @@ app.get('/', (req, res) => {
   res.send('Hello from your Node.js server with Express!');
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server listening on port ${process.env.PORT}`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
