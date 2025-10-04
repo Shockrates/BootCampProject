@@ -21,7 +21,9 @@ const { email, password } = req.body;
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ message: 'Login successful', user });
+    const { password: _, ...userWithoutPassword } = user.toObject();
+
+    res.json({ message: 'Login successful', user: userWithoutPassword, token });
 
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
