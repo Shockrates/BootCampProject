@@ -10,24 +10,24 @@ const router = express.Router();
 // });
 
 router.post("/login", (req, res) => {
-  const {email, password } = req.body;
-  User.findOne({email: email})
-  .then(user =>{
-    if(user){//if user exists
-      if(user.password === String(password).trim()){
-        res.json("Success");
+  const { email, password } = req.body;
+  User.findOne({ email: email })
+    .then(user => {
+      if (user) {//if user exists
+        if (user.password === String(password).trim()) {
+          res.json("Success");
+        }
+        else {
+          res.json("The password was incorrect")
+        }
       }
-      else{
-        res.json("The password was incorrect")
+      else {
+        res.json("No record existed for this email")
       }
-    }    
-    else{
-      res.json("No record existed for this email")
-    }
 
-  }
-)
-  });
+    }
+    )
+});
 
 router.post("/register", (req, res) => {
   const { username, email, password, age } = req.body;
