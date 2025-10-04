@@ -9,10 +9,30 @@ const router = express.Router();
 //     .catch(err => res.json(err));
 // });
 
+router.post("/login", (req, res) => {
+  const {email, password } = req.body;
+  User.findOne({email: email})
+  .then(user =>{
+    if(user){//if user exists
+      if(user.password === String(password).trim()){
+        res.json("Success");
+      }
+      else{
+        res.json("The password was incorrect")
+      }
+    }    
+    else{
+      res.json("No record existed for this email")
+    }
+
+  }
+)
+  });
+
 router.post("/register", (req, res) => {
   const { username, email, password, age } = req.body;
 
-  // Απλός έλεγχος όλων των πεδίων
+  // Έλεγχος όλων των πεδίων
   if (!username || !email || !password || !age) {
     return res.status(400).json({ error: "All fields are required" });
   }
@@ -24,9 +44,10 @@ router.post("/register", (req, res) => {
 });
 
 
+
 // router.get("/:id", getNoteById);
 // router.post("/", createNote);
 // router.put("/:id", updateNote);
 // router.delete("/:id", deleteNote);
 
-export default router; // ✅ ES Module export
+export default router; // ES Module export
