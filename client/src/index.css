@@ -225,3 +225,42 @@ button:focus {
 .register-link {
   @apply font-semibold text-indigo-400 hover:text-indigo-300;
 }
+
+/*Registration Form */
+
+/* Container */
+.register-container {
+  @apply flex min-h-full flex-col justify-center px-6 py-8 mt-6 lg:px-8 border-slate-800 rounded-lg border-2 shadow-md
+}
+
+/*Title*/
+.register-title {
+  @apply sm:mx-auto sm:w-full sm:max-w-sm
+}
+
+.register-title h2 {
+  @apply mt-10 text-center text-2xl/9 font-bold tracking-tight text-white
+}
+
+/* Form */
+.register-form {
+  @apply flex flex-col gap-4 mt-10 sm:mx-auto sm:w-full sm:max-w-sm;
+}
+
+.form-success {
+  @apply text-green-500 text-sm;
+}
+
+/* Button */
+.register-btn {
+  @apply flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500;
+}
+
+/* Login link */
+.login-text {
+  @apply mt-10 text-center text-sm/6 text-gray-400;
+}
+
+.login-link {
+  @apply font-semibold text-indigo-400 hover:text-indigo-300;
+}
