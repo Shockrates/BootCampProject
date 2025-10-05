@@ -21,16 +21,18 @@ const User = mongoose.model('User', userSchema);
 
 export default User;
 
-const movieSchema = new mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
-    title: { type: String, required: true, unique: true },
-    director: { type: String, required: true },
-    year: { type: Number, required: true },
-    genre: { type: String, required: true },
-    description: { type: String, required: true },
-    posterUrl: { type: String, required: true },
-}, { timestamps: true });
+//-----------------moved to movies.js -----------------
 
-const Movie = mongoose.model('Movie', movieSchema);
+// const movieSchema = new mongoose.Schema({
+//     _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+//     title: { type: String, required: true, unique: true },
+//     director: { type: String, required: true },
+//     year: { type: Number, required: true },
+//     genre: { type: String, required: true },
+//     description: { type: String, required: true },
+//     posterUrl: { type: String, required: true },
+// }, { timestamps: true });
 
-export { Movie };
+// const Movie = mongoose.model('Movie', movieSchema);
+
+// export { Movie };
