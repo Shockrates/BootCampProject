@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 /**
  * MovieTableItem component.
  * - Displays a single movie as a clickable card linking to its detailed page.
@@ -18,7 +19,12 @@ export default function MovieTableItem({ movie, index }) {
         <Link to={`/movie/${index}`} className="movie-card-link" style={{ textDecoration: 'none' }}>
             <article className="movie-card" aria-labelledby={`movie-title-${index}`}>
                 <div className="poster-wrap">
-                    <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy' />
+                    <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy' 
+                        onError={(e) => {
+                            e.currentTarget.src = "/no_poster.svg"; 
+                            e.currentTarget.alt = "Poster not available";
+  }}
+                    />
                 </div>
 
 

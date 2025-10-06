@@ -1,0 +1,36 @@
+<!-- Save as fallback-poster.svg or use as inline SVG -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-label="No poster available">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e6e9ee"></stop>
+      <stop offset="1" stop-color="#cfd6df"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- background card -->
+  <rect width="600" height="900" rx="20" fill="url(#g)"></rect>
+
+  <!-- film strip-top -->
+  <rect x="40" y="80" width="520" height="160" rx="8" fill="#f7fafc" stroke="#d1d5db" stroke-width="2"></rect>
+  <!-- sprocket holes -->
+  <g fill="#cbd5e1">
+    <rect x="70" y="110" width="12" height="24" rx="3"></rect>
+    <rect x="110" y="110" width="12" height="24" rx="3"></rect>
+    <rect x="150" y="110" width="12" height="24" rx="3"></rect>
+    <rect x="430" y="110" width="12" height="24" rx="3"></rect>
+    <rect x="470" y="110" width="12" height="24" rx="3"></rect>
+    <rect x="510" y="110" width="12" height="24" rx="3"></rect>
+  </g>
+
+  <!-- camera / play icon -->
+  <g transform="translate(150,300)">
+    <rect x="0" y="0" width="300" height="350" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"></rect>
+    <polygon points="120,125 210,175 120,225" fill="#9aa6b2"></polygon>
+  </g>
+
+  <!-- text -->
+  <text x="300" y="720" font-family="system-ui, Arial, Helvetica, sans-serif" font-size="28" text-anchor="middle" fill="#6b7280">No poster available</text>
+
+  <!-- small hint -->
+  <text x="300" y="760" font-family="system-ui, Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle" fill="#9ca3af">placeholder image</text>
+</svg>

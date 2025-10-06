@@ -20,10 +20,22 @@ const URI = "http://localhost:3000";
 export const loginRequest = async (email, password) => {
     try {
         // json-server supports filtering via query params:
-        const res = await fetch(`${URI}/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
-        const users = await res.json();
+        //const res = await fetch(`${URI}/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
+        
+        
+        const res = await fetch(`${URI}/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({email, password})
+        })
+        
+        const { message, user, token } = await res.json();
         // if a match exists, return the first match
-        return users.length ? users[0] : null;
+        console.log(message);
+        return user ? user : null;
     } catch (error) {
         console.log("Error:", error);
     }
@@ -42,13 +54,18 @@ export async function fetchTopMovies(limit = 36, start = 0) {
   const params = new URLSearchParams();
   params.set('_start', String(start));
   params.set('_limit', String(limit));
-  const url = `${URI}/movies?${params.toString()}`;
 
-  const res = await fetch(url);
+  //Code for testing in json server
+  //const url = `${URI}/movies?${params.toString()}`;
+  //const res = await fetch(url);
+
+  const res = await fetch(`${URI}/moviestest`);
+  
   if (!res.ok) {
     // Throw so the caller knows this was a failure (not just an empty list)
     throw new Error(`Failed to fetch top movies (${res.status})`);
   }
   const movies = await res.json();
+  
   return movies; 
 }

@@ -12,14 +12,18 @@ import { useAuth } from "../components/Auth/AuthProvider"
  */
 
 const PrivateRoute = () => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const location = useLocation();
 
     //Change it to false in order to gain acces to the other pages
-    if (false) {
+    if (!user) {
         // send to login and keep where they were trying to go
         return <Navigate to="/login" replace state={{ from: location }} />;
     }
+
+     const handleLogout = () => {
+        logout(); // clears user + localStorage
+    };
 
     // user is present: render nested routes
     return (
@@ -32,7 +36,16 @@ const PrivateRoute = () => {
                     </div>
                     <div className="nav-right">
                         <Link to="/profile">Profile</Link>
-                        {!user ? (<p>No user Found </p>) : (<p>{user.username} </p>)}
+                        {!user ? (
+                            <p>No user Found </p>
+                            ) : (
+                            <div>{user.username} 
+                                <button
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
+                            </div>)}
                     </div>
                 </div>
             </nav>
