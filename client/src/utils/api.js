@@ -18,27 +18,27 @@ const URI = "http://localhost:3000";
  *                                Returns `undefined` only if an error occurs.
  */
 export const loginRequest = async (email, password) => {
-    try {
-        // json-server supports filtering via query params:
-        //const res = await fetch(`${URI}/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
-        
-        
-        const res = await fetch(`${URI}/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({email, password})
-        })
-        
-        const { message, user, token } = await res.json();
-        // if a match exists, return the first match
-        console.log(message);
-        return user ? user : null;
-    } catch (error) {
-        console.log("Error:", error);
-    }
+  try {
+    // json-server supports filtering via query params:
+    //const res = await fetch(`${URI}/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
+
+
+    const res = await fetch(`${URI}/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+    const { message, user, error } = await res.json();
+    // if a match exists, return the first match
+    console.log(message, ": ", error);
+    return user ? user : null;
+  } catch (error) {
+    console.log("Error:", error);
+  }
 
 }
 
@@ -60,12 +60,12 @@ export async function fetchTopMovies(limit = 36, start = 0) {
   //const res = await fetch(url);
 
   const res = await fetch(`${URI}/moviestest`);
-  
+
   if (!res.ok) {
     // Throw so the caller knows this was a failure (not just an empty list)
     throw new Error(`Failed to fetch top movies (${res.status})`);
   }
   const movies = await res.json();
-  
-  return movies; 
+
+  return movies;
 }
