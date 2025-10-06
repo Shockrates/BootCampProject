@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState} from 'react';
+import { useState } from 'react';
 import useAuth from './AuthProvider';
-import {  Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { loginRequest } from '../../utils/api'
 
 
@@ -18,7 +18,7 @@ const Login = () => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
 
-    const { login} = useAuth();
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -107,7 +107,24 @@ const Login = () => {
                         Register here
                     </Link>
                 </p>
+
+                {/**LOGS A TEST USER FOR TESTING PURPOSE */}
+                <form action=""
+                    onSubmit={() => {
+                        login({
+                            username: "Test User",
+                            email: "tester@test.com",
+                            age: "30"
+                        });
+                    }}
+                    className="space-y-6"
+                >
+                    <div className="">
+                        <button type="submit" className='login-btn'>Sign in a Test User (no need for credentials)</button>
+                    </div>
+                </form>
             </div>
+
 
         </div>
     )

@@ -33,7 +33,7 @@ export default function MoviesTable() {
                 const movies = await fetchTopMovies(37, 0);
                 if (!mounted) return;
                 setMovies(movies);
-                setMessage("Showing Data from Json Server");
+                setMessage("Showing Data from Backend Server");
             } catch (error) {
                 console.log("Error:", error);
                 if (!mounted) return;
