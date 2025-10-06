@@ -28,11 +28,15 @@ export async function loginUser (req,res) {
 }
 
 export async function registerUser (req,res) {
-const { username, email, password, age } = req.body;
+const { username, email, password, confirmPass, age } = req.body;
 
   try {
-    if (!username || !email || !password || !age) {
+    if (!username || !email || !password || !confirmPass || !age) {           //added confirmation password field 
       return res.status(400).json({ message: 'All fields are required' });
+    }
+    
+    if (password !== confirmPass) {
+      return res.status(400).json({ message: 'Passwords do not match' });   //added confirmation password check
     }
 
     const userExists = await User.findOne({ email });
