@@ -12,9 +12,8 @@ import { Link } from 'react-router-dom';
  * - Uses a controlled form similar to Login component.
  */
 const Register = () => {
-    const [credentials, setCredentials] = useState({ email: "", password: "", confirmPassword: "" }); //<- Age field also is needed
+    const [credentials, setCredentials] = useState({ email: "", password: "", confirmPassword: "", age: "" });
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
 
     const { login } = useAuth();
 
@@ -22,13 +21,13 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         setError("");
-        setSuccess("");
 
         const email = credentials.email.trim();
         const password = credentials.password;
         const confirmPassword = credentials.confirmPassword;
+        const age = credentials.age;
 
-        if (!email || !password || !confirmPassword) {
+        if (!email || !password || !confirmPassword || !age) {
             setError("Please fill in all fields");
             return;
         }
@@ -39,13 +38,12 @@ const Register = () => {
         }
 
         try {
-            const user = await registerRequest(email, password, confirmPassword);//TODO
+            const user = await registerRequest(email, password, confirmPassword, age);//TODO
             if (!user) {
                 setError("Registration failed. Please try again");
                 return;
             }
             login(user); // <- This will set User to localhost and cause redirect, 
-            setSuccess("Account created successfully!");
         } catch (err) {
             console.error(err);
             setError("An error occured during registration. Please try again")
@@ -110,8 +108,23 @@ const Register = () => {
                         </div>
                     </div>
 
+                    <div>
+                        <label htmlFor="age" className="form-label"> Age </label>
+                        <div className="mt-2">
+                            <input
+                                name="age"
+                                type="number"
+                                min = "1"
+                                max = "122"
+                                value={credentials.age}
+                                onChange={handleChange}
+                                required
+                                className='form-input'
+                            />
+                        </div>
+                    </div>
+
                     {error && <div className="form-error">{error}</div>}
-                    {success && <div className="form-success">{success}</div>}
                     <div className="">
                         <button type="submit" className='register-btn'>Register</button>
                     </div>
