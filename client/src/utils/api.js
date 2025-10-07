@@ -2,6 +2,7 @@
 //  * api.js – API helper functions.
 //  * - Defines the base URI for the backend (currently local JSON server).
 //  * - Provides a login function that queries the /users endpoint with username and password.
+//  * - Provides a register function that queries the /users endpoint with relevant credentials.
 //  * - Returns the first matching user if credentials are correct, or null if no match is found.
 //  * - Logs errors to the console if the fetch request fails.
 //  */
@@ -34,6 +35,28 @@ export const loginRequest = async (email, password) => {
 
     const { message, user, error } = await res.json();
     // if a match exists, return the first match
+    console.log(message, ": ", error);
+    return user ? user : null;
+  } catch (error) {
+    console.log("Error:", error);
+  }
+
+}
+
+export const registerRequest = async (username, email, password, confirmPass, age) => {
+  try {
+
+
+    const res = await fetch(`${URI}/register`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify ({username, email, password, confirmPass, age})
+      })
+    
+    const { message, user, error } = await res.json();
     console.log(message, ": ", error);
     return user ? user : null;
   } catch (error) {

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import useAuth from './AuthProvider';
 import { Link } from 'react-router-dom';
-//TODO: registerRequest
+import { registerRequest } from '../../utils/api'
 
 /**
  * Register component (under construction).
@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
  * - Uses a controlled form similar to Login component.
  */
 const Register = () => {
-    const [credentials, setCredentials] = useState({ email: "", password: "", confirmPassword: "", age: "" });
+    const [credentials, setCredentials] = useState({ email: "", username: "", password: "", confirmPass: "", age: "" });
     const [error, setError] = useState("");
 
     const { login } = useAuth();
@@ -22,23 +22,24 @@ const Register = () => {
         e.preventDefault();
         setError("");
 
+        const username = credentials.username;
         const email = credentials.email.trim();
         const password = credentials.password;
-        const confirmPassword = credentials.confirmPassword;
+        const confirmPass = credentials.confirmPass;
         const age = credentials.age;
 
-        if (!email || !password || !confirmPassword || !age) {
+        if (!email || !username || !password || !confirmPass || !age) {
             setError("Please fill in all fields");
             return;
         }
 
-        if (password !== confirmPassword) {
+        if (password !== confirmPass) {
             setError("Passwords do not match");
             return;
         }
 
         try {
-            const user = await registerRequest(email, password, confirmPassword, age);//TODO
+            const user = await registerRequest(email, username, password, confirmPass, age);//TODO
             if (!user) {
                 setError("Registration failed. Please try again");
                 return;
@@ -67,11 +68,27 @@ const Register = () => {
                     className="space-y-6"
                 >
                     <div>
-                        <label htmlFor="email" className="form-label">Email address </label>
+                        <label htmlFor="username" className="form-label"> Username </label>
+                        <div className="mt-2">
+                            <input
+                                name="username"
+                                type="text"
+                                pattern="[a-zA-Z0-9]+"
+                                maxlength="20"
+                                value={credentials.username}
+                                onChange={handleChange}
+                                required
+                                className='form-input'
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label htmlFor="email" className="form-label"> Email address </label>
                         <div className="mt-2">
                             <input
                                 name="email"
-                                type='email'
+                                type="email"
                                 value={credentials.email}
                                 onChange={handleChange}
                                 required
@@ -79,6 +96,7 @@ const Register = () => {
                             />
                         </div>
                     </div>
+
 
                     <div>
                         <label htmlFor="password" className="form-label"> Password </label>
@@ -95,12 +113,12 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="confirmPassword" className="form-label"> Confirm Password </label>
+                        <label htmlFor="confirmPass" className="form-label"> Confirm Password </label>
                         <div className="mt-2">
                             <input
-                                name="confirmPassword"
+                                name="confirmPass"
                                 type="password"
-                                value={credentials.confirmPassword}
+                                value={credentials.confirmPass}
                                 onChange={handleChange}
                                 required
                                 className='form-input'
