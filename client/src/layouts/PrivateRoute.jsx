@@ -31,21 +31,19 @@ const PrivateRoute = () => {
             <nav className="nav">
                 <div className="nav-inner">
                     <div className="nav-left">
-                        <Link to="/">Dashboard</Link>
+                        <Link to="/imdb-top-movies">Dashboard</Link>
                         <Link to="/about">About</Link>
                     </div>
                     <div className="nav-right">
-                        <Link to="/profile">Profile</Link>
                         {!user ? (
                             <p>No user Found </p>
                             ) : (
-                            <div>{user.username} 
-                                <button
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </button>
-                            </div>)}
+                            <>
+                                <Link to="/"> {user.username} Profile</Link>
+                                <button onClick={handleLogout}>
+                                    Logout
+                                </button>
+                            </>)}
                     </div>
                 </div>
             </nav>

@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../config/models/User.js";
-import Movie from "../config/models/Movies.js";
+import Movie from "../config/models/Movie.js";
 import { loginUser, registerUser ,getUser} from "../controllers/userController.js";
 
 const router = express.Router();
@@ -31,6 +31,7 @@ router.get("/moviestest", async(req,res) => {
     }
 );
 
-//END OF TESTING CODE
+// //END OF TESTING CODE
+
 
 export default router; // ES Module export

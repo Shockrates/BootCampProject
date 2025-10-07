@@ -1,5 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import movies from '../../data/movies.json'
+import MovieRating from './MovieRating'
+import { useAuth } from '../Auth/AuthProvider'
 
 
 const MoviePage = () => {
@@ -16,6 +18,9 @@ const MoviePage = () => {
 
   //Tranforms the genres table to a string
   const genres = (movie?.genre || []).join(', ')
+
+  //Check if the user is logged in
+  const {user} = useAuth();
 
   return (
     <article className="max-w-6xl mx-auto">
@@ -49,6 +54,9 @@ const MoviePage = () => {
             <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
               <Link to="/">← Back to Dashboard</Link>
             </div>
+               {user &&
+              <MovieRating />
+            }
           </div>
         </div>
       )}

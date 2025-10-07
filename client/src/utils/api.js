@@ -82,7 +82,7 @@ export async function fetchTopMovies(limit = 36, start = 0) {
   //const url = `${URI}/movies?${params.toString()}`;
   //const res = await fetch(url);
 
-  const res = await fetch(`${URI}/moviestest`);
+  const res = await fetch(`${URI}/getAllMovies`);
 
   if (!res.ok) {
     // Throw so the caller knows this was a failure (not just an empty list)
