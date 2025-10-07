@@ -41,7 +41,8 @@ body {
 }
 
 /* Shared link styles */
-.nav-link {
+.nav-link,
+.nav-link button {
   @apply text-slate-100 font-medium rounded px-2 py-1 hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-400;
 }
 
