@@ -12,7 +12,7 @@ import { registerRequest } from '../../utils/api'
  * - Uses a controlled form similar to Login component.
  */
 const Register = () => {
-    const [credentials, setCredentials] = useState({ email: "", username: "", password: "", confirmPass: "", age: "" });
+    const [credentials, setCredentials] = useState({ username: "", email: "", password: "", confirmPass: "", age: "" });
     const [error, setError] = useState("");
 
     const { login } = useAuth();
@@ -28,7 +28,7 @@ const Register = () => {
         const confirmPass = credentials.confirmPass;
         const age = credentials.age;
 
-        if (!email || !username || !password || !confirmPass || !age) {
+        if (!username || !email || !password || !confirmPass || !age) {
             setError("Please fill in all fields");
             return;
         }
@@ -39,7 +39,7 @@ const Register = () => {
         }
 
         try {
-            const user = await registerRequest(email, username, password, confirmPass, age);//TODO
+            const user = await registerRequest(username, email, password, confirmPass, age);//TODO
             if (!user) {
                 setError("Registration failed. Please try again");
                 return;
