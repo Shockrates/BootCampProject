@@ -1,17 +1,17 @@
 import mongoose from 'mongoose';
-import fs from'fs';
-import Movie from './config/models/Movies.js';
+import fs from 'fs';
+import Movie from './config/models/Movie.js';
 import 'dotenv/config';
 import { connectDB } from './config/db.js';
 async function seedMovies() {
-   try {
+  try {
     await connectDB();
-     // Clear existing movies
+    // Clear existing movies
     await Movie.deleteMany({});
     console.log('Cleared existing movies');
 
     const movieDatasetFilePath = '../client/src/data/movies.json';
-;
+    ;
 
     // Check if dataset file exists
     if (!fs.existsSync(movieDatasetFilePath)) {
@@ -23,7 +23,7 @@ async function seedMovies() {
     const moviesData = JSON.parse(fs.readFileSync(movieDatasetFilePath, 'utf8'));
 
     // Insert movies
-    const insertedMovies = await Movie.insertMany(moviesData,{ ordered: false });
+    const insertedMovies = await Movie.insertMany(moviesData, { ordered: false });
     console.log(`Successfully seeded ${insertedMovies.length} movies`);
 
     console.log('Movies added:');
