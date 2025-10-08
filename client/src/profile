@@ -1,18 +1,32 @@
 import React from "react";
-import MovieTableItem from './MovieTableItem'
-import movies from '../data/imdb_top_1000.json'
-import MONGO_URI from '../../.env.example'
-import { useState } from "react";
+import MovieTableItem from './MovieTableItem' // Not used here
+import movies from '../data/imdb_top_1000.json' // Not used here
 
+export function Profile({ useAuth }) {
+  const user = useAuth();
 
-export function Profile(useAuth) {
+  const handleExport = () => {
+    const userData = {
+      username: user.username,
+      age: user.age,
+      email: user.email,
+    };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userData));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "user_data.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  };
 
-    return (
-        <><div className="profile">
-            <h1>{user ? user.username : 'useAuth(id)'}</h1>
-            <a href="#"><i username="useAuth(username)" /></i></a>
-            <a href="#"><i age="useAuth(age)"></i></a>
-            <a href="#"><i email="useAuth(email)"></i></a>
-            </div>
-    );
+  return (
+    <div className="profile">
+      <h1>{user ? user.username : 'Guest'}</h1>
+      <div>Username: {user?.username}</div>
+      <div>Age: {user?.age}</div>
+      <div>Email: {user?.email}</div>
+      <button onClick={handleExport}>Export User Data</button>
+    </div>
+  );
 }
