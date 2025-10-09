@@ -261,3 +261,16 @@ button:focus {
 .login-link {
   @apply font-semibold text-indigo-400 hover:text-indigo-300;
 }
+
+/*Modal*/
+.modal-container {
+  @apply fixed left-0 top-0 w-full h-full flex items-center justify-center bg-black/50
+}
+
+.modal {
+  @apply bg-blue-700 rounded-md p-8 w-full max-w-[1024px]
+}
+
+.modal-btn {
+  @apply border-none bg-green-700 px-2 py-6 rounded-md cursor-pointer shadow-slate-100 text-base
+}
