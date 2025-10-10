@@ -1,8 +1,12 @@
 import React from 'react'
+import MovieSearch from '../Tests/MovieSearch/MovieSearch'
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div>
+      <MovieSearch />
+    </div>
+
   )
 }
 

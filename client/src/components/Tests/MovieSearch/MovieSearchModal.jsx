@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MovieSearchModal = () => {
+const MovieSearchModal = ({ children }) => {
     return (
         <div className='modal-container'>
             <div className="modal">
@@ -8,15 +8,7 @@ const MovieSearchModal = () => {
                     <p className="close">&times;</p>
                 </div>
                 <div className="modal-content">
-                    <h3>Enter a movie title</h3>
-                    <form action="" method="post">
-                        <div className="movie-search-input flex">
-                            <label htmlFor="movieTitle"></label>
-                            <input type="text" name='movieTitle' />
-                            <button type="submit" className='modal-btn'>Search</button>
-                        </div>
-
-                    </form>
+                    {children}
                 </div>
                 <div className="modal-footer"></div>
             </div>
