@@ -121,7 +121,7 @@ export async function fetchMovie(id) {
 
 export async function searchMovies(query) {
   const res = await fetch(
-    `http://localhost:3000/searchMovies?searchTerm=${encodeURIComponent(query)}`
+    `${URI}/searchMovies?searchTerm=${encodeURIComponent(query)}`
   );
   if (!res.ok) throw new Error("Server error");
 
