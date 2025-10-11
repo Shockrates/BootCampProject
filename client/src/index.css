@@ -15,7 +15,7 @@ body {
 
 /* Dark mode (Tailwind dark mode should be set to 'class' so <html class="dark"> or similar works) */
 body {
-  @apply bg-slate-900 text-slate-100;
+  @apply bg-black text-slate-100;
 }
 
 /* Layout */
