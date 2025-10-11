@@ -180,6 +180,10 @@ button:focus {
   @apply flex-1 min-w-[24rem] w-full sm:w-auto
 }
 
+.btn-back {
+  @apply text-indigo-600 hover:underline;
+}
+
 /*Login Form */
 
 /* Container */

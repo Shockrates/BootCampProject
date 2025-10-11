@@ -16,14 +16,14 @@ export default function MovieTableItem({ movie, index }) {
 
 
     return (
-        <Link to={`/movie/${index}`} className="movie-card-link" style={{ textDecoration: 'none' }}>
+        <Link to={`/movie/${movie._id}`} className="movie-card-link" style={{ textDecoration: 'none' }}>
             <article className="movie-card" aria-labelledby={`movie-title-${index}`}>
                 <div className="poster-wrap">
-                    <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy' 
+                    <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy'
                         onError={(e) => {
-                            e.currentTarget.src = "/no_poster.svg"; 
+                            e.currentTarget.src = "/no_poster.svg";
                             e.currentTarget.alt = "Poster not available";
-  }}
+                        }}
                     />
                 </div>
 
