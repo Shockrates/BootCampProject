@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet, Navigate, useLocation, Link } from 'react-router-dom'
 import { useAuth } from "../components/Auth/AuthProvider"
+import logo from '../assets/ReelTalk.png'
 
 
 /**
@@ -21,7 +22,7 @@ const PrivateRoute = () => {
         return <Navigate to="/login" replace state={{ from: location }} />;
     }
 
-     const handleLogout = () => {
+    const handleLogout = () => {
         logout(); // clears user + localStorage
     };
 
@@ -30,14 +31,16 @@ const PrivateRoute = () => {
         <>
             <nav className="nav">
                 <div className="nav-inner">
+
                     <div className="nav-left">
+                        <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
                         <Link to="/imdb-top-movies">Dashboard</Link>
                         <Link to="/about">About</Link>
                     </div>
                     <div className="nav-right">
                         {!user ? (
                             <p>No user Found </p>
-                            ) : (
+                        ) : (
                             <>
                                 <Link to="/"> {user.username} Profile</Link>
                                 <button onClick={handleLogout}>

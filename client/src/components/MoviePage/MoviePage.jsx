@@ -1,34 +1,54 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import movies from '../../data/movies.json'
+import React, { useEffect, useState } from 'react';
 import MovieRating from './MovieRating'
 import { useAuth } from '../Auth/AuthProvider'
+import { fetchMovie } from '../../utils/api';
 
 
 const MoviePage = () => {
 
+  const [movie, setMovie] = useState()
+  const [message, setMessage] = useState("")
+
   //Takes the id value form url (ex. http://localhost:5173/movie/1 id='1' )
   const { id } = useParams()
-  // Makes into a number (useParams() saves a s String)
-  const idx = Number(id)
+
   //Hook for navigate
   const navigate = useNavigate()
 
-  //If there is a movie in the imdb_top_1000.json at the idx index will return the movie else return null
-  const movie = Number.isInteger(idx) && movies[idx] ? movies[idx] : null
+  useEffect(() => {
+    let mounted = true;
+    const loadMovies = async () => {
+      setMessage('Loading...');
+      try {
+        const movies = await fetchMovie(id);
+        if (!mounted) return;
+        setMovie(movies);
+        setMessage("Showing Data from Backend Server");
+      } catch (error) {
+        console.log("Error:", error);
+        if (!mounted) return;
+        setMessage(error.message);
+      }
+    }
+    loadMovies();
+
+  }, []);
 
   //Tranforms the genres table to a string
   const genres = (movie?.genre || []).join(', ')
 
   //Check if the user is logged in
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   return (
-    <article className="max-w-6xl mx-auto">
+    <article className="max-w-6xl mx-auto mt-10">
       {/* "Movie not found" block  If there is a movie show this block bellow*/}
       {!movie && (
         <div>
           <h1>Movie not found</h1>
           <p>We couldn't find the movie you requested.</p>
+          <div>{message}</div>
           {/** Click event for navogating back */}
           <button onClick={() => navigate(-1)}>Go back</button>
         </div>
@@ -52,9 +72,9 @@ const MoviePage = () => {
             <p style={{ marginTop: 12 }}>{movie.description}</p>
 
             <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
-              <Link to="/">← Back to Dashboard</Link>
+              <button className='btn-back' onClick={() => navigate(-1)}>← Go Back</button>
             </div>
-               {user &&
+            {user &&
               <MovieRating />
             }
           </div>

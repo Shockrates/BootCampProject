@@ -1,7 +1,30 @@
 import React from 'react'
+import { useState } from 'react'
+import MovieSearch from './MovieSearch';
 
 const MovieSearchModal = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
+        <div className="movie-search text-center">
+        <button onClick={() => setIsOpen(true)} className="register-btn">
+            Search Movies
+        </button>
+
+        <MovieSearch
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            maxResults={6}
+        />
+        </div>
+
+    )
+}
+
+export default MovieSearchModal
+
+/*    return (
         <div className='modal-container'>
             <div className="modal">
                 <div className="modal-header">
@@ -26,3 +49,4 @@ const MovieSearchModal = () => {
 }
 
 export default MovieSearchModal
+*/

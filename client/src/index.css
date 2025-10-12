@@ -15,7 +15,7 @@ body {
 
 /* Dark mode (Tailwind dark mode should be set to 'class' so <html class="dark"> or similar works) */
 body {
-  @apply bg-slate-900 text-slate-100;
+  @apply bg-black text-slate-100;
 }
 
 /* Layout */
@@ -27,7 +27,7 @@ body {
 
 /* Inner wrapper (centers and constrains width) */
 .nav-inner {
-  @apply max-w-[1200px] mx-auto flex items-center justify-between px-6 py-3;
+  @apply max-w-[1200px] mx-auto flex items-center justify-between px-6 py-1;
 }
 
 /* Left group (Dashboard + About) */
@@ -180,6 +180,10 @@ button:focus {
   @apply flex-1 min-w-[24rem] w-full sm:w-auto
 }
 
+.btn-back {
+  @apply text-indigo-600 hover:underline;
+}
+
 /*Login Form */
 
 /* Container */
@@ -268,9 +272,9 @@ button:focus {
 }
 
 .modal {
-  @apply bg-blue-700 rounded-md p-8 w-full max-w-[1024px]
+  @apply bg-blue-900 rounded-md p-8 w-full max-w-[1024px]
 }
 
 .modal-btn {
-  @apply border-none bg-green-700 px-2 py-6 rounded-md cursor-pointer shadow-slate-100 text-base
+  @apply border-none bg-blue-950 px-2 py-6 rounded-md cursor-pointer shadow-slate-100 text-base
 }

@@ -7,7 +7,7 @@
 //  * - Logs errors to the console if the fetch request fails.
 //  */
 
-const URI = "http://localhost:3000";
+const URI = "https://bootcampproject-production.up.railway.app";
 
 /**
  * Attempts to log in a user by checking email and password against the JSON server.
@@ -53,9 +53,9 @@ export const registerRequest = async (username, email, password, confirmPass, ag
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify ({username, email, password, confirmPass, age})
+        body: JSON.stringify({ username, email, password, confirmPass, age })
       })
-    
+
     const { message, user, error } = await res.json();
     console.log(message, ": ", error);
     return user ? user : null;
@@ -88,6 +88,43 @@ export async function fetchTopMovies(limit = 36, start = 0) {
     // Throw so the caller knows this was a failure (not just an empty list)
     throw new Error(`Failed to fetch top movies (${res.status})`);
   }
+  const movies = await res.json();
+
+  return movies;
+}
+
+/**
+ * Fetch the top N movies from the JSON server.
+ * Only supports pagination via `start` and `limit`.
+ *
+ * @param {string} id  the id of the movie
+ * @returns {Promise<movie>}  A Movie object
+ */
+export async function fetchMovie(id) {
+  const params = new URLSearchParams();
+  params.set('id', String(id));
+
+  //Code for testing in json server
+  //const url = `${URI}/movies?${params.toString()}`;
+  //const res = await fetch(url);
+
+  const res = await fetch(`${URI}/movie?${params.toString()}`);
+
+  if (!res.ok) {
+    // Throw so the caller knows this was a failure (not just an empty list)
+    throw new Error(`Failed to fetch top movies (${res.status})`);
+  }
+  const movie = await res.json();
+
+  return movie;
+}
+
+export async function searchMovies(query) {
+  const res = await fetch(
+    `${URI}/searchMovies?searchTerm=${encodeURIComponent(query)}`
+  );
+  if (!res.ok) throw new Error("Server error");
+
   const movies = await res.json();
 
   return movies;

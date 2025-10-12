@@ -1,9 +1,19 @@
 import React from 'react'
+import MovieSearchModal from '../Tests/MovieSearch/MovieSearchModal';
 
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div className="max-w-3xl mx-auto mt-8 px-4">
+      <h1 className="text-3xl font-bold mb-4 text-white">Profile</h1>
+      <section className="mb-6">
+        <p className="text-gray-300 mb-4">
+          Welcome to your profile! You can search for movies by clicking the button below:
+        </p>
+        <MovieSearchModal />
+      </section>
+    </div>
   )
 }
+
 
 export default Profile
