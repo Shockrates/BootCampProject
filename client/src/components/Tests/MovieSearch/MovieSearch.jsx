@@ -40,7 +40,7 @@ const MovieSearch = ({ isOpen, onClose, maxResults = 6 }) => {
           setMovies([]);
           setError("No results found")
         } else {
-          const updatedMovies = data.slice(0, maxResults).map((m) => ({
+          const updatedMovies = data.map((m) => ({
             ...m,
             index: m._id, //reassign index prop attempt (fail)
           }));
@@ -65,7 +65,7 @@ const MovieSearch = ({ isOpen, onClose, maxResults = 6 }) => {
 
   return (
     <div className="modal-container fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50">
-      <div className="modal bg-slate-800 rounded-2xl shadow-lg w-[90%] max-w-md p-6 text-white relative">
+      <div className="modal bg-slate-800 rounded-2xl shadow-lg w-[90%] p-6 text-white relative">
         {/* Header */}
         <div className="modal-header flex justify-between items-center border-b border-slate-700 pb-3">
           <h3 className="text-xl font-bold">Search Movies</h3>
@@ -84,7 +84,7 @@ const MovieSearch = ({ isOpen, onClose, maxResults = 6 }) => {
 
 
         {/*Content*/}
-        <div className="modal bg-slate-800 rounded-2xl shadow-lg w-[90%] max-w-md p-6 text-white relative max-h-[85vh] overflow-y-auto">
+        <div className="modal bg-slate-800 rounded-2xl shadow-lg w-[90%] max-w-xl p-6 text-white relative max-h-[85vh] overflow-y-auto">
           <div className="modal-content mt-4">
             <input
               type="text"

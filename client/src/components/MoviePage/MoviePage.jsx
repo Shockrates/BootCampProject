@@ -1,6 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react';
-import movies from '../../data/movies.json'
 import MovieRating from './MovieRating'
 import { useAuth } from '../Auth/AuthProvider'
 import { fetchMovie } from '../../utils/api';
@@ -33,7 +32,6 @@ const MoviePage = () => {
       }
     }
     loadMovies();
-    console.log(movies);
 
   }, []);
 
@@ -44,7 +42,7 @@ const MoviePage = () => {
   const { user } = useAuth();
 
   return (
-    <article className="max-w-6xl mx-auto">
+    <article className="max-w-6xl mx-auto mt-10">
       {/* "Movie not found" block  If there is a movie show this block bellow*/}
       {!movie && (
         <div>
