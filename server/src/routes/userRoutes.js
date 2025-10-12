@@ -1,7 +1,8 @@
 import express from "express";
 import User from "../config/models/User.js";
 import Movie from "../config/models/Movie.js";
-import { loginUser, registerUser ,getUser} from "../controllers/userController.js";
+import { getUser} from "../controllers/userController.js";
+import { loginUser, registerUser } from "../controllers/authController.js";
 
 const router = express.Router();
 
