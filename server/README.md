@@ -36,3 +36,17 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 
     ## Returns:
     A JSON array containing all watched movie entries in descending order of creation date.
+
+3. watchedByUser
+   Description:
+   Fetches all the Watched Movies from a user.
+
+   Method: GET
+   Endpoint: /watchedByUser?user= { userid }
+
+    ## Required Fields:
+
+    userId – The ID of the user
+
+   ## Returns:
+   A JSON array containing all the records from the Watched Movie.
