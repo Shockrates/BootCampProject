@@ -6,6 +6,8 @@ import bcrypt from 'bcrypt';
 import { connectDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
+import watchedMovieRoutes from './routes/watchedMovieRoutes.js';
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,6 +21,8 @@ app.use(express.json()); // For parsing JSON bodies
 //an kanei request sto parakatw anoigei to notesRoutes kai xtypaei ekeines tis routes
 app.use("/", userRoutes);
 app.use("/",movieRoutes);
+app.use("/",watchedMovieRoutes);
+
 
 // Test route
 app.get('/', (req, res) => {
