@@ -40,13 +40,13 @@ export default function Dashboard() {
             }
         }
         loadMovies();
-        console.log(movies);
+        console.log(message);
 
     }, []);
     return (
         <div>
             <h1>Movies Dashboard</h1>
-            <MoviesTable movies={movies} message={message} />
+            <MoviesTable movies={movies} />
         </div>
     )
 }

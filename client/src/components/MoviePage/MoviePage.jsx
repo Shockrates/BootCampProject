@@ -66,7 +66,7 @@ const MoviePage = () => {
               {movie.title} <small>({movie.year})</small>
             </h1>
             <div style={{ color: '#666', marginTop: 6 }}>
-              {genres} • {movie.runtime} min
+              {genres} • {movie.runtime}
             </div>
             <div style={{ color: '#666', marginTop: 6 }}>Director: {movie.director}</div>
             <p style={{ marginTop: 12 }}>{movie.description}</p>
