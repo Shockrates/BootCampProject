@@ -18,13 +18,13 @@ router.get("/user/:id", getUser);
 // router.delete("/:id", deleteNote);
 
 //ROUTES FOR TESTING PURPOSES (TO BE DELETED OR BETTER IMPLEMENTED BY BACKEND, ¨οπως νομίζεται καλύτερα :) )
-router.get("/moviestest", async(req,res) => {
+router.get("/usertest", async(req,res) => {
         try {
-            const movies = await Movie.find().limit(36);
+            const users = await User.find().limit(36);
 
-            if(!movies) return res.status(404).json({message:"Movie not found"});
+            if(!users) return res.status(404).json({message:"User not found"});
             
-            res.status(200).json(movies);
+            res.status(200).json(users);
         } catch (error) {
             console.error("Error:", error);
             res.status(500).json({message:"Internal server error"});
