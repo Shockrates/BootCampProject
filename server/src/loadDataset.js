@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import fs from 'fs';
 import Movie from './config/models/Movie.js';
+import WatchedMovie from './config/models/WatchedMovie.js';
 import 'dotenv/config';
 import { connectDB } from './config/db.js';
 async function seedMovies() {
@@ -37,5 +38,40 @@ async function seedMovies() {
   }
 };
 
+async function seedReviews() {
+  try {
+    await connectDB();
+    // Clear existing movies
+    await WatchedMovie.deleteMany({});
+    console.log('Cleared existing movies');
+
+    const reviewsFilePath = '../client/src/data/watchedMovies.json';
+    ;
+
+    // Check if dataset file exists
+    if (!fs.existsSync(reviewsFilePath)) {
+      console.error('Dataset file not found! Please download movies_dataset.json and place it in the server folder.');
+      return;
+    }
+
+    console.log('Reading dataset file...');
+    const reviewsData = JSON.parse(fs.readFileSync(reviewsFilePath, 'utf8'));
+
+    // Insert movies
+    const reviews = await WatchedMovie.insertMany(reviewsData, { ordered: false });
+    console.log(`Successfully seeded ${reviews.length} movies`);
+
+    console.log('Movies added:');
+    reviews.forEach(review => {
+      console.log(`- ${review.userId} (${review.movieId})`);
+    });
+  } catch (error) {
+    console.error('Error seeding movies: ', error);
+  } finally {
+    mongoose.connection.close();
+  }
+};
+
 // Run the seed function
-seedMovies();
+//seedMovies();
+seedReviews();
