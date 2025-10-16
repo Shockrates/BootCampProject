@@ -129,3 +129,17 @@ export async function searchMovies(query) {
 
   return movies;
 }
+
+
+export async function fetchReviews() {
+
+  const res = await fetch(`${URI}/getAllWatchedMovies`);
+
+  if (!res.ok) {
+    // Throw so the caller knows this was a failure (not just an empty list)
+    throw new Error(`Failed to fetch reviews (${res.status})`);
+  }
+  const reviews = await res.json();
+
+  return reviews;
+}

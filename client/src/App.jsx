@@ -9,6 +9,7 @@ import NotFoundPage from './components/ErrorPage/NotFoundPage'
 import RootLayout from './layouts/RootLayout'
 import PrivateRoute from './layouts/PrivateRoute'
 import PublicRoute from './layouts/PublicRoute'
+import CommunityFeed from './components/Tests/CommunityFeed/CommunityFeed'
 
 /**
  * Main application component.
@@ -32,6 +33,7 @@ function App() {
           {/**Will change to top movies when ratin is implemented */}
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="about" element={<About />} />
+          <Route path="feed" element={<CommunityFeed />} />
           <Route path="movie/:id" element={<MoviePage />} />
           
         </Route>

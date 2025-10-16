@@ -1,5 +1,5 @@
 import React from 'react'
-import MovieSearchModal from '../Tests/MovieSearch/MovieSearchModal';
+import MovieSearchModal from './MovieSearch/MovieSearchModal';
 import { useAuth } from '../Auth/AuthProvider';
 
 const Profile = () => {

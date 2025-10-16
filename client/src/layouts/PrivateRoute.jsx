@@ -35,6 +35,7 @@ const PrivateRoute = () => {
                     <div className="nav-left">
                         <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
                         <Link to="/imdb-top-movies">Dashboard</Link>
+                        <Link to="/feed">Community Feed</Link>
                         <Link to="/about">About</Link>
                     </div>
                     <div className="nav-right">
