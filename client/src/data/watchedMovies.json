@@ -1,152 +1,142 @@
 [
     {
-        "_id": "68f01a8d89fba62b2def9710",
+        "_id": "69011a8d89fba62b2def9800",
         "userId": "68e3e2e2a256bdaf47468be0",
-        "movieId": "68ebcf7bad7c00440ca3268e",
+        "movieId": "68f135d1a67f173b8e31f068",
         "rating": 5,
-        "review": "An absolute masterpiece. Every scene feels timeless.",
-        "watchedAt": "2025-09-25T20:15:00.000Z",
-        "createdAt": "2025-09-25T20:15:00.000Z",
-        "updatedAt": "2025-09-25T20:15:00.000Z"
+        "review": "Incredibly moving — hope and friendship carried the film.",
+        "watchedAt": "2025-10-10T20:00:00.000Z",
+        "createdAt": "2025-10-10T20:00:00.000Z",
+        "updatedAt": "2025-10-10T20:00:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9711",
+        "_id": "69011a8d89fba62b2def9801",
         "userId": "68e3f75bb5747e6294a5c49b",
-        "movieId": "68ebcf7bad7c00440ca32694",
+        "movieId": "68f135d1a67f173b8e31f069",
         "rating": 5,
-        "review": "Spielberg at his finest. Deeply emotional and unforgettable.",
-        "watchedAt": "2025-09-27T14:30:00.000Z",
-        "createdAt": "2025-09-27T14:30:00.000Z",
-        "updatedAt": "2025-09-27T14:30:00.000Z"
+        "review": "A timeless classic — direction and acting are flawless.",
+        "watchedAt": "2025-10-11T18:30:00.000Z",
+        "createdAt": "2025-10-11T18:30:00.000Z",
+        "updatedAt": "2025-10-11T18:30:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9712",
+        "_id": "69011a8d89fba62b2def9802",
         "userId": "68e4205cce29aac34a4a6e96",
-        "movieId": "68ebcf7bad7c00440ca32699",
-        "rating": 4,
-        "review": "Classic western energy. Great soundtrack and tension.",
-        "watchedAt": "2025-09-28T10:00:00.000Z",
-        "createdAt": "2025-09-28T10:00:00.000Z",
-        "updatedAt": "2025-09-28T10:00:00.000Z"
-    },
-    {
-        "_id": "68f01a8d89fba62b2def9713",
-        "userId": "68e4f934fdee8fb094e96512",
-        "movieId": "68ebcf7bad7c00440ca326bb",
+        "movieId": "68f135d1a67f173b8e31f06a",
         "rating": 5,
-        "review": "Heartbreaking. One of the most emotional animated films ever.",
-        "watchedAt": "2025-09-29T18:10:00.000Z",
-        "createdAt": "2025-09-29T18:10:00.000Z",
-        "updatedAt": "2025-09-29T18:10:00.000Z"
+        "review": "Heath Ledger is extraordinary. Dark, thrilling, brilliant.",
+        "watchedAt": "2025-10-09T22:15:00.000Z",
+        "createdAt": "2025-10-09T22:15:00.000Z",
+        "updatedAt": "2025-10-09T22:15:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9714",
+        "_id": "69011a8d89fba62b2def9803",
+        "userId": "68e4f934fdee8fb094e96512",
+        "movieId": "68f135d1a67f173b8e31f06b",
+        "rating": 4,
+        "review": "Great sequel — rich with character and history.",
+        "watchedAt": "2025-10-08T16:00:00.000Z",
+        "createdAt": "2025-10-08T16:00:00.000Z",
+        "updatedAt": "2025-10-08T16:00:00.000Z"
+    },
+    {
+        "_id": "69011a8d89fba62b2def9804",
         "userId": "68e4f9e3fdee8fb094e9651b",
-        "movieId": "68ebcf7bad7c00440ca32821",
-        "rating": 4,
-        "review": "Dustin Hoffman and Tom Cruise deliver top-tier performances.",
-        "watchedAt": "2025-09-30T21:00:00.000Z",
-        "createdAt": "2025-09-30T21:00:00.000Z",
-        "updatedAt": "2025-09-30T21:00:00.000Z"
-    },
-    {
-        "_id": "68f01a8d89fba62b2def9715",
-        "userId": "68e4fa3afdee8fb094e96525",
-        "movieId": "68ebcf7bad7c00440ca3269d",
+        "movieId": "68f135d1a67f173b8e31f06c",
         "rating": 5,
-        "review": "The best Star Wars movie, hands down. Epic storytelling.",
-        "watchedAt": "2025-10-01T12:00:00.000Z",
-        "createdAt": "2025-10-01T12:00:00.000Z",
-        "updatedAt": "2025-10-01T12:00:00.000Z"
+        "review": "Tight, intense courtroom drama — superb writing and acting.",
+        "watchedAt": "2025-10-07T14:45:00.000Z",
+        "createdAt": "2025-10-07T14:45:00.000Z",
+        "updatedAt": "2025-10-07T14:45:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9716",
+        "_id": "69011a8d89fba62b2def9805",
+        "userId": "68e4fa3afdee8fb094e96525",
+        "movieId": "68f135d1a67f173b8e31f06d",
+        "rating": 5,
+        "review": "Epic scope and emotional payoff — a brilliant finale.",
+        "watchedAt": "2025-10-06T20:20:00.000Z",
+        "createdAt": "2025-10-06T20:20:00.000Z",
+        "updatedAt": "2025-10-06T20:20:00.000Z"
+    },
+    {
+        "_id": "69011a8d89fba62b2def9806",
         "userId": "68e51a8d89fba62b2def970f",
-        "movieId": "68ebcf7bad7c00440ca326a5",
-        "rating": 5,
-        "review": "Realistic and intense war scenes. Emotional ending.",
-        "watchedAt": "2025-10-02T19:15:00.000Z",
-        "createdAt": "2025-10-02T19:15:00.000Z",
-        "updatedAt": "2025-10-02T19:15:00.000Z"
-    },
-    {
-        "_id": "68f01a8d89fba62b2def9717",
-        "userId": "68e51b3889fba62b2def9715",
-        "movieId": "68ebcf7bad7c00440ca32694",
+        "movieId": "68f135d1a67f173b8e31f06e",
         "rating": 4,
-        "review": "Powerful story, though a bit long in the middle.",
-        "watchedAt": "2025-10-03T09:30:00.000Z",
-        "createdAt": "2025-10-03T09:30:00.000Z",
-        "updatedAt": "2025-10-03T09:30:00.000Z"
+        "review": "Tarantino's dialogue and structure shine — stylish and fun.",
+        "watchedAt": "2025-10-05T21:10:00.000Z",
+        "createdAt": "2025-10-05T21:10:00.000Z",
+        "updatedAt": "2025-10-05T21:10:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9718",
-        "userId": "68e4205cce29aac34a4a6e96",
-        "movieId": "68ebcf7bad7c00440ca3268e",
+        "_id": "69011a8d89fba62b2def9807",
+        "userId": "68e51b3889fba62b2def9715",
+        "movieId": "68f135d1a67f173b8e31f06f",
         "rating": 5,
-        "review": "Brilliant cinematography and dialogue. Iconic performances.",
-        "watchedAt": "2025-10-04T17:40:00.000Z",
-        "createdAt": "2025-10-04T17:40:00.000Z",
-        "updatedAt": "2025-10-04T17:40:00.000Z"
+        "review": "Powerful and devastating — Spielberg at full force.",
+        "watchedAt": "2025-10-04T19:00:00.000Z",
+        "createdAt": "2025-10-04T19:00:00.000Z",
+        "updatedAt": "2025-10-04T19:00:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9719",
-        "userId": "68e4f934fdee8fb094e96512",
-        "movieId": "68ebcf7bad7c00440ca326a5",
-        "rating": 5,
-        "review": "The beach landing scene is unforgettable. Brutal realism.",
-        "watchedAt": "2025-10-05T13:00:00.000Z",
-        "createdAt": "2025-10-05T13:00:00.000Z",
-        "updatedAt": "2025-10-05T13:00:00.000Z"
+        "_id": "69011a8d89fba62b2def9808",
+        "userId": "68e3e2e2a256bdaf47468be0",
+        "movieId": "68f135d1a67f173b8e31f068",
+        "rating": 4,
+        "review": "Warm, human story — rewatchable and comforting.",
+        "watchedAt": "2025-10-03T12:30:00.000Z",
+        "createdAt": "2025-10-03T12:30:00.000Z",
+        "updatedAt": "2025-10-03T12:30:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9720",
+        "_id": "69011a8d89fba62b2def9809",
         "userId": "68e3f75bb5747e6294a5c49b",
-        "movieId": "68ebcf7bad7c00440ca326bb",
+        "movieId": "68f135d1a67f173b8e31f06a",
         "rating": 5,
-        "review": "Takahata's masterpiece. Brings tears every single time.",
-        "watchedAt": "2025-10-06T21:00:00.000Z",
-        "createdAt": "2025-10-06T21:00:00.000Z",
-        "updatedAt": "2025-10-06T21:00:00.000Z"
+        "review": "Rewatch value is huge — complex, dark, and brilliant.",
+        "watchedAt": "2025-10-02T22:50:00.000Z",
+        "createdAt": "2025-10-02T22:50:00.000Z",
+        "updatedAt": "2025-10-02T22:50:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9721",
-        "userId": "68e3e2e2a256bdaf47468be0",
-        "movieId": "68ebcf7bad7c00440ca3269d",
+        "_id": "69011a8d89fba62b2def9810",
+        "userId": "68e4205cce29aac34a4a6e96",
+        "movieId": "68f135d1a67f173b8e31f06b",
         "rating": 4,
-        "review": "A worthy sequel with memorable characters and action.",
-        "watchedAt": "2025-10-07T16:30:00.000Z",
-        "createdAt": "2025-10-07T16:30:00.000Z",
-        "updatedAt": "2025-10-07T16:30:00.000Z"
+        "review": "Deepens the story of the Corleone family — excellent pacing.",
+        "watchedAt": "2025-10-01T17:00:00.000Z",
+        "createdAt": "2025-10-01T17:00:00.000Z",
+        "updatedAt": "2025-10-01T17:00:00.000Z"
     },
     {
-        "_id": "68f01a8d89fba62b2def9722",
+        "_id": "69011a8d89fba62b2def9811",
+        "userId": "68e4f934fdee8fb094e96512",
+        "movieId": "68f135d1a67f173b8e31f06c",
+        "rating": 5,
+        "review": "Clutch performances and razor-sharp dialogue — a masterpiece.",
+        "watchedAt": "2025-09-30T20:45:00.000Z",
+        "createdAt": "2025-09-30T20:45:00.000Z",
+        "updatedAt": "2025-09-30T20:45:00.000Z"
+    },
+    {
+        "_id": "69011a8d89fba62b2def9812",
+        "userId": "68e4f9e3fdee8fb094e9651b",
+        "movieId": "68f135d1a67f173b8e31f06d",
+        "rating": 5,
+        "review": "Grand and sweeping — emotional in all the right places.",
+        "watchedAt": "2025-09-29T15:30:00.000Z",
+        "createdAt": "2025-09-29T15:30:00.000Z",
+        "updatedAt": "2025-09-29T15:30:00.000Z"
+    },
+    {
+        "_id": "69011a8d89fba62b2def9813",
         "userId": "68e4fa3afdee8fb094e96525",
-        "movieId": "68ebcf7bad7c00440ca32699",
+        "movieId": "68f135d1a67f173b8e31f06e",
         "rating": 3,
-        "review": "Enjoyable, but slower than expected. Still a solid classic.",
-        "watchedAt": "2025-10-08T11:15:00.000Z",
-        "createdAt": "2025-10-08T11:15:00.000Z",
-        "updatedAt": "2025-10-08T11:15:00.000Z"
-    },
-    {
-        "_id": "68f01a8d89fba62b2def9723",
-        "userId": "68e51b3889fba62b2def9715",
-        "movieId": "68ebcf7bad7c00440ca32821",
-        "rating": 4,
-        "review": "Loved the character development and story pacing.",
-        "watchedAt": "2025-10-09T08:00:00.000Z",
-        "createdAt": "2025-10-09T08:00:00.000Z",
-        "updatedAt": "2025-10-09T08:00:00.000Z"
-    },
-    {
-        "_id": "68f01a8d89fba62b2def9724",
-        "userId": "68e3e2e2a256bdaf47468be0",
-        "movieId": "68ebcf7bad7c00440ca326a5",
-        "rating": 5,
-        "review": "A film that redefined war cinema. Perfect direction.",
-        "watchedAt": "2025-10-10T19:50:00.000Z",
-        "createdAt": "2025-10-10T19:50:00.000Z",
-        "updatedAt": "2025-10-10T19:50:00.000Z"
+        "review": "Great moments but a bit over-stylized for my taste.",
+        "watchedAt": "2025-09-28T21:00:00.000Z",
+        "createdAt": "2025-09-28T21:00:00.000Z",
+        "updatedAt": "2025-09-28T21:00:00.000Z"
     }
 ]
