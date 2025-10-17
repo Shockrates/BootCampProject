@@ -6,6 +6,13 @@ import WatchedMovie from "../config/models/WatchedMovie.js"
 export async function createWatchedMovie(req, res) {
     try {
         const { userId, movieId, rating, review, watchedAt } = req.body;
+        
+        const existingRecord = await WatchedMovie.findOne({ userId, movieId });
+
+        if (existingRecord) {
+          return res.status(400).json({ message: "User has already added this movie to watched list" });
+        }
+
         const watchedMovie = new WatchedMovie({ userId, movieId, rating, review, watchedAt });
 
         const savedWatchedMovie = await watchedMovie.save();
