@@ -1,14 +1,34 @@
-import Movie from "../config/models/Movie.js";
 import WatchedMovie from "../config/models/WatchedMovie.js"
-
+import Movie from "../config/models/Movie.js"
+import User from "../config/models/User.js"
+import mongoose from 'mongoose';
 
 // Controller function to create a watched movie entry
 export async function createWatchedMovie(req, res) {
     try {
         const { userId, movieId, rating, review, watchedAt } = req.body;
-        
+         // 1. Validate ObjectIds 
+         if (
+             !mongoose.Types.ObjectId.isValid(userId) ||
+             !mongoose.Types.ObjectId.isValid(movieId)
+         ) {
+         return res.status(400).json({ message: "Invalid userId or movieId format" });
+         }
+
+        // 2. Check if user exists
+        const currentUserId = await User.findOne({_id:userId });
+        if (!currentUserId) {
+          return res.status(400).json({ message: "User does not exist in the UserDB" });
+        }
+
+        // 3. Check if movie exists
+        const currentMovieId = await Movie.findOne({ _id:movieId });
+        if (!currentMovieId) {
+          return res.status(400).json({ message: "Movie does not exist in the MovieDB" });
+        }
         const existingRecord = await WatchedMovie.findOne({ userId, movieId });
 
+        // 4. Check if this record exists (for this movie and user)
         if (existingRecord) {
           return res.status(400).json({ message: "User has already added this movie to watched list" });
         }
