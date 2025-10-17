@@ -30,12 +30,11 @@ function App() {
       <Route path="/" element={<RootLayout />} errorElement={<NotFoundPage />}>
         <Route element={<PrivateRoute />} >
           <Route index element={<Profile />} />
-          {/**Will change to top movies when ratin is implemented */}
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="about" element={<About />} />
           <Route path="feed" element={<CommunityFeed />} />
           <Route path="movie/:id" element={<MoviePage />} />
-          
+           {/* <Route path='profile/:id' element={<Profile />} /> */}
         </Route>
         <Route element={<PublicRoute />} >
           <Route path="login" element={<Login />} />
