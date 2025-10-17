@@ -34,7 +34,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="feed" element={<CommunityFeed />} />
           <Route path="movie/:id" element={<MoviePage />} />
-           {/* <Route path='profile/:id' element={<Profile />} /> */}
+          {/* <Route path='profile/:id' element={<Profile />} /> */}
         </Route>
         <Route element={<PublicRoute />} >
           <Route path="login" element={<Login />} />

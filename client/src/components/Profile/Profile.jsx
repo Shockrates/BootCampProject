@@ -30,17 +30,17 @@ export default Profile
 
 // This is for favorite movies
 //export function FavoriteMovies({ useAuth }) {
-  //const user = useAuth();
-  //const favoriteMovieIds = user?.favoriteMovies || [];
-  //const favoriteMovies = movies.filter(movie => favoriteMovieIds.includes(movie.id));
+//const user = useAuth();
+//const favoriteMovieIds = user?.favoriteMovies || [];
+//const favoriteMovies = movies.filter(movie => favoriteMovieIds.includes(movie.id));
 //}
 
 //function FavoriteMovies({ useAuth }) {
-  //const [favoriteMovies, setFavoriteMoviesCounter] = React.useState([0]);
+//const [favoriteMovies, setFavoriteMoviesCounter] = React.useState([0]);
 
-   //return (
-    //<div>
-      //<p>WATCHED MOVIES</p>
-      //<h1>setFavoriteMoviesCounter</h1>
-    //</div>
-   //)
+//return (
+//<div>
+//<p>WATCHED MOVIES</p>
+//<h1>setFavoriteMoviesCounter</h1>
+//</div>
+//)
