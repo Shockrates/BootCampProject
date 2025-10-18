@@ -7,7 +7,7 @@ import { connectDB } from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
 import watchedMovieRoutes from './routes/watchedMovieRoutes.js';
-
+import reviewCommentRoutes from './routes/reviewCommentRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,6 +22,7 @@ app.use(express.json()); // For parsing JSON bodies
 app.use("/", userRoutes);
 app.use("/",movieRoutes);
 app.use("/",watchedMovieRoutes);
+app.use("/",reviewCommentRoutes);
 
 
 // Test route

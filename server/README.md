@@ -25,7 +25,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     watchedAt – Date the movie was watched (optional; defaults to current date/time, accepted example:"2025-09-10T00:00:00.000Z")
 
     ## Returns:
-    A JSON object containing the saved Watched Movie document from the database. (In case no comment was )
+    A JSON object containing the saved Watched Movie document from the database.
 
 2. getAllMovies
     Description:
@@ -50,3 +50,39 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 
    ## Returns:
    A JSON array containing all the records from the Watched Movie.
+
+
+4. createReviewComment
+    Description:
+    Creates a new record of a ReviewComment for a watchedMovie
+
+    Method: POST
+    Endpoint: /createReviewComment
+
+    ## Required Fields:
+
+    watchedMovieId – The ID of the watchedMovie
+
+    commenterId – The ID of the commenter in the User table
+
+    comment – User’s text review 
+
+    ## Returns:
+    1. On failure (400) when not all fields are given:
+    json: { message: 'All fields are required' } 
+
+    2. On failure (400)....:
+    json: { message: 'Invalid watchedMovieId or commenterId format' } 
+
+    ... to be written.. 
+    On success(200): 
+    A JSON object containing the review Comment i.e.:
+    "savedReviewComment": {
+        "_id": "68f38e2c969aac8ea22baf6c",
+        "watchedMovieId": "69011a8d89fba62b2def9804",
+        "commenterId": "68e3e2e2a256bdaf47468be0",
+        "comment": "I loved it",
+        "createdAt": "2025-10-18T12:55:08.413Z",
+        "updatedAt": "2025-10-18T12:55:08.413Z",
+        "__v": 0
+    }
