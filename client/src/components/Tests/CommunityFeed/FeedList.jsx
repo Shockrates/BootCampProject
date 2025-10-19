@@ -13,14 +13,14 @@ const FeedList = ({ reviews }) => {
       /* Reads reviews */
       reviews.map((r, index) => (
 
-        <div className="flex flex-col border  bg-slate-800 m-4 p-2 rounded-md" key={index}>
+        <div className="flex flex-col border-b-2  text-slate-50 bg-stone-900 m-4 p-2 " key={index}>
           <div className="review-items flex flex-row">
             <div className="flex flex-col items-end m-2 gap-2">
               <p> {new Date(r.watchedAt).toLocaleDateString()}</p>
               <FaRegBookmark />
               <div className="flex flex-row gap-1">
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <IoIosStar size={20} key={index} />
+                  <IoIosStar size={20} key={index} color='#D26D15' />
                 ))}
 
               </div>
@@ -45,7 +45,7 @@ const FeedList = ({ reviews }) => {
               <div className="user-review block m-2 w-full h-auto shadow-sm">
                 <Link to="/">
                   <h3>
-                    {r.userId.username}, {r.userId.age}
+                    {r.userId.username},
                   </h3>
                 </Link>
                 {/* <Link to={`/profile/${r.userId._id}`}><h3>{r.userId.username} </h3> </Link> */}
