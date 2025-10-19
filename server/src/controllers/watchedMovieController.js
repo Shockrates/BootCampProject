@@ -45,14 +45,16 @@ export async function createWatchedMovie(req, res) {
 
 export async function getAllWatchedMovies(req, res) {
     try {
-        const watchedMovies = (await WatchedMovie.find().sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
+        const watchedMovies = (await WatchedMovie.find()
+            .populate({ path: 'movieId', select: 'title poster_url' })
+            .populate({ path: 'userId', select: 'username email' })
+            .sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
         res.status(200).json(watchedMovies);
     }
     catch (error) {
         console.error("Error in getAllWatchedMovies controller", error);
         res.status(500).json({ message: "Internal server error" });
     }
-
 }
 
 // Controller function to get watched movies by user  

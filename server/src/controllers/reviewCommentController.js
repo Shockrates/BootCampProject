@@ -32,13 +32,6 @@ export async function createReviewComment(req, res) {
           return res.status(400).json({ message: "This watchedMovieId does not exist in the WatchedMovieDB" });
         }
 
-        // const existingRecord = await WatchedMovie.findOne({ userId, movieId });
-
-        // // 4. Check if this record exists (for this movie and user)
-        // if (existingRecord) {
-        //   return res.status(400).json({ message: "User has already added this movie to watched list" });
-        // }
-
         const reviewComment = new ReviewComment({ watchedMovieId, commenterId, comment });
 
         const savedReviewComment = await reviewComment.save();
