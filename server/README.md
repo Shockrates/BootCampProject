@@ -25,7 +25,25 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     watchedAt – Date the movie was watched (optional; defaults to current date/time, accepted example:"2025-09-10T00:00:00.000Z")
 
     ## Returns:
-    A JSON object containing the saved Watched Movie document from the database.
+    1. On failure (400) or (500):
+    json: { message: 'All fields are required' } 
+
+    2. On success(200): 
+    A JSON object containing the WatchedMovie i.e.:
+    {
+    "savedWatchedMovie": {
+        "_id": "68f54bcdd4ccea8199b19962",
+        "userId": "68e3e2e2a256bdaf47468be0",
+        "movieId": "68f135d1a67f173b8e31f0b8",
+        "rating": 3,
+        "review": "Stanley Kubrick made an amazing job in this movie",
+        "watchedAt": "2025-10-19T20:36:29.902Z",
+        "createdAt": "2025-10-19T20:36:29.916Z",
+        "updatedAt": "2025-10-19T20:36:29.916Z",
+        "__v": 0
+    }
+}
+    
 
 2. getAllMovies
     Description:
@@ -33,9 +51,37 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     
     Method: GET
     Endpoint: /getAllMovies
-
+    
+    ## Requires:    
+    A request in the form of: getAllWatchedMovies?skip=0&limit=30, for the first 30 movies. 
+    skip: skip the first N entries
+    limit: give the next N entries
+    
     ## Returns:
-    A JSON array containing all watched movie entries in descending order of creation date.
+    
+    1. On failure (500)
+    json: { message: 'Internal server error' } 
+
+    2. On success(200): 
+
+    A JSON object containing the watched movie entries asked (N) in descending order of creation date. i.e.:
+    "_id": "68f54bcdd4ccea8199b19962",
+        "userId": {
+            "_id": "68e3e2e2a256bdaf47468be0",
+            "username": "Katerina",
+            "email": "katerina@gmail.com"
+        },
+        "movieId": {
+            "_id": "68f135d1a67f173b8e31f0b8",
+            "title": "Paths of Glory",
+            "poster_url": "https://m.media-amazon.com/images/M/MV5BNjViMmRkOTEtM2ViOS00ODg0LWJhYWEtNTBlOGQxNDczOGY3XkEyXkFqcGdeQXVyMDI2NDg0NQ@@._V1_.jpg"
+        },
+        "rating": 3,
+        "review": "Stanley Kubrick made an amazing job in this movie",
+        "watchedAt": "2025-10-19T20:36:29.902Z",
+        "createdAt": "2025-10-19T20:36:29.916Z",
+        "updatedAt": "2025-10-19T20:36:29.916Z",
+        "__v": 0    
 
 3. watchedByUser
    Description:
@@ -68,14 +114,10 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     comment – User’s text review 
 
     ## Returns:
-    1. On failure (400) when not all fields are given:
-    json: { message: 'All fields are required' } 
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
 
-    2. On failure (400)....:
-    json: { message: 'Invalid watchedMovieId or commenterId format' } 
-
-    ... to be written.. 
-    On success(200): 
+    2. On success(200): 
     A JSON object containing the review Comment i.e.:
     "savedReviewComment": {
         "_id": "68f38e2c969aac8ea22baf6c",
