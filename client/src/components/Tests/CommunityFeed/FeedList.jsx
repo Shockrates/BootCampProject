@@ -1,43 +1,56 @@
 import React from 'react'
 import { Outlet, Navigate, Link } from 'react-router-dom'
-import { FaStar } from "react-icons/fa";
-import { CiBookmark } from "react-icons/ci";
+import { IoIosStar } from "react-icons/io";
+import { FaRegBookmark } from "react-icons/fa";
 
 const FeedList = ({ reviews }) => {
   if (!reviews || reviews.length === 0) return <p>No reviews available.</p>
+
+
   return (
 
     <div>{
       /* Reads reviews */
-      reviews.map((r) => (
-        <div className="flex flex-col border  bg-slate-800 m-4 p-2 rounded-md">
+      reviews.map((r, index) => (
+
+        <div className="flex flex-col border  bg-slate-800 m-4 p-2 rounded-md" key={index}>
           <div className="review-items flex flex-row">
-            <div className="flex flex-col items-end m-2">
-              <p> {r.watchedAt}</p>
-              <CiBookmark />
-              <div className="flex flex-row">
-                <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+            <div className="flex flex-col items-end m-2 gap-2">
+              <p> {new Date(r.watchedAt).toLocaleDateString()}</p>
+              <FaRegBookmark />
+              <div className="flex flex-row gap-1">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <IoIosStar size={20} key={index} />
+                ))}
+
               </div>
 
             </div>
-            <div className="review-movie flex flex-col">
+            <div className="review-movie inline-block max-w-[200px]">
+
               <img src={r.movieId?.poster_url} alt={r.movieId?.title} title={r.movieId?.title} loading='lazy'
                 onError={(e) => {
                   e.currentTarget.src = "/no_poster.svg";
                   e.currentTarget.alt = "Poster not available";
                 }}
-                width={200}
+                className="block w-full h-auto shadow-sm"
               />
+              <div
+                className="bg-[#D26D15] text-white text-sm font-medium px-3 py-2 break-words top-0"
+              >
+                {r.movieId?.title}
+              </div>
             </div>
-            <div className="user-review">
-              <Link to="/">
-                <h3>
-                  {r.userId.username}
-                </h3>
-              </Link>
-              {/* <Link to={`/profile/${r.userId._id}`}><h3>{r.userId.username} </h3> </Link> */}
-              <p> {r.movieId?.title}</p>
-              <p>{r.review}</p>
+            <div className="flex w-full items-end">
+              <div className="user-review block m-2 w-full h-auto shadow-sm">
+                <Link to="/">
+                  <h3>
+                    {r.userId.username}, {r.userId.age}
+                  </h3>
+                </Link>
+                {/* <Link to={`/profile/${r.userId._id}`}><h3>{r.userId.username} </h3> </Link> */}
+                <p>{r.review}</p>
+              </div>
             </div>
           </div>
 
