@@ -33,9 +33,12 @@ const PrivateRoute = () => {
                 <div className="nav-inner">
 
                     <div className="nav-left">
-                        <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
+                        <Link to="/">
+                            <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
+                        </Link>
+
                         <Link to="/imdb-top-movies">Dashboard</Link>
-                        <Link to="/feed">Community Feed</Link>
+
                         <Link to="/about">About</Link>
                     </div>
                     <div className="nav-right">
@@ -43,7 +46,7 @@ const PrivateRoute = () => {
                             <p>No user Found </p>
                         ) : (
                             <>
-                                <Link to="/"> {user.username} Profile</Link>
+                                <Link to="/profile"> {user.username} Profile</Link>
                                 <button onClick={handleLogout}>
                                     Logout
                                 </button>

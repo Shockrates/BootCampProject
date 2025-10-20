@@ -4,7 +4,6 @@ import { useAuth } from '../Auth/AuthProvider';
 
 const Profile = () => {
   const { user } = useAuth();
-  console.log(user);
 
   return (
     <div className="max-w-3xl mx-auto mt-8 px-4">

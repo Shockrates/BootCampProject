@@ -34,14 +34,14 @@ const CommunityFeed = () => {
         console.log(message);
 
     }, []);
-  return (
-    <div>
-        <h1>
-            TESTING FOR CommunityFeed
-        </h1>
-<FeedList reviews={reviews} />
-    </div>
-  )
+    return (
+        <div>
+            <h1>
+                TESTING FOR CommunityFeed
+            </h1>
+            <FeedList reviews={reviews} />
+        </div>
+    )
 }
 
 export default CommunityFeed

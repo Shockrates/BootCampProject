@@ -15,14 +15,14 @@ body {
 
 /* Dark mode (Tailwind dark mode should be set to 'class' so <html class="dark"> or similar works) */
 body {
-  @apply bg-black text-slate-100;
+  @apply bg-stone-900 text-slate-100;
 }
 
 /* Layout */
 
 /* Navbar outer container (full width background) */
 .nav {
-  @apply bg-slate-800 shadow-md;
+  @apply bg-black shadow-md;
 }
 
 /* Inner wrapper (centers and constrains width) */

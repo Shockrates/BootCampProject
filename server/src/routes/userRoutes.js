@@ -35,8 +35,8 @@ router.get("/reviewsTest", async (req, res) => {
     try {
         const watchedMovies = (await WatchedMovie.find()
             //TESTING CODE, MODIFY AS YOU SEE FIT
-            .populate({ path: 'movieId', select: 'title' })
-            .populate({ path: 'userId', select: 'username email' })
+            .populate({ path: 'movieId', select: 'title poster_url genre' })
+            .populate({ path: 'userId', select: 'username email age' })
             //END OF TESTING CODE
             .sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
         res.status(200).json(watchedMovies);
