@@ -14,7 +14,7 @@ const FeedList = ({ reviews }) => {
       reviews.map((r, index) => (
 
         <div className="flex flex-col border-b-2  text-slate-50 bg-stone-900 m-4 p-2 " key={index}>
-          <div className="review-items flex flex-row">
+          <div className="review-items flex flex-col sm:flex-row">
             <div className="flex flex-col items-end m-2 gap-2">
               <p> {new Date(r.watchedAt).toLocaleDateString()}</p>
               <FaRegBookmark />
@@ -42,10 +42,10 @@ const FeedList = ({ reviews }) => {
               </div>
             </div>
             <div className="flex w-full items-end">
-              <div className="user-review block m-2 w-full h-auto shadow-sm">
+              <div className="user-review flex flex-col m-2 w-full h-1/2 shadow-sm border-2 p-2 items-start">
                 <Link to="/">
                   <h3>
-                    {r.userId.username},
+                    {r.userId.username},{r.userId.age}
                   </h3>
                 </Link>
                 {/* <Link to={`/profile/${r.userId._id}`}><h3>{r.userId.username} </h3> </Link> */}
