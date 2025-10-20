@@ -26,7 +26,9 @@ const PublicRoute = () => {
             <nav className="nav">
                 <div className="nav-inner">
                     <div className="nav-left">
-                        <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
+                         <Link to="/">
+                                                    <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
+                                                </Link>
 
                     </div>
                     <div className="nav-right">

@@ -6,7 +6,10 @@ import { FaRegBookmark } from "react-icons/fa";
 import RatingIcon from './RatingIcon';
 
 const FeedListItem = ({review, index}) => {
-    console.log(review);
+   //console.log(review.movieId.genre);
+   review.movieId?.genre &&  review.movieId?.genre.map((genre) => (
+                        console.log(genre)
+                    ))
     
   return (
     <div className="flex flex-col border-b-2  text-slate-50 bg-stone-900 m-4 p-2 " key={index}>
@@ -36,10 +39,11 @@ const FeedListItem = ({review, index}) => {
                 className="bg-[#D26D15] text-white text-sm font-medium px-3 py-2 break-words top-0"
               >
                 {review.movieId?.title}
+             
                 {
-                    review.movieId.genre.map(genre => (
-                        {genre}
-                    ))
+                //    review.movieId?.genre &&  review.movieId?.genre.map((genre) => (
+                //         {genre}
+                //     ))
                 }
               </div>
             </div>
@@ -51,7 +55,6 @@ const FeedListItem = ({review, index}) => {
                     {review.userId.username}, {review.userId.age}
                   </h3>
                 </Link>
-                {console.log(review.userId)}
                 
              
                 {/* <Link to={`/profile/${review.userId._id}`}><h3>{review.userId.username} </h3> </Link> */}
