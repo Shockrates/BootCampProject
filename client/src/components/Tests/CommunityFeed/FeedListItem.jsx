@@ -37,7 +37,7 @@ const FeedListItem = ({review, index}) => {
               >
                 {review.movieId?.title}
                 {
-                    review.movieId.genres.map(genre => (
+                    review.movieId.genre.map(genre => (
                         {genre}
                     ))
                 }
