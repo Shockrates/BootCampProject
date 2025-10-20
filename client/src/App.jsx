@@ -10,7 +10,6 @@ import RootLayout from './layouts/RootLayout'
 import PrivateRoute from './layouts/PrivateRoute'
 import PublicRoute from './layouts/PublicRoute'
 import CommunityFeed from './components/Tests/CommunityFeed/CommunityFeed'
-import AuthRoute from './layouts/AuthRoute'
 
 /**
  * Main application component.
@@ -30,6 +29,7 @@ function App() {
 
       <Route path="/" element={<RootLayout />} errorElement={<NotFoundPage />}>
         <Route element={<PrivateRoute />} >
+          <Route index element={<CommunityFeed />} />
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="about" element={<About />} />
           <Route path="movie/:id" element={<MoviePage />} />
@@ -38,11 +38,8 @@ function App() {
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<CommunityFeed />} />
-          <Route element={<AuthRoute />} >
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
-
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
       </Route>
 

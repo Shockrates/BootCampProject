@@ -44,19 +44,19 @@ export default Profile
 //</div>
 //)
 
- //This is for favoritemovies
-  export function FavoriteMovies({ useAuth }) {
-  const user = useAuth();
-  const favoriteMovieIds = user?.favoriteMovies || [];
-  const favoriteMovies = movies.filter(movie => favoriteMovieIds.includes(movie.id, movie.poster_url));
-}
+//This is for favoritemovies
+//   export function FavoriteMovies({ useAuth }) {
+//   const user = useAuth();
+//   const favoriteMovieIds = user?.favoriteMovies || [];
+//   const favoriteMovies = movies.filter(movie => favoriteMovieIds.includes(movie.id, movie.poster_url));
+// }
 
-function FavoriteMovies({ useAuth }) {
-  const [favoriteMovies, setFavoriteMoviesCounter] = React.useState([0]);
+// function FavoriteMovies({ useAuth }) {
+//   const [favoriteMovies, setFavoriteMoviesCounter] = React.useState([0]);
 
-   return (
-    <div>
-      <p>WATCHED MOVIES</p>
-      <h1>setFavoriteMoviesCounter</h1>
-    </div>
-   ) }
+//    return (
+//     <div>
+//       <p>WATCHED MOVIES</p>
+//       <h1>setFavoriteMoviesCounter</h1>
+//     </div>
+//    ) }
