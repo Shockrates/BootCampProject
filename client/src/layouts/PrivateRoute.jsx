@@ -36,9 +36,9 @@ const PrivateRoute = () => {
                         <Link to="/">
                             <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
                         </Link>
-                        
+
                         <Link to="/imdb-top-movies">Dashboard</Link>
-                        
+
                         <Link to="/about">About</Link>
                     </div>
                     <div className="nav-right">
