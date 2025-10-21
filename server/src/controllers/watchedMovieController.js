@@ -67,7 +67,7 @@ export async function getAllWatchedMovies(req, res) {
 // Controller function to get watched movies by user  
 export async function watchedByUser(req, res) {
     try {
-        const { user } = req.query;
+        const { user } = req.params;
         if (!user) {
             return res.status(400).json({ message: "User ID is required" });        // αν δεν υπαρχει καθολου user id, μονο τοτε λεει οτι ειναι απαραιτητο. 
         }                                                                       //to do : validate user by checking if it exists in User collection ( Matthew )

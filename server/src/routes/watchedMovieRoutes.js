@@ -5,7 +5,7 @@ import { createWatchedMovie, watchedByUser, getAllWatchedMovies } from '../contr
 const router = express.Router();
 
 router.post("/createWatchedMovie", createWatchedMovie);  // create a watched movie entry
-router.get("/watchedByUser/", watchedByUser); // get watched movies by user
+router.get("/watchedByUser/:user", watchedByUser); // get watched movies by user
 router.get("/getAllWatchedMovies", getAllWatchedMovies); // get all watched movies
 
 export default router; // ES Module export
