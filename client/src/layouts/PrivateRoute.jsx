@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet, Navigate, useLocation, Link } from 'react-router-dom'
 import { useAuth } from "../components/Auth/AuthProvider"
-import logo from '../assets/ReelTalk.png'
+import Navbar from '../components/Navbar/Navbar'
 
 
 /**
@@ -13,7 +13,7 @@ import logo from '../assets/ReelTalk.png'
  */
 
 const PrivateRoute = () => {
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     const location = useLocation();
 
     //Change it to false in order to gain acces to the other pages
@@ -22,39 +22,14 @@ const PrivateRoute = () => {
         return <Navigate to="/login" replace state={{ from: location }} />;
     }
 
-    const handleLogout = () => {
-        logout(); // clears user + localStorage
-    };
+    // const handleLogout = () => {
+    //     logout(); // clears user + localStorage
+    // };
 
     // user is present: render nested routes
     return (
         <>
-            <nav className="nav">
-                <div className="nav-inner">
-
-                    <div className="nav-left">
-                        <Link to="/">
-                            <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
-                        </Link>
-
-                        <Link to="/imdb-top-movies">Dashboard</Link>
-
-                        <Link to="/about">About</Link>
-                    </div>
-                    <div className="nav-right">
-                        {!user ? (
-                            <p>No user Found </p>
-                        ) : (
-                            <>
-                                <Link to="/profile"> {user.username} Profile</Link>
-                                <button onClick={handleLogout}>
-                                    Logout
-                                </button>
-                            </>)}
-                    </div>
-                </div>
-            </nav>
-
+            <Navbar user={user} />
             <main className="main">
                 <Outlet />
             </main>

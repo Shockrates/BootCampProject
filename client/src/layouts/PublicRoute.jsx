@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet, Navigate, Link, useLocation } from 'react-router-dom'
 import { useAuth } from "../components/Auth/AuthProvider"
-import logo from '../assets/ReelTalk.png'
+import Navbar from '../components/Navbar/Navbar'
 /**
  * PublicRoute component.
  * - Checks if a user is already authenticated via AuthProvider.
@@ -17,27 +17,13 @@ const PublicRoute = () => {
 
     // Get the original intended route from state, fallback to dashboard
     const from = location.state?.from?.pathname || "/";
-    if (user) {
-        // if already logged in, send to dashboard
-        return <Navigate to={from} replace />;
-    }
+    // if (user) {
+    //     // if already logged in, send to dashboard
+    //     return <Navigate to={from} replace />;
+    // }
     return (
         <div>
-            <nav className="nav">
-                <div className="nav-inner">
-                    <div className="nav-left">
-                        <Link to="/">
-                            <img src={logo} width={80} alt={logo} title={logo} loading='lazy' />
-                        </Link>
-
-                    </div>
-                    <div className="nav-right">
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
-                    </div>
-                </div>
-            </nav>
-
+            <Navbar user={user} />
             <main className="main">
                 <Outlet />
             </main>

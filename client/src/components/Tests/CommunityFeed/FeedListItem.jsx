@@ -24,7 +24,7 @@ const FeedListItem = ({ review, index }) => {
           <RatingIcon rating={review.rating} />
 
         </div>
-        <div className="review-movie inline-block max-w-[200px]">
+        <div className="review-movie inline-block max-w-[200px] border-4 border-transparent hover:border-[#D26D15] transition-all">
 
           <img src={review.movieId?.poster_url} alt={review.movieId?.title} title={review.movieId?.title} loading='lazy'
             onError={(e) => {

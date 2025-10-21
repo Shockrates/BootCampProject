@@ -9,6 +9,7 @@ import NotFoundPage from './components/ErrorPage/NotFoundPage'
 import RootLayout from './layouts/RootLayout'
 import PrivateRoute from './layouts/PrivateRoute'
 import PublicRoute from './layouts/PublicRoute'
+import AuthRoute from './layouts/AuthRoute'
 import CommunityFeed from './components/Tests/CommunityFeed/CommunityFeed'
 
 /**
@@ -28,8 +29,8 @@ function App() {
     createRoutesFromElements(
 
       <Route path="/" element={<RootLayout />} errorElement={<NotFoundPage />}>
+       
         <Route element={<PrivateRoute />} >
-          <Route index element={<CommunityFeed />} />
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="about" element={<About />} />
           <Route path="movie/:id" element={<MoviePage />} />
@@ -38,9 +39,13 @@ function App() {
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<CommunityFeed />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route element={<AuthRoute />} >
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          
         </Route>
+        
       </Route>
 
     )

@@ -73,7 +73,7 @@ const Register = () => {
                             <input
                                 name="username"
                                 type="text"
-                                pattern="[a-zA-Z0-9]+"
+                                pattern="[a-zA-Z0-9 ]+"
                                 maxlength="20"
                                 value={credentials.username}
                                 onChange={handleChange}
