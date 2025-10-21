@@ -132,8 +132,8 @@ const Register = () => {
                             <input
                                 name="age"
                                 type="number"
-                                min = "1"
-                                max = "122"
+                                min="1"
+                                max="122"
                                 value={credentials.age}
                                 onChange={handleChange}
                                 required

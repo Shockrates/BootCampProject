@@ -7,39 +7,40 @@ import mongoose from 'mongoose';
 export async function createWatchedMovie(req, res) {
     try {
         const { userId, movieId, rating, review, watchedAt } = req.body;
-         // 1. Validate ObjectIds 
-         if (
-             !mongoose.Types.ObjectId.isValid(userId) ||
-             !mongoose.Types.ObjectId.isValid(movieId)
-         ) {
-         return res.status(400).json({ message: "Invalid userId or movieId format" });
-         }
+        // 1. Validate ObjectIds 
+        if (
+            !mongoose.Types.ObjectId.isValid(userId) ||
+            !mongoose.Types.ObjectId.isValid(movieId)
+        ) {
+            return res.status(400).json({ message: "Invalid userId or movieId format" });
+        }
 
         // 2. Check if user exists
-        const currentUserId = await User.findOne({_id:userId });
+        const currentUserId = await User.findOne({ _id: userId });
         if (!currentUserId) {
-          return res.status(400).json({ message: "User does not exist in the UserDB" });
+            return res.status(400).json({ message: "User does not exist in the UserDB" });
         }
 
         // 3. Check if movie exists
-        const currentMovieId = await Movie.findOne({ _id:movieId });
+        const currentMovieId = await Movie.findOne({ _id: movieId });
         if (!currentMovieId) {
-          return res.status(400).json({ message: "Movie does not exist in the MovieDB" });
+            return res.status(400).json({ message: "Movie does not exist in the MovieDB" });
         }
         const existingRecord = await WatchedMovie.findOne({ userId, movieId });
 
         // 4. Check if this record exists (for this movie and user)
         if (existingRecord) {
-          return res.status(400).json({ message: "User has already added this movie to watched list" });
+            return res.status(400).json({ message: "User has already added this movie to watched list" });
         }
 
         const watchedMovie = new WatchedMovie({ userId, movieId, rating, review, watchedAt });
 
         const savedWatchedMovie = await watchedMovie.save();
+        console.log('Movie Saved Successfully');
         res.status(200).json({ savedWatchedMovie });
     } catch (error) {
         console.error("Error in create Watched Movie controller", error);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ message: "Internal server error: " + error.message });
     }
 }
 

@@ -7,8 +7,8 @@
 //  * - Logs errors to the console if the fetch request fails.
 //  */
 
-const URI = "https://bootcampproject-production.up.railway.app";
-//const URI = "http://localhost:3000";
+//const URI = "https://bootcampproject-production.up.railway.app";
+const URI = "http://localhost:3000";
 
 /**
  * Attempts to log in a user by checking email and password against the JSON server.
@@ -143,4 +143,25 @@ export async function fetchReviews() {
   const reviews = await res.json();
 
   return reviews;
+}
+
+export async function createReview(userId, movieId, rating, review, watchedAt) {
+  try {
+
+    const res = await fetch(`${URI}/createWatchedMovie`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userId, movieId, rating, review, watchedAt })
+      })
+
+    const { message, savedWatchedMovie } = await res.json();
+    // if a match exists, return the first match
+    console.log(message);
+    return savedWatchedMovie ? savedWatchedMovie : null;
+  } catch (error) {
+    console.log("Error:", error);
+  }
 }

@@ -24,15 +24,17 @@ const FeedListItem = ({ review, index }) => {
           <RatingIcon rating={review.rating} />
 
         </div>
-        <div className="review-movie inline-block max-w-[200px] border-4 border-transparent hover:border-[#D26D15] transition-all">
 
-          <img src={review.movieId?.poster_url} alt={review.movieId?.title} title={review.movieId?.title} loading='lazy'
-            onError={(e) => {
-              e.currentTarget.src = "/no_postereview.svg";
-              e.currentTarget.alt = "Poster not available";
-            }}
-            className="block w-full h-auto shadow-sm"
-          />
+        <div className="review-movie inline-block max-w-[250px] border-4 border-transparent hover:border-[#D26D15] transition-all">
+          <Link to={`/movie/${review.movieId?._id}`}>
+            <img src={review.movieId?.poster_url} alt={review.movieId?.title} title={review.movieId?.title} loading='lazy'
+              onError={(e) => {
+                e.currentTarget.src = "/no_postereview.svg";
+                e.currentTarget.alt = "Poster not available";
+              }}
+              className="block w-full h-auto shadow-sm"
+            />
+          </Link>
           <div
             className="bg-[#D26D15] text-white text-sm font-medium px-3 py-2 break-words top-0"
           >
@@ -48,6 +50,7 @@ const FeedListItem = ({ review, index }) => {
 
           </div>
         </div>
+
         <div className="flex w-full items-end">
           <div className="user-review flex flex-col m-2 w-full h-1/2 shadow-md shadow-black border-1 p-2 items-start justify-between">
             <div className="">

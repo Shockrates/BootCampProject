@@ -75,7 +75,7 @@ const MoviePage = () => {
               <button className='btn-back' onClick={() => navigate(-1)}>← Go Back</button>
             </div>
             {user &&
-              <MovieRating />
+              <MovieRating movieId={id} userId={user._id} />
             }
           </div>
         </div>
