@@ -29,13 +29,13 @@ function App() {
     createRoutesFromElements(
 
       <Route path="/" element={<RootLayout />} errorElement={<NotFoundPage />}>
-       
+
         <Route element={<PrivateRoute />} >
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="about" element={<About />} />
           <Route path="movie/:id" element={<MoviePage />} />
-          <Route path='profile' element={<Profile />} />
-          {/* <Route path='profile/:id' element={<Profile />} /> */}
+          {/* <Route path='profile' element={<Profile />} /> */}
+          <Route path='profile/:id' element={<Profile />} />
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<CommunityFeed />} />
@@ -43,9 +43,9 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
-          
+
         </Route>
-        
+
       </Route>
 
     )

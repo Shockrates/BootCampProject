@@ -54,7 +54,7 @@ const FeedListItem = ({ review, index }) => {
         <div className="flex w-full items-end">
           <div className="user-review flex flex-col m-2 w-full h-1/2 shadow-md shadow-black border-1 p-2 items-start justify-between">
             <div className="">
-              <Link to="/">
+              <Link to={`/profile/${review.userId._id}`}>
                 <h3>
                   {review.userId.username}, {review.userId.age}
                 </h3>
