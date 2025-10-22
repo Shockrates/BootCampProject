@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-//import ReviewComment from "."
-
 
 const watchedMovieSchema = new mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
@@ -13,8 +11,8 @@ const watchedMovieSchema = new mongoose.Schema({
 
 watchedMovieSchema.virtual('CommentCount', {
   ref: 'ReviewComment',
-  localField: '_id',
-  foreignField: 'ReviewComment',
+  localField: '_id', // το _id του WatchedMovie στο WatchedMovie schema
+  foreignField: 'watchedMovieId', // το πεδίο που κάνει ref σε αυτό στο reviewComment schema
   count: true // επιστρέφει αριθμό likes
 });
 
