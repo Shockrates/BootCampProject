@@ -34,7 +34,7 @@ const Navbar = ({user}) => {
                        
                         ) : (
                             <>
-                                <Link to="/profile"> {user.username} Profile</Link>
+                                <Link to={`/profile/${user._id}`}> {user.username} Profile</Link>
                                 <button onClick={handleLogout}>
                                     Logout
                                 </button>

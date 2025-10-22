@@ -8,7 +8,7 @@
 //  */
 
 const URI = "https://bootcampproject-production.up.railway.app";
-// const URI = "http://localhost:3000";
+//const URI = "http://localhost:3000";
 
 /**
  * Attempts to log in a user by checking email and password against the JSON server.

@@ -4,8 +4,9 @@ import { FaComments } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa";
 import RatingIcon from './RatingIcon';
+import TimeAgo from '../../Helper/TimeAgo';
 
-const FeedListItem = ({ review, index }) => {
+const FeedListItem = ({ review, index, onOpen }) => {
   //console.log(review.movieId.genre);
 
 
@@ -13,7 +14,7 @@ const FeedListItem = ({ review, index }) => {
     <div className="flex flex-col border-b-2  text-slate-50 bg-stone-900 m-4 p-2 " key={index}>
       <div className="review-items flex flex-col sm:flex-row">
         <div className="flex flex-col items-end m-2 gap-2">
-          <p> {new Date(review.watchedAt).toLocaleDateString()}</p>
+          <TimeAgo createdAt={review.createdAt}/>
           <FaRegBookmark />
           {/* <div className="flex flex-row gap-1">
                 {Array.from({ length: 5 }).map((_, index) => (
@@ -51,8 +52,11 @@ const FeedListItem = ({ review, index }) => {
           </div>
         </div>
 
-        <div className="flex w-full items-end">
-          <div className="user-review flex flex-col m-2 w-full h-1/2 shadow-md shadow-black border-1 p-2 items-start justify-between">
+        <div className="flex w-full items-end" >
+          <div className="user-review flex flex-col m-2 w-full h-1/2 shadow-md shadow-black border-1 p-2 items-start justify-between transition-all hover:bg-stone-800"
+            role="button"
+            onClick={() => onOpen()}
+          >
             <div className="">
               <Link to={`/profile/${review.userId._id}`}>
                 <h3>
@@ -60,8 +64,7 @@ const FeedListItem = ({ review, index }) => {
                 </h3>
               </Link>
 
-
-              {/* <Link to={`/profile/${review.userId._id}`}><h3>{review.userId.username} </h3> </Link> */}
+              {/* Watched at: <span className='text-xs'> {new Date(review.watchedAt).toLocaleDateString("el-GR")}</span> */}
               <p>{review.review}</p>
             </div>
 

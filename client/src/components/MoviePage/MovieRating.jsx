@@ -5,31 +5,38 @@ import { createReview } from '../../utils/api/'
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const MovieRating = ({ movieId, userId }) => {
+
+const MovieRating = ({ movie, userId }) => {
 
     const [review, setReview] = useState("");
     const [rating, setRating] = useState("");
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState(new Date());
     const [error, setError] = useState("");
 
 
     const handleReview = async (e) => {
         e.preventDefault();
-        console.log({ userId, movieId, rating, review, date });
-
+        
+        if(movie){
+            console.log({ userId, movie, rating, review, date });
+            
+        }
         setError("");
 
+        if (!rating ) {
+            setError("Please give a rating for this movie");
+            return;
+        }
 
-
-        if (!review || !rating || !date) {
-            setError("Please fill in all fields");
+        if (movie && date.getFullYear() < parseInt(movie.year)) {
+             setError("I think you watched the movie a little to early");
             return;
         }
 
 
 
         try {
-            const movieReview = await createReview(userId, movieId, rating, review, date);//TODO
+            const movieReview = await createReview(userId, movie._id, rating, review, date);//TODO
             if (!movieReview) {
                 setError("Review failed. Please try again");
                 return;
