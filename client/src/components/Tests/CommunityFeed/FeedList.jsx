@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import FeedListItem from './FeedListItem'
 import ReviewModal from '../../Review/ReviewModal';
+import { useAuth } from '../../Auth/AuthProvider';
 
 
 const FeedList = ({ reviews }) => {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [review, setReview] = useState({});
+  const { user } = useAuth();
 
-   function openModal() {
+
+  function openModal(selectedReview) {
+    setReview(selectedReview)
     setIsOpen(true);
   }
 
@@ -20,14 +25,16 @@ const FeedList = ({ reviews }) => {
       /* Reads reviews */
       reviews.map((review, index) => (
 
-        <FeedListItem review={review} index={index} onOpen={openModal}/>
+        <FeedListItem key={index} review={review} onOpen={openModal} />
 
       ))
     }
-    <ReviewModal 
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-    />
+      <ReviewModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        review={review}
+        user={user}
+      />
     </div>
   )
 }
