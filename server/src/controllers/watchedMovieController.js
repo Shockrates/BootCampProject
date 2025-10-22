@@ -57,6 +57,7 @@ export async function getAllWatchedMovies(req, res) {
             .populate({ path: 'movieId', select: 'title poster_url genre' })
             .populate({ path: 'userId', select: 'username email age' })
             .populate('CommentCount') // populate στο virtual
+            .populate('LikeCount') // populate στο virtual
             .sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
         res.status(200).json(watchedMovies);
     }

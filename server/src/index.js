@@ -8,6 +8,7 @@ import userRoutes from './routes/userRoutes.js';
 import movieRoutes from './routes/movieRoutes.js';
 import watchedMovieRoutes from './routes/watchedMovieRoutes.js';
 import reviewCommentRoutes from './routes/reviewCommentRoutes.js';
+import reviewLikeRoutes from './routes/reviewLikeRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,7 +24,7 @@ app.use("/", userRoutes);
 app.use("/",movieRoutes);
 app.use("/",watchedMovieRoutes);
 app.use("/",reviewCommentRoutes);
-
+app.use("/",reviewLikeRoutes);
 
 // Test route
 app.get('/', (req, res) => {
