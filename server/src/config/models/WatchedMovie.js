@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//import ReviewComment from "."
 
 
 const watchedMovieSchema = new mongoose.Schema({
@@ -10,6 +10,15 @@ const watchedMovieSchema = new mongoose.Schema({
     review: { type: String, maxLength: 500, required: false },
     watchedAt: { type: Date, default: Date.now },
 }, { timestamps: true });
+
+watchedMovieSchema.virtual('CommentCount', {
+  ref: 'ReviewComment',
+  localField: '_id',
+  foreignField: 'ReviewComment',
+  count: true // επιστρέφει αριθμό likes
+});
+
+watchedMovieSchema.set('toJSON', { virtuals: true });
 
 const WatchedMovie = mongoose.model('WatchedMovie', watchedMovieSchema);
 

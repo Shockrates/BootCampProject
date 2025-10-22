@@ -53,9 +53,9 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     Endpoint: /getAllMovies
     
     ## Requires:    
-    A request in the form of: getAllWatchedMovies?skip=0&limit=30, for the first 30 movies. 
-    skip: skip the first N entries
-    limit: give the next N entries
+    A request in the form of: getAllWatchedMovies/0/30, for the first 30 movies. 
+    skip: skip the first N entries (default=0)
+    limit: give the next N entries (default=20)
     
     ## Returns:
     
@@ -65,23 +65,26 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     2. On success(200): 
 
     A JSON object containing the watched movie entries asked (N) in descending order of creation date. i.e.:
-    "_id": "68f54bcdd4ccea8199b19962",
+    "_id": "68f8c6194afd9f566be87a68",
         "userId": {
-            "_id": "68e3e2e2a256bdaf47468be0",
-            "username": "Katerina",
-            "email": "katerina@gmail.com"
+            "_id": "68e3f75bb5747e6294a5c49b",
+            "username": "Gandalf the Gray",
+            "email": "aWizardIsNeverLate@gmail.com"
         },
         "movieId": {
-            "_id": "68f135d1a67f173b8e31f0b8",
-            "title": "Paths of Glory",
-            "poster_url": "https://m.media-amazon.com/images/M/MV5BNjViMmRkOTEtM2ViOS00ODg0LWJhYWEtNTBlOGQxNDczOGY3XkEyXkFqcGdeQXVyMDI2NDg0NQ@@._V1_.jpg"
+            "_id": "68f135d1a67f173b8e31f080",
+            "title": "Saving Private Ryan",
+            "poster_url": "https://m.media-amazon.com/images/M/MV5BZjhkMDM4MWItZTVjOC00ZDRhLThmYTAtM2I5NzBmNmNlMzI1XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg"
         },
         "rating": 3,
-        "review": "Stanley Kubrick made an amazing job in this movie",
-        "watchedAt": "2025-10-19T20:36:29.902Z",
-        "createdAt": "2025-10-19T20:36:29.916Z",
-        "updatedAt": "2025-10-19T20:36:29.916Z",
-        "__v": 0    
+        "review": "Where's Bryan?",
+        "watchedAt": "2020-10-22T11:54:41.000Z",
+        "createdAt": "2025-10-22T11:55:05.185Z",
+        "updatedAt": "2025-10-22T11:55:05.185Z",
+        "__v": 0,
+        "CommentCount": 0,
+        "id": "68f8c6194afd9f566be87a68"
+    
 
 3. watchedByUser
    Description:
