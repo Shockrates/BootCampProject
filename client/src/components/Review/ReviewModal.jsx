@@ -15,7 +15,7 @@ const ReviewModal = ({ isOpen, onClose, review, user }) => {
   //   const loadComments = async () => {
   //     setMessage('Loading...');
   //     try {
-  //       const res = await fetch(`/getReviewCommentsByWatchedMovie/${review._id}`);
+  //       const res = await fetch(`https://bootcampproject-production.up.railway.app/getReviewCommentsByWatchedMovie/${review._id}`);
   //       const comments = await res.json();
 
   //       //if (!mounted) return;

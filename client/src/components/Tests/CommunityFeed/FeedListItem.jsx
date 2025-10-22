@@ -70,10 +70,10 @@ const FeedListItem = ({ review, onOpen }) => {
 
             <div className="flex flex-row w-full justify-between">
               <span className='flex items-center gap-2'>
-                <FaHeart /> 325 Likes
+                <FaHeart /> {review.LikeCount} Likes
               </span>
               <span className='flex items-center gap-2'>
-                <FaComments /> 35 Comments
+                <FaComments /> {review.CommentCount} Comments
               </span>
 
 

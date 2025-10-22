@@ -11,7 +11,7 @@ const CommentReviewForm = ({ watchedMovieId, commenterId }) => {
         console.log(watchedMovieId, " ", commenterId, " ", comment);
         try {
 
-            const res = await fetch(`http://localhost:3000/createReviewComment`,
+            const res = await fetch(`https://bootcampproject-production.up.railway.app/createReviewComment`,
                 {
                     method: 'POST',
                     headers: {

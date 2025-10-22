@@ -134,7 +134,7 @@ export async function searchMovies(query) {
 
 export async function fetchReviews() {
 
-  const res = await fetch(`${URI}/reviewsTest`);
+  const res = await fetch(`${URI}/getAllWatchedMovies`);
 
   if (!res.ok) {
     // Throw so the caller knows this was a failure (not just an empty list)
