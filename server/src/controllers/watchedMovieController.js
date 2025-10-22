@@ -76,7 +76,9 @@ export async function watchedByUser(req, res) {
             return res.status(400).json({ message: "User ID is required" });        // αν δεν υπαρχει καθολου user id, μονο τοτε λεει οτι ειναι απαραιτητο. 
         }                                                                       //to do : validate user by checking if it exists in User collection ( Matthew )
 
-        const watchedMovies = await WatchedMovie.find({ userId: user }).lean();
+        const watchedMovies = await WatchedMovie.find({ userId: user })
+            .populate({ path: 'movieId', select: 'title poster_url genre runtime' })
+            .lean();
         if (!watchedMovies || watchedMovies.length === 0) {
             return res.status(404).json({ message: "No watched movies found for this user" });
         }
