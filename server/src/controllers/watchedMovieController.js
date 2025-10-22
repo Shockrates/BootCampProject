@@ -46,6 +46,7 @@ export async function createWatchedMovie(req, res) {
 
 export async function getAllWatchedMovies(req, res) {
 
+    //query params
     const skip = parseInt(req.query.skip) || 0;   // π.χ. 0, 30, 50 ...
     const limit = parseInt(req.query.limit) || 20; // πόσα να φέρει κάθε φορά
 
@@ -53,8 +54,10 @@ export async function getAllWatchedMovies(req, res) {
         const watchedMovies = (await WatchedMovie.find()
             .skip(skip)
             .limit(limit)
-            .populate({ path: 'movieId', select: 'title poster_url' })
-            .populate({ path: 'userId', select: 'username email' })
+            .populate({ path: 'movieId', select: 'title poster_url genre' })
+            .populate({ path: 'userId', select: 'username email age' })
+            .populate('CommentCount') // populate στο virtual
+            .populate('LikeCount') // populate στο virtual
             .sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
         res.status(200).json(watchedMovies);
     }
@@ -72,7 +75,9 @@ export async function watchedByUser(req, res) {
             return res.status(400).json({ message: "User ID is required" });        // αν δεν υπαρχει καθολου user id, μονο τοτε λεει οτι ειναι απαραιτητο. 
         }                                                                       //to do : validate user by checking if it exists in User collection ( Matthew )
 
-        const watchedMovies = await WatchedMovie.find({ userId: user }).lean();
+        const watchedMovies = await WatchedMovie.find({ userId: user })
+            .populate({ path: 'movieId', select: 'title poster_url genre runtime' })
+            .lean();
         if (!watchedMovies || watchedMovies.length === 0) {
             return res.status(404).json({ message: "No watched movies found for this user" });
         }
