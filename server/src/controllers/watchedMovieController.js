@@ -46,18 +46,16 @@ export async function createWatchedMovie(req, res) {
 
 export async function getAllWatchedMovies(req, res) {
 
-    //const skip = parseInt(req.query.skip) || 0;   // π.χ. 0, 30, 50 ...
-    //const limit = parseInt(req.query.limit) || 20; // πόσα να φέρει κάθε φορά
-
-    const skip = parseInt(req.params.skip) || 0;
-    const limit = parseInt(req.params.limit) || 20;
+    //query params
+    const skip = parseInt(req.query.skip) || 0;   // π.χ. 0, 30, 50 ...
+    const limit = parseInt(req.query.limit) || 20; // πόσα να φέρει κάθε φορά
 
     try {
         const watchedMovies = (await WatchedMovie.find()
             .skip(skip)
             .limit(limit)
-            .populate({ path: 'movieId', select: 'title poster_url' })
-            .populate({ path: 'userId', select: 'username email' })
+            .populate({ path: 'movieId', select: 'title poster_url genre' })
+            .populate({ path: 'userId', select: 'username email age' })
             .populate('CommentCount') // populate στο virtual
             .sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
         res.status(200).json(watchedMovies);
