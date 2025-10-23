@@ -7,8 +7,8 @@
 //  * - Logs errors to the console if the fetch request fails.
 //  */
 
-const URI = "https://bootcampproject-production.up.railway.app";
-//const URI = "http://localhost:3000";
+//const URI = "https://bootcampproject-production.up.railway.app";
+const URI = "http://localhost:3000";
 
 /**
  * Attempts to log in a user by checking email and password against the JSON server.
@@ -113,7 +113,7 @@ export async function fetchMovie(id) {
 
   if (!res.ok) {
     // Throw so the caller knows this was a failure (not just an empty list)
-    throw new Error(`Failed to fetch top movies (${res.status})`);
+    throw new Error(`Failed to fetch movie (${res.status})`);
   }
   const movie = await res.json();
 
@@ -163,5 +163,26 @@ export async function createReview(userId, movieId, rating, review, watchedAt) {
     return savedWatchedMovie ? savedWatchedMovie : null;
   } catch (error) {
     console.log("Error:", error);
+  }
+}
+
+export async function createComment(watchedMovieId, commenterId, comment){
+  try {
+      const res = await fetch(`https://bootcampproject-production.up.railway.app/createReviewComment`,
+          {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ watchedMovieId, commenterId, comment })
+          })
+
+      const { message, savedReviewComment } = await res.json();
+      if (message) {
+          console.log(message);
+      }
+      return savedReviewComment ? savedReviewComment : null;
+  } catch (error) {
+      console.log("Error:", error.message);
   }
 }

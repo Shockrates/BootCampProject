@@ -10,7 +10,7 @@ import RootLayout from './layouts/RootLayout'
 import PrivateRoute from './layouts/PrivateRoute'
 import PublicRoute from './layouts/PublicRoute'
 import AuthRoute from './layouts/AuthRoute'
-import CommunityFeed from './components/Tests/CommunityFeed/CommunityFeed'
+import CommunityFeed from './components/CommunityFeed/CommunityFeed'
 
 /**
  * Main application component.

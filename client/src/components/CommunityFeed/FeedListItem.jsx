@@ -4,7 +4,7 @@ import { FaComments } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa";
 import RatingIcon from './RatingIcon';
-import TimeAgo from '../../Helper/TimeAgo';
+import TimeAgo from '../Helper/TimeAgo';
 
 const FeedListItem = ({ review, onOpen }) => {
   //console.log(review.movieId.genre);
@@ -16,14 +16,7 @@ const FeedListItem = ({ review, onOpen }) => {
         <div className="flex flex-col items-end m-2 gap-2">
           <TimeAgo createdAt={review.createdAt} />
           <FaRegBookmark />
-          {/* <div className="flex flex-row gap-1">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <IoIosStar size={20} key={index} color='#D26D15' />
-                ))}
-
-              </div> */}
           <RatingIcon rating={review.rating} />
-
         </div>
 
         <div className="review-movie inline-block max-w-[250px] border-4 border-transparent hover:border-[#D26D15] transition-all">

@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import FeedListItem from './FeedListItem'
-import ReviewModal from '../../Review/ReviewModal';
-import { useAuth } from '../../Auth/AuthProvider';
-
+import ReviewModal from '../Review/ReviewModal';
+import { useAuth } from '../Auth/AuthProvider'
 
 const FeedList = ({ reviews }) => {
 
@@ -16,6 +15,8 @@ const FeedList = ({ reviews }) => {
     setIsOpen(true);
   }
 
+
+  
   if (!reviews || reviews.length === 0) return <p>No reviews available.</p>
 
 
@@ -33,7 +34,8 @@ const FeedList = ({ reviews }) => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         review={review}
-        user={user}
+        user={review.userId}
+        authUser={user}
       />
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import reviewsTest from '../../../data/watchedMovies.json'
+import reviewsTest from '../../data/watchedMovies.json'
 import FeedList from './FeedList'
-import { fetchReviews } from '../../../utils/api'
+import { fetchReviews } from '../../utils/api'
 
 const CommunityFeed = () => {
 
@@ -12,7 +12,7 @@ const CommunityFeed = () => {
     /**
      * Testing fetching functionality from a JSON Server.
      * If Json server is running data is set from there
-     * if that fails data is set from static imdb_top_1000.json
+     * if that fails data is set from static json
      */
     useEffect(() => {
         let mounted = true;

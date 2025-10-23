@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { createComment } from '../../utils/api';
 
 
 const CommentReviewForm = ({ watchedMovieId, commenterId }) => {
@@ -10,27 +11,16 @@ const CommentReviewForm = ({ watchedMovieId, commenterId }) => {
         e.preventDefault();
         console.log(watchedMovieId, " ", commenterId, " ", comment);
         try {
-
-            const res = await fetch(`https://bootcampproject-production.up.railway.app/createReviewComment`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ watchedMovieId, commenterId, comment })
-                })
-
-            const { message, savedReviewComment } = await res.json();
-            if (message) {
-                setError(message)
-            }
-
-            //return savedWatchedMovie ? savedWatchedMovie : null;
-        } catch (error) {
-
-            console.log("Error:", error.message);
-        }
-
+            const reviewComment = await createComment(watchedMovieId, commenterId, comment);
+                  if (!reviewComment) {
+                      setError("Review failed. Please try again");
+                      return;
+                  }
+                  setComment("")
+              } catch (err) {
+                  console.error(err);
+                  setError("An error occured during reviewing this movie. Please wait our team to fix the issue")
+              }
     }
 
     return (

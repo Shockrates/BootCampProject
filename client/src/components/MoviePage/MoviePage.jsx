@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MovieRating from './MovieRating'
 import { useAuth } from '../Auth/AuthProvider'
 import { fetchMovie } from '../../utils/api';
+import MoviePageDetails from './MoviePageDetails';
 
 
 const MoviePage = () => {
@@ -36,7 +37,7 @@ const MoviePage = () => {
   }, []);
 
   //Tranforms the genres table to a string
-  const genres = (movie?.genre || []).join(', ')
+  //const genres = (movie?.genre || []).join(', ')
 
   //Check if the user is logged in
   const { user } = useAuth();
@@ -57,27 +58,7 @@ const MoviePage = () => {
       {/* Movie details block */}
       {movie && (
         <div className='movie-page'>
-          <div className="movie-body">
-            <img src={movie.poster_url} alt={`${movie.title} poster`} className="movie-poster" />
-          </div>
-
-          <div className='movie-info'>
-            <h1 style={{ margin: 0 }}>
-              {movie.title} <small>({movie.year})</small>
-            </h1>
-            <div style={{ color: '#666', marginTop: 6 }}>
-              {genres} • {movie.runtime}
-            </div>
-            <div style={{ color: '#666', marginTop: 6 }}>Director: {movie.director}</div>
-            <p style={{ marginTop: 12 }}>{movie.description}</p>
-
-            <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
-              <button className='btn-back' onClick={() => navigate(-1)}>← Go Back</button>
-            </div>
-            {user &&
-              <MovieRating movie={movie} userId={user._id} />
-            }
-          </div>
+          <MoviePageDetails user={user} movie={movie}/>
         </div>
       )}
     </article>

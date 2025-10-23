@@ -272,7 +272,7 @@ button:focus {
 }
 
 .modal {
-  @apply bg-blue-900 rounded-md p-8 w-full max-w-[1024px]
+  @apply bg-stone-800 rounded-md p-8 w-full max-w-[1024px]
 }
 
 .modal-btn {
