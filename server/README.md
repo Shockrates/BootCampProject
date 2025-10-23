@@ -5,33 +5,32 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 ## Project Endpoints
 
 ## Watched movies Endpoints
-1. createWatchedMovie
+1. **createWatchedMovie**
+   
     Description:
     Creates a new record of a movie that a user has watched.
 
-    Method: POST
-    Endpoint: /createWatchedMovie
+    **Method**: POST
+    **Endpoint**: /createWatchedMovie
 
-    ## Required Fields:
+    ### Required Fields:
 
-    userId – The ID of the user
+    **userId** – The ID of the user
 
-    movieId – The ID or reference of the movie
+    **movieId** – The ID or reference of the movie
 
-    rating – User’s rating for the movie (accepted 1-5)
+    **rating** – User’s rating for the movie (accepted 1-5)
 
-    review – User’s text review (optional)
+    **review** – User’s text review (optional)
 
-    watchedAt – Date the movie was watched (optional; defaults to current date/time, accepted example:"2025-09-10T00:00:00.000Z")
+    **watchedAt** – Date the movie was watched (optional; defaults to current date/time, accepted example:"2025-09-10T00:00:00.000Z")
 
-    ## Returns:
+    ### Returns:
     1. On failure (400) or (500):
     json: { message: 'All fields are required' } 
 
     2. On success(200): 
-    A JSON object containing the WatchedMovie i.e.:
-    {
-    "savedWatchedMovie": {
+    A JSON object containing the WatchedMovie i.e.:{ "savedWatchedMovie": {
         "_id": "68f54bcdd4ccea8199b19962",
         "userId": "68e3e2e2a256bdaf47468be0",
         "movieId": "68f135d1a67f173b8e31f0b8",
@@ -45,27 +44,26 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 }
     
 
-2. getAllMovies
+3. **getAllMovies**
     Description:
     Fetches all watched movies saved in the database, sorted by newest first.
     
-    Method: GET
-    Endpoint: /getAllMovies
+    **Method**: GET
+    **Endpoint**: /getAllMovies
     
-    ## Requires:    
-    A request in the form of: getAllWatchedMovies/0/30, for the first 30 movies. 
+    ### Requires:    
+    A request in the form of: getAllWatchedMovies?skip=0&limit=30, for the first 30 movies. 
     skip: skip the first N entries (default=0)
     limit: give the next N entries (default=20)
     
-    ## Returns:
+    ### Returns:
     
     1. On failure (500)
     json: { message: 'Internal server error' } 
 
     2. On success(200): 
-
     A JSON object containing the watched movie entries asked (N) in descending order of creation date. i.e.:
-    "_id": "68f8c6194afd9f566be87a68",
+   "_id": "68f8c6194afd9f566be87a68",
         "userId": {
             "_id": "68e3f75bb5747e6294a5c49b",
             "username": "Gandalf the Gray",
@@ -86,37 +84,38 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "id": "68f8c6194afd9f566be87a68"
     
 
-3. watchedByUser
+4. **watchedByUser**
    Description:
    Fetches all the Watched Movies from a user.
 
-   Method: GET
-   Endpoint: /watchedByUser?user= { userid }
+   **Method**: GET
+   **Endpoint**: /watchedByUser?user= { userid }
 
-    ## Required Fields:
+    ### Required Fields:
 
     userId – The ID of the user
 
-   ## Returns:
+   ### Returns:
    A JSON array containing all the records from the Watched Movie.
 
+## Review Comment Endpoints
 
-4. createReviewComment
+1. **createReviewComment**
     Description:
     Creates a new record of a ReviewComment for a watchedMovie
 
-    Method: POST
-    Endpoint: /createReviewComment
+    **Method**: POST
+    **Endpoint**: /createReviewComment
 
-    ## Required Fields:
+    ### Required Fields:
 
-    watchedMovieId – The ID of the watchedMovie
+    **watchedMovieId** – The ID of the watchedMovie
 
-    commenterId – The ID of the commenter in the User table
+    **commenterId** – The ID of the commenter in the User table
 
-    comment – User’s text review 
+    **comment** – User’s text review 
 
-    ## Returns:
+    ### Returns:
     1. On failure (400) or (500)
     It returns a JSON with a message e.g: { message: 'Internal server error' } 
 
