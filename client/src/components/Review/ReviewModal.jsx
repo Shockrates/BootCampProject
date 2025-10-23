@@ -71,7 +71,7 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
             
             <CommentReviewList comments={comments} />
             { authUser && (
-              <CommentReviewForm watchedMovieId={review._id} commenterId={authUser} />
+              <CommentReviewForm watchedMovieId={review._id} commenterId={authUser._id} />
             )}
             
           </div>
