@@ -7,11 +7,11 @@ export async function getAllMovies(req, res) {
     try {
         const movies = await Movie.find().limit(37);
 
-        if (!movies) return res.status(404).json({ message: "Movie not found" });
+        if (!movies) return res.status(404).json({ message: "Movies not found" });
 
         res.status(200).json(movies);
     } catch (error) {
-        console.error("Error in getUser controller", error);
+        console.error("Error in getAllMovies controller", error);
         res.status(500).json({ message: "Internal server error" });
     }
 };
