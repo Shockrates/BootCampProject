@@ -63,7 +63,7 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
             console.log("Review Comments fetched:", reviewComments);
             //3. If no comments found
         if (!reviewComments || reviewComments.length === 0) {
-            return res.status(404).json({ message: "No review comments found for this movie" });
+            return res.status(200).json({ message: "No review comments found for this watched movie", reviewComments: [] });
         }
 
             //4. Return the review comments
