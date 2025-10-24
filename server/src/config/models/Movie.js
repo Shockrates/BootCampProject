@@ -11,6 +11,25 @@ const movieSchema = new mongoose.Schema({
     poster_url: { type: String, required: true },
 }, { timestamps: true });
 
+// Virtual to associate WatchedMovies with Movie
+movieSchema.virtual('WatchedMovie', {
+    ref: 'WatchedMovie',
+    localField: '_id',
+    foreignField: 'movieId',
+});
+
+// Virtual to calculate Average Rating from associated WatchedMovies
+movieSchema.virtual('AverageRating').get( function() {
+    if(!this.WatchedMovie || this.WatchedMovie.length === 0) return 0;
+    const sum = this.WatchedMovie.reduce((acc, WatchedMovie) => acc + (WatchedMovie.rating || 0), 0);
+    const avg = sum / this.WatchedMovie.length;
+    return Math.round(avg * 10) / 10; // Round to one decimal place
+});
+
+movieSchema.set('toJSON', { virtuals: true });
+movieSchema.set('toObject', { virtuals: true });
+
+
 const Movie = mongoose.model('Movie', movieSchema);
 
 export default Movie ;
