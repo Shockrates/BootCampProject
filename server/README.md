@@ -228,27 +228,17 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     2. On success(200): 
     An empty array in case this user did not like any watchedMovies [] or,
 
-    a JSON object containing all the review Likes of the given user i.e.:
+    a JSON object containing the id and the watched movie of all the review Likes of the given user i.e.:
     [
     {
-        "_id": "68fd143a9b09d23f2fe6fce2",
-        "watchedMovieId": "69011a8d89fba62b2def9801",
-        "likerId": "68e3e2e2a256bdaf47468be0",
-        "like": true,
-        "createdAt": "2025-10-25T18:17:30.153Z",
-        "updatedAt": "2025-10-25T18:17:30.153Z",
-        "__v": 0
+        "_id": "68fd14adeedc6c6cb682af4c",
+        "watchedMovieId": "69011a8d89fba62b2def9803"
     },
     {
-        "_id": "68fd14adeedc6c6cb682af4c",
-        "watchedMovieId": "69011a8d89fba62b2def9803",
-        "likerId": "68e3e2e2a256bdaf47468be0",
-        "like": true,
-        "createdAt": "2025-10-25T18:19:25.687Z",
-        "updatedAt": "2025-10-25T18:19:25.687Z",
-        "__v": 0
-    }]
-
+        "_id": "68fd151b952d2e97423d437b",
+        "watchedMovieId": "68f28b20ad882ba6d509f786"
+    }
+]
 
     1. **deleteLike**
     Description:

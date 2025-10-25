@@ -59,7 +59,7 @@ export async function getAllLikesByUserId(req,res){
             return res.status(400).json({ message: "Invalid userId format" });
         }
 
-        const likes = await ReviewLike.find({likerId : userId});
+        const likes = await ReviewLike.find({likerId : userId}).select("_id").select("watchedMovieId");
 
         // if(!likes) return res.status(404).json({message:"Likes not found"});
         
