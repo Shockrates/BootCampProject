@@ -89,3 +89,28 @@ export async function watchedByUser(req, res) {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+//to update comments on feed when a new comment is done 
+export async function getWatchedMovieByItsId(req, res) {
+    try{
+    const {givenWatchedMovieId} = req.params;
+
+    if (!givenWatchedMovieId) {
+            return res.status(400).json({ message: "WatchedMovie ID is required" });         
+    }                                                                     
+
+    const watchedMovie = await WatchedMovie.findById( givenWatchedMovieId)
+            .populate({ path: 'movieId', select: 'title poster_url genre' })
+            .populate({ path: 'userId', select: 'username email age' })
+            .populate('CommentCount') // populate στο virtual
+            .populate('LikeCount') // populate στο virtual
+    if (!watchedMovie ) {
+            return res.status(404).json({ message: "No watched movies found for this watchedMovieID" });
+    }
+    
+    res.status(200).json({watchedMovie});}
+    catch (error) {
+        console.error("Error in getWatchedMovieByItsId controller", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}

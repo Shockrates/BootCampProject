@@ -98,6 +98,53 @@ BACKEND for Team A's BootCamp Project for SKG.Education
    ### Returns:
    A JSON array containing all the records from the Watched Movie.
 
+   5. **getWatchedMovieByItsId**
+    Description:
+    Returns the watched movie with all the needed data.
+    
+    **Method**: GET
+    **Endpoint**: /getWatchedMovieByitsId/:givenWatchedMovieId
+    
+    ### Requires:    
+    The watched movie id that was just modified to to update the view of the watched movie to the feed    
+    ### Returns:
+    
+    1. On failure (500)or(400)
+    json: { message: 'Internal server error' } or message: "WatchedMovie ID is required"
+
+    2. On success(200): 
+    A JSON object containing the watched movie entry asked {watchedMovie} in the form of:
+   {
+    "watchedMovie": {
+        "_id": "68f8c6194afd9f566be87a68",
+        "userId": {
+            "_id": "68e3f75bb5747e6294a5c49b",
+            "username": "Gandalf the Gray",
+            "email": "aWizardIsNeverLate@gmail.com",
+            "age": 1763
+        },
+        "movieId": {
+            "_id": "68f135d1a67f173b8e31f080",
+            "title": "Saving Private Ryan",
+            "genre": [
+                "Drama",
+                "War"
+            ],
+            "poster_url": "https://m.media-amazon.com/images/M/MV5BZjhkMDM4MWItZTVjOC00ZDRhLThmYTAtM2I5NzBmNmNlMzI1XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg"
+        },
+        "rating": 3,
+        "review": "Where's Bryan?",
+        "watchedAt": "2020-10-22T11:54:41.000Z",
+        "createdAt": "2025-10-22T11:55:05.185Z",
+        "updatedAt": "2025-10-22T11:55:05.185Z",
+        "__v": 0,
+        "CommentCount": 2,
+        "LikeCount": 2,
+        "id": "68f8c6194afd9f566be87a68"
+    }
+} 
+
+
 ## Review Comment Endpoints
 
 1. **createReviewComment**
