@@ -42,7 +42,6 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "__v": 0
     }
 }
-    
 
 3. **getAllMovies**
     Description:
@@ -177,3 +176,95 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "updatedAt": "2025-10-18T12:55:08.413Z",
         "__v": 0
     }
+
+## Review Like Endpoints
+
+1. **createReviewLike**
+    Description:
+    Creates a new record of a ReviewLLike for a watchedMovie and User
+
+    **Method**: POST
+    **Endpoint**: /createReviewLike
+
+    ### Required Fields:
+
+    **watchedMovieId** – The ID of the watchedMovie
+
+    **likerId** – The ID of the liker in the User table
+
+    **like** – Boolean -true 
+
+    ### Returns:
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
+
+    2. On success(200): 
+    A JSON object containing the review Like i.e.:
+    {
+    "_id": "68fd151b952d2e97423d437b",
+    "watchedMovieId": "68f28b20ad882ba6d509f786",
+    "likerId": "68e3e2e2a256bdaf47468be0",
+    "like": true,
+    "createdAt": "2025-10-25T18:21:15.863Z",
+    "updatedAt": "2025-10-25T18:21:15.863Z",
+    "__v": 0
+}
+
+1. **getAllLikesByUserId**
+    Description:
+    Returns all the likes of the given User
+
+    **Method**: GET
+    **Endpoint**: /getAllLikesByUserId/:userId
+
+    ### Required Fields:
+
+    **userId** – The ID of the liker in the User table
+
+    ### Returns:
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
+
+    2. On success(200): 
+    An empty array in case this user did not like any watchedMovies [] or,
+
+    a JSON object containing all the review Likes of the given user i.e.:
+    [
+    {
+        "_id": "68fd143a9b09d23f2fe6fce2",
+        "watchedMovieId": "69011a8d89fba62b2def9801",
+        "likerId": "68e3e2e2a256bdaf47468be0",
+        "like": true,
+        "createdAt": "2025-10-25T18:17:30.153Z",
+        "updatedAt": "2025-10-25T18:17:30.153Z",
+        "__v": 0
+    },
+    {
+        "_id": "68fd14adeedc6c6cb682af4c",
+        "watchedMovieId": "69011a8d89fba62b2def9803",
+        "likerId": "68e3e2e2a256bdaf47468be0",
+        "like": true,
+        "createdAt": "2025-10-25T18:19:25.687Z",
+        "updatedAt": "2025-10-25T18:19:25.687Z",
+        "__v": 0
+    }]
+
+
+    1. **deleteLike**
+    Description:
+    Returns all the likes of the given User
+
+    **Method**: DELETE
+    **Endpoint**: /deleteLike/:likeId
+
+    ### Required Fields:
+
+    **likeId** – The ID of the like in the ReviewLike table
+
+    ### Returns:
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
+
+    2. On success(200): 
+    A success message that the like was deleted successfully in the form of:
+    {"message": "Like deleted successfully"}
