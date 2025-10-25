@@ -144,6 +144,84 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 } 
 
 
+6. **getWatchedMoviesByMovieId**
+    Description:
+    Returns all the watchedMovies that have review for the given MovieId to use it to the movie profile      
+    
+    **Method**: GET
+    **Endpoint**: /getWatchedMoviesByMovieId/:movieId
+    
+    ### Requires:    
+    **movieId** – The ID of the movie to find all the reviews
+    
+    ### Returns:
+    
+    1. On failure (500)
+    json: { message: 'Internal server error' } 
+
+    2. On success(200): 
+    An empty array [] when there are no reviews for the given movie or 
+    a JSON object containing the watched movie entries existing for this movie:
+    [
+    {
+        "_id": "68f7d94e52a5833565605074",
+        "userId": {
+            "_id": "68f7d46152a5833565605035",
+            "username": "Zak",
+            "email": "zak@zak.com",
+            "age": 29
+        },
+        "movieId": {
+            "_id": "68f135d1a67f173b8e31f1fd",
+            "title": "Akira",
+            "genre": [
+                "Animation",
+                "Action",
+                "Sci-Fi"
+            ],
+            "poster_url": "https://m.media-amazon.com/images/M/MV5BM2ZiZTk1ODgtMTZkNS00NTYxLWIxZTUtNWExZGYwZTRjODViXkEyXkFqcGdeQXVyMTE2MzA3MDM@._V1_.jpg"
+        },
+        "rating": 5,
+        "review": "kaneda",
+        "watchedAt": "9999-09-28T21:00:00.000Z",
+        "createdAt": "2025-10-21T19:04:46.221Z",
+        "updatedAt": "2025-10-21T19:04:46.221Z",
+        "__v": 0,
+        "CommentCount": 0,
+        "LikeCount": 0,
+        "id": "68f7d94e52a5833565605074"
+    },
+    {
+        "_id": "68f87bce133d64c881dcf5a8",
+        "userId": {
+            "_id": "68e3f75bb5747e6294a5c49b",
+            "username": "Gandalf the Gray",
+            "email": "aWizardIsNeverLate@gmail.com",
+            "age": 1763
+        },
+        "movieId": {
+            "_id": "68f135d1a67f173b8e31f1fd",
+            "title": "Akira",
+            "genre": [
+                "Animation",
+                "Action",
+                "Sci-Fi"
+            ],
+            "poster_url": "https://m.media-amazon.com/images/M/MV5BM2ZiZTk1ODgtMTZkNS00NTYxLWIxZTUtNWExZGYwZTRjODViXkEyXkFqcGdeQXVyMTE2MzA3MDM@._V1_.jpg"
+        },
+        "rating": 4,
+        "review": "I liked the original dub better",
+        "watchedAt": "2025-09-30T21:00:00.000Z",
+        "createdAt": "2025-10-22T06:38:06.209Z",
+        "updatedAt": "2025-10-22T06:38:06.209Z",
+        "__v": 0,
+        "CommentCount": 0,
+        "LikeCount": 0,
+        "id": "68f87bce133d64c881dcf5a8"
+    }
+]
+
+
 ## Review Comment Endpoints
 
 1. **createReviewComment**

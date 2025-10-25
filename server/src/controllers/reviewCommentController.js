@@ -52,7 +52,7 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
         if (!watchedMovieId) {
             return res.status(400).json({ message: "WatchedMovie ID is required" });
         }
-            // 1 . Validate ObjectId
+        // 1 . Validate ObjectId
         if (!mongoose.Types.ObjectId.isValid(watchedMovieId)) {
             return res.status(400).json({ message: "Invalid watchedMovieId format" });
         }

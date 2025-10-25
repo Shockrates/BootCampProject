@@ -114,3 +114,32 @@ export async function getWatchedMovieByItsId(req, res) {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+//Function to return all the watchedMovies that have review for the given MovieId to use it to the movie profile  
+export async function getWatchedMoviesByMovieId(req, res) {
+    try{
+    const {movieId} = req.params;
+
+    if (!movieId) {
+            return res.status(400).json({ message: "Movie ID is required" });         
+    }   
+    // 1 . Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(movieId)) {
+        return res.status(400).json({ message: "Invalid movieId format" });
+    }                                                                  
+
+    const watchedMovie = await WatchedMovie.find({movieId:movieId})
+            .populate({ path: 'movieId', select: 'title poster_url genre' })
+            .populate({ path: 'userId', select: 'username email age' })
+            .populate('CommentCount') // populate στο virtual
+            .populate('LikeCount') // populate στο virtual
+    // if (!watchedMovie ) {
+    //         return res.status(404).json({ message: "No watched movies found for this watchedMovieID" });
+    // }
+    
+    res.status(200).json(watchedMovie);}
+    catch (error) {
+        console.error("Error in getWatchedMovieByItsId controller", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
