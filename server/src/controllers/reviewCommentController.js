@@ -83,7 +83,7 @@ export async function updateReviewCommentsByCommentId(req, res) {
         const {commentId}  = req.params;
 
         if (!comment ) {
-            return res.status(400).json({ message: "Provide a string updated review" });
+            return res.status(400).json({ message: "Provide a string updated comment" });
         }
         if (!commentId) {
             return res.status(400).json({ message: "Comment ID is required" });
@@ -105,7 +105,7 @@ export async function updateReviewCommentsByCommentId(req, res) {
             return res.status(403).json({ message: "Not allowed to edit this comment." });
         }
 
-// 4. Update the comment
+    // 4. Update the comment
     existingComment.comment = comment;
     await existingComment.save();
 
@@ -120,7 +120,7 @@ export async function updateReviewCommentsByCommentId(req, res) {
 
         //6. Catch block
     } catch (error) {
-        console.error("Error in get Review Comments by movie controller", error);
+        console.error("Error in editing Review Comment", error);
         res.status(500).json({ message: "Internal server error" });
     }   
 }

@@ -1,5 +1,4 @@
 # Backend node.js 
-
 BACKEND for Team A's BootCamp Project for SKG.Education 
 
 ## Project Endpoints
@@ -219,6 +218,56 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "id": "68f87bce133d64c881dcf5a8"
     }
 ]
+
+
+7. ### updateReviewCommentsByCommentId
+    Description:
+    Updated an existing review field in WatchedMovie
+
+    **Method**: PUT
+    **Endpoint**: "/updateReviewByWatchedMovieId/:watchedMovieId", verifyToken, updateReviewByWatchedMovieId
+
+    **Required Fields:**
+
+    **watchedMovieId** – The ID of the watchedMovie in the params
+    **review** - The updated string review in the body
+    **headers** - In the form of: {"Authorization": `Bearer ${token}` // <-- send the token},
+
+    **Returns:**
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
+    or (403) {message: "Not allowed to edit this review."}
+
+    2. On success(200): 
+    A JSON object containing the updated review along with all the watchedMovie needed fields i.e.:
+    {
+    "_id": "68f9e6f0c05801e16abcb34c",
+    "userId": {
+        "_id": "68e3e2e2a256bdaf47468be0",
+        "username": "Katerina",
+        "email": "katerina@gmail.com",
+        "age": 25
+    },
+    "movieId": {
+        "_id": "68f135d1a67f173b8e31f29d",
+        "title": "A Night at the Opera",
+        "genre": [
+            "Comedy",
+            "Music",
+            "Musical"
+        ],
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BYTJmNmQxNGItNDNlMC00MDU3LWFhNzMtZDQ2NDY0ZTVkNjE3XkEyXkFqcGdeQXVyMDI2NDg0NQ@@._V1_.jpg"
+    },
+    "rating": 2,
+    "review": "I did not really like it. Probably because it is a musical I am not a big fan of musicals",
+    "watchedAt": "2025-07-02T08:26:31.000Z",
+    "createdAt": "2025-10-23T08:27:28.674Z",
+    "updatedAt": "2025-10-26T17:20:23.307Z",
+    "__v": 0,
+    "CommentCount": 7,
+    "LikeCount": 0,
+    "id": "68f9e6f0c05801e16abcb34c"
+    }
 
 
 ## Review Comment Endpoints

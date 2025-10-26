@@ -77,7 +77,7 @@ export async function watchedByUser(req, res) {
 
         const watchedMovies = await WatchedMovie.find({ userId: user })
             .populate({ path: 'movieId', select: 'title poster_url genre runtime' })
-            .lean();
+            //.lean();
         if (!watchedMovies || watchedMovies.length === 0) {
             return res.status(404).json({ message: "No watched movies found for this user" });
         }
@@ -90,7 +90,7 @@ export async function watchedByUser(req, res) {
     }
 }
 
-//to update comments on feed when a new comment is done 
+//to update comments count on feed when a new comment is done 
 export async function getWatchedMovieByItsId(req, res) {
     try{
     const {givenWatchedMovieId} = req.params;
@@ -142,4 +142,51 @@ export async function getWatchedMoviesByMovieId(req, res) {
         console.error("Error in getWatchedMovieByItsId controller", error);
         res.status(500).json({ message: "Internal server error" });
     }
+}
+
+// Controller function to Update review by watchedMovieId
+export async function updateReviewByWatchedMovieId(req, res) {
+    try {
+        const {review}= req.body;//the string to be updated
+        const {watchedMovieId}  = req.params;
+
+        if (!review ) {
+            return res.status(400).json({ message: "Provide a string updated review" });
+        }
+        if (!watchedMovieId) {
+            return res.status(400).json({ message: "WatchedMovie ID is required" });
+        }
+        // 1 . Validate watchedMovieId
+        if (!mongoose.Types.ObjectId.isValid(watchedMovieId)) {
+            return res.status(400).json({ message: "Invalid watchedMovieId format" });
+        }
+        // 2. Find the watchedMovie first
+        const existingWatchedMovie = await WatchedMovie.findById(watchedMovieId);
+        if (!existingWatchedMovie) {
+            return res.status(404).json({ message: "This watchedMovie was not found" });
+        }
+        // 2 Authorization check
+        //find the user that made this review 
+        if (existingWatchedMovie.userId.toString() !== req.userId) {
+            return res.status(403).json({ message: "Not allowed to edit this review." });
+        }
+
+        // 4. Update the review
+        existingWatchedMovie.review = review;
+        await existingWatchedMovie.save();
+
+        //5. Populate neeeded info
+        const populatedWatchedMovie = await WatchedMovie.findById(watchedMovieId)
+            .populate({ path: 'movieId', select: 'title poster_url genre' })
+            .populate({ path: 'userId', select: 'username email age' })
+            .populate('CommentCount') // populate στο virtual
+            .populate('LikeCount'); // populate στο virtual
+        // 6. Return success
+        return res.status(200).json(populatedWatchedMovie);       //5. Return the review
+
+        //7. Catch block
+        } catch (error) {
+        console.error("Error in editing review", error);
+        res.status(500).json({ message: "Internal server error" });
+    }   
 }
