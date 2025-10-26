@@ -89,7 +89,7 @@ export async function fetchTopMovies(limit = 36, start = 0) {
     // Throw so the caller knows this was a failure (not just an empty list)
     throw new Error(`Failed to fetch top movies (${res.status})`);
   }
-  const movies = await res.json();
+  const { movies } = await res.json();
 
   return movies;
 }
@@ -115,7 +115,7 @@ export async function fetchMovie(id) {
     // Throw so the caller knows this was a failure (not just an empty list)
     throw new Error(`Failed to fetch movie (${res.status})`);
   }
-  const movie = await res.json();
+  const { movie } = await res.json();
 
   return movie;
 }
@@ -126,7 +126,7 @@ export async function searchMovies(query) {
   );
   if (!res.ok) throw new Error("Server error");
 
-  const movies = await res.json();
+  const { movies } = await res.json();
 
   return movies;
 }
@@ -140,9 +140,10 @@ export async function fetchReviews() {
     // Throw so the caller knows this was a failure (not just an empty list)
     throw new Error(`Failed to fetch reviews (${res.status})`);
   }
-  const reviews = await res.json();
+  const { watchedMovies } = await res.json();
+  console.log(watchedMovies);
 
-  return reviews;
+  return watchedMovies;
 }
 
 export async function createReview(userId, movieId, rating, review, watchedAt) {
