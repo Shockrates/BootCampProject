@@ -224,7 +224,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 
 ## Review Comment Endpoints
 
-1. **createReviewComment**
+1. ## **createReviewComment**
     Description:
     Creates a new record of a ReviewComment for a watchedMovie
 
