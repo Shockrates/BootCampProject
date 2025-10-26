@@ -255,7 +255,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "__v": 0
     }
 
-1. **createReviewComment**
+1. ## **updateReviewCommentsByCommentId** 
     Description:
     Updated an existing ReviewComment
 
