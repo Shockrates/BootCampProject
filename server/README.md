@@ -1,11 +1,10 @@
 # Backend node.js 
-
 BACKEND for Team A's BootCamp Project for SKG.Education 
 
 ## Project Endpoints
 
 ## Watched movies Endpoints
-1. **createWatchedMovie**
+1. ### createWatchedMovie
    
     Description:
     Creates a new record of a movie that a user has watched.
@@ -13,7 +12,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     **Method**: POST
     **Endpoint**: /createWatchedMovie
 
-    ### Required Fields:
+    **Required Fields:**
 
     **userId** – The ID of the user
 
@@ -25,7 +24,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 
     **watchedAt** – Date the movie was watched (optional; defaults to current date/time, accepted example:"2025-09-10T00:00:00.000Z")
 
-    ### Returns:
+    **Returns:**
     1. On failure (400) or (500):
     json: { message: 'All fields are required' } 
 
@@ -43,19 +42,19 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     }
 }
 
-3. **getAllMovies**
+3. ### getAllMovies
     Description:
     Fetches all watched movies saved in the database, sorted by newest first.
     
     **Method**: GET
     **Endpoint**: /getAllMovies
     
-    ### Requires:    
+    **Requires:**    
     A request in the form of: getAllWatchedMovies?skip=0&limit=30, for the first 30 movies. 
     skip: skip the first N entries (default=0)
     limit: give the next N entries (default=20)
     
-    ### Returns:
+    **Returns:**
     
     1. On failure (500)
     json: { message: 'Internal server error' } 
@@ -83,30 +82,30 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "id": "68f8c6194afd9f566be87a68"
     
 
-4. **watchedByUser**
+4. ### watchedByUser
    Description:
    Fetches all the Watched Movies from a user.
 
    **Method**: GET
    **Endpoint**: /watchedByUser?user= { userid }
 
-    ### Required Fields:
+    **Required Fields:**
 
     userId – The ID of the user
 
-   ### Returns:
+   **Returns:**
    A JSON array containing all the records from the Watched Movie.
 
-   5. **getWatchedMovieByItsId**
+   5. ### getWatchedMovieByItsId
     Description:
     Returns the watched movie with all the needed data.
     
     **Method**: GET
     **Endpoint**: /getWatchedMovieByitsId/:givenWatchedMovieId
     
-    ### Requires:    
+    **Requires:**   
     The watched movie id that was just modified to to update the view of the watched movie to the feed    
-    ### Returns:
+    **Returns:**
     
     1. On failure (500)or(400)
     json: { message: 'Internal server error' } or message: "WatchedMovie ID is required"
@@ -143,18 +142,17 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     }
 } 
 
-
-6. **getWatchedMoviesByMovieId**
+6. ### getWatchedMoviesByMovieId
     Description:
     Returns all the watchedMovies that have review for the given MovieId to use it to the movie profile      
     
     **Method**: GET
     **Endpoint**: /getWatchedMoviesByMovieId/:movieId
     
-    ### Requires:    
+    **Requires:**
     **movieId** – The ID of the movie to find all the reviews
     
-    ### Returns:
+    **Returns:**
     
     1. On failure (500)
     json: { message: 'Internal server error' } 
@@ -222,16 +220,66 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 ]
 
 
+7. ### updateReviewCommentsByCommentId
+    Description:
+    Updated an existing review field in WatchedMovie
+
+    **Method**: PUT
+    **Endpoint**: "/updateReviewByWatchedMovieId/:watchedMovieId", verifyToken, updateReviewByWatchedMovieId
+
+    **Required Fields:**
+
+    **watchedMovieId** – The ID of the watchedMovie in the params
+    **review** - The updated string review in the body
+    **headers** - In the form of: {"Authorization": `Bearer ${token}` // <-- send the token},
+
+    **Returns:**
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
+    or (403) {message: "Not allowed to edit this review."}
+
+    2. On success(200): 
+    A JSON object containing the updated review along with all the watchedMovie needed fields i.e.:
+    {
+    "_id": "68f9e6f0c05801e16abcb34c",
+    "userId": {
+        "_id": "68e3e2e2a256bdaf47468be0",
+        "username": "Katerina",
+        "email": "katerina@gmail.com",
+        "age": 25
+    },
+    "movieId": {
+        "_id": "68f135d1a67f173b8e31f29d",
+        "title": "A Night at the Opera",
+        "genre": [
+            "Comedy",
+            "Music",
+            "Musical"
+        ],
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BYTJmNmQxNGItNDNlMC00MDU3LWFhNzMtZDQ2NDY0ZTVkNjE3XkEyXkFqcGdeQXVyMDI2NDg0NQ@@._V1_.jpg"
+    },
+    "rating": 2,
+    "review": "I did not really like it. Probably because it is a musical I am not a big fan of musicals",
+    "watchedAt": "2025-07-02T08:26:31.000Z",
+    "createdAt": "2025-10-23T08:27:28.674Z",
+    "updatedAt": "2025-10-26T17:20:23.307Z",
+    "__v": 0,
+    "CommentCount": 7,
+    "LikeCount": 0,
+    "id": "68f9e6f0c05801e16abcb34c"
+    }
+
+
 ## Review Comment Endpoints
 
-1. **createReviewComment**
+1. ## createReviewComment
     Description:
     Creates a new record of a ReviewComment for a watchedMovie
 
     **Method**: POST
     **Endpoint**: /createReviewComment
 
-    ### Required Fields:
+    **Required Fields:** 
 
     **watchedMovieId** – The ID of the watchedMovie
 
@@ -239,7 +287,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 
     **comment** – User’s text review 
 
-    ### Returns:
+    **Returns:**
     1. On failure (400) or (500)
     It returns a JSON with a message e.g: { message: 'Internal server error' } 
 
@@ -255,16 +303,50 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "__v": 0
     }
 
+2. ### updateReviewCommentsByCommentId
+    Description:
+    Updated an existing ReviewComment
+
+    **Method**: PUT
+    **Endpoint**: "/UpdateReviewCommentsByCommentId/:commentId", verifyToken, updateReviewCommentsByCommentId
+
+    **Required Fields:**
+
+    **commentId** – The ID of the comment in the params
+    **comment** - The updated string comment in the body
+    **headers** - In the form of: {"Authorization": `Bearer ${token}` // <-- send the token},
+
+    **Returns:**
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
+    or (403){"message": "Not allowed to edit this comment."}
+
+    2. On success(200): 
+    A JSON object containing the updated review Comment i.e.:
+    {
+    "_id": "68fe031745e0bd725701a5cd",
+    "watchedMovieId": "68f9e6f0c05801e16abcb34c",
+    "commenterId": {
+        "_id": "68e3e2e2a256bdaf47468be0",
+        "username": "Katerina",
+        "email": "katerina@gmail.com"
+    },
+    "comment": "This is an updated comment using token",
+    "createdAt": "2025-10-26T11:16:39.149Z",
+    "updatedAt": "2025-10-26T11:19:23.475Z",
+    "__v": 0
+}
+
 ## Review Like Endpoints
 
-1. **createReviewLike**
+1. ### createReviewLike**
     Description:
     Creates a new record of a ReviewLLike for a watchedMovie and User
 
     **Method**: POST
     **Endpoint**: /createReviewLike
 
-    ### Required Fields:
+    **Required Fields:**
 
     **watchedMovieId** – The ID of the watchedMovie
 
@@ -272,7 +354,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 
     **like** – Boolean -true 
 
-    ### Returns:
+    **Returns:**
     1. On failure (400) or (500)
     It returns a JSON with a message e.g: { message: 'Internal server error' } 
 
@@ -288,26 +370,25 @@ BACKEND for Team A's BootCamp Project for SKG.Education
     "__v": 0
 }
 
-1. **getAllLikesByUserId**
+1. ### getAllLikesByUserId
     Description:
     Returns all the likes of the given User
 
     **Method**: GET
     **Endpoint**: /getAllLikesByUserId/:userId
 
-    ### Required Fields:
+    **Required Fields:**
 
     **userId** – The ID of the liker in the User table
 
-    ### Returns:
+    **Returns:**
     1. On failure (400) or (500)
     It returns a JSON with a message e.g: { message: 'Internal server error' } 
 
     2. On success(200): 
     An empty array in case this user did not like any watchedMovies [] or,
 
-    a JSON object containing the id and the watched movie of all the review Likes of the given user i.e.:
-    [
+    a JSON object containing the id and the watched movie of all the review Likes of the given user i.e.:  
     {
         "_id": "68fd14adeedc6c6cb682af4c",
         "watchedMovieId": "69011a8d89fba62b2def9803"
@@ -316,20 +397,20 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "_id": "68fd151b952d2e97423d437b",
         "watchedMovieId": "68f28b20ad882ba6d509f786"
     }
-]
 
-    1. **deleteLike**
+
+    1. ### deleteLike
     Description:
     Returns all the likes of the given User
 
     **Method**: DELETE
     **Endpoint**: /deleteLike/:likeId
 
-    ### Required Fields:
+    **Required Fields:**
 
     **likeId** – The ID of the like in the ReviewLike table
 
-    ### Returns:
+    **Returns:**
     1. On failure (400) or (500)
     It returns a JSON with a message e.g: { message: 'Internal server error' } 
 

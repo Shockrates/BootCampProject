@@ -71,7 +71,7 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
         }
 
         //4. Return the review comments
-        return res.status(200).json({ reviewComments });
+        res.status(200).json({ reviewComments });
 
         //5. Catch block
     } catch (error) {
@@ -83,13 +83,12 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
 
 // Controller function to Update ReviewComment by commentId
 export async function updateReviewCommentsByCommentId(req, res) {
-    //θελω ελεγχο ότι θέλει να αλλάξει comment Που είναι δικό του 
     try {
         const { comment, userId } = req.body;
         const { commentId } = req.params;
 
-        if (!comment || !userId) {
-            return res.status(400).json({ message: "Provide a string updated review" });
+        if (!comment) {
+            return res.status(400).json({ message: "Provide a string updated comment" });
         }
         if (!commentId) {
             return res.status(400).json({ message: "Comment ID is required" });
@@ -108,12 +107,22 @@ export async function updateReviewCommentsByCommentId(req, res) {
             return res.status(200).json({ message: "No review comments found for this watched movie" });
         }
 
-        //4. Return the review comments
-        res.status(200).json(updatedReviewComments);
+        // 4. Update the comment
+        existingComment.comment = comment;
+        await existingComment.save();
 
-        //5. Catch block
+        // 5. Optionally populate commenter info
+        const populatedComment = await existingComment.populate({
+            path: "commenterId",
+            select: "username email",
+        });
+
+        // 6. Return success
+        return res.status(200).json({ populatedComment });       //5. Return the review comments
+
+        //6. Catch block
     } catch (error) {
-        console.error("Error in get Review Comments by movie controller", error);
+        console.error("Error in editing Review Comment", error);
         res.status(500).json({ message: "Internal server error" });
     }
 }
