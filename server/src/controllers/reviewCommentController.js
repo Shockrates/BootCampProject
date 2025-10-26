@@ -7,34 +7,39 @@ import User from "../config/models/User.js";
 // Controller function to create a ReviewComment entry
 export async function createReviewComment(req, res) {
     try {
-        const {watchedMovieId, commenterId, comment} = req.body;
+        const { watchedMovieId, commenterId, comment } = req.body;
 
-        if (!watchedMovieId || !commenterId || !comment){
+        if (!watchedMovieId || !commenterId || !comment) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-         // 1. Validate ObjectIds 
-         if (
-             !mongoose.Types.ObjectId.isValid(watchedMovieId) ||
-             !mongoose.Types.ObjectId.isValid(commenterId)
-         ) {
-         return res.status(400).json({ message: "Invalid watchedMovieId or commenterId format" });
-         }
+        // 1. Validate ObjectIds 
+        if (
+            !mongoose.Types.ObjectId.isValid(watchedMovieId) ||
+            !mongoose.Types.ObjectId.isValid(commenterId)
+        ) {
+            return res.status(400).json({ message: "Invalid watchedMovieId or commenterId format" });
+        }
 
         // 2. Check if commenter exists
-        const currentUserId = await User.findOne({_id:commenterId });
+        const currentUserId = await User.findOne({ _id: commenterId });
         if (!currentUserId) {
-          return res.status(400).json({ message: "This commenter does not exist in the UserDB" });
+            return res.status(400).json({ message: "This commenter does not exist in the UserDB" });
         }
 
         // 3. Check if watchedMovie exists
-        const currentWatchedMovieId = await WatchedMovie.findOne({ _id:watchedMovieId });
+        const currentWatchedMovieId = await WatchedMovie.findOne({ _id: watchedMovieId });
         if (!currentWatchedMovieId) {
-          return res.status(400).json({ message: "This watchedMovieId does not exist in the WatchedMovieDB" });
+            return res.status(400).json({ message: "This watchedMovieId does not exist in the WatchedMovieDB" });
         }
 
         const reviewComment = new ReviewComment({ watchedMovieId, commenterId, comment });
 
         const savedReviewComment = await reviewComment.save();
+        await savedReviewComment.populate({
+            path: 'watchedMovieId',
+            select: '_id',
+            populate: { path: 'CommentCount' } // populate the virtual on the nested doc
+        });
         res.status(200).json({ savedReviewComment });
     } catch (error) {
         console.error("Error in create Review Comment controller", error);
@@ -55,24 +60,24 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
         if (!mongoose.Types.ObjectId.isValid(watchedMovieId)) {
             return res.status(400).json({ message: "Invalid watchedMovieId format" });
         }
-            // 2. Check if watchedMovie exists
+        // 2. Check if watchedMovie exists
         const reviewComments = await ReviewComment.find({ watchedMovieId })
             .populate({ path: 'commenterId', select: 'username email' })
-            .lean();    
-            console.log("Review Comments fetched:", reviewComments);
-            //3. If no comments found
+            .lean();
+        console.log("Review Comments fetched:", reviewComments);
+        //3. If no comments found
         if (!reviewComments || reviewComments.length === 0) {
             return res.status(200).json({ message: "No review comments found for this watched movie", reviewComments: [] });
         }
 
-            //4. Return the review comments
-        res.status(200).json(reviewComments);
+        //4. Return the review comments
+        return res.status(200).json({ reviewComments });
 
-            //5. Catch block
+        //5. Catch block
     } catch (error) {
         console.error("Error in get Review Comments by movie controller", error);
         res.status(500).json({ message: "Internal server error" });
-    }   
+    }
 }
 
 
@@ -80,8 +85,8 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
 export async function updateReviewCommentsByCommentId(req, res) {
     //θελω ελεγχο ότι θέλει να αλλάξει comment Που είναι δικό του 
     try {
-        const {comment, userId}= req.body;
-        const {commentId}  = req.params;
+        const { comment, userId } = req.body;
+        const { commentId } = req.params;
 
         if (!comment || !userId) {
             return res.status(400).json({ message: "Provide a string updated review" });
@@ -94,10 +99,10 @@ export async function updateReviewCommentsByCommentId(req, res) {
             return res.status(400).json({ message: "Invalid commentId format" });
         }
         // 2. Check if commentId exists and update it
-        const updatedReviewComments = await ReviewComment.findOneAndUpdate({_id: commentId, commenterId:userId},{comment},{new:true})
+        const updatedReviewComments = await ReviewComment.findOneAndUpdate({ _id: commentId, commenterId: userId }, { comment }, { new: true })
             .populate({ path: 'commenterId', select: 'username email' })
-            .lean();    
-            console.log("Review Comments fetched:", updatedReviewComments);
+            .lean();
+        console.log("Review Comments fetched:", updatedReviewComments);
         //3. If no comments found
         if (!updatedReviewComments || updatedReviewComments.length === 0) {
             return res.status(200).json({ message: "No review comments found for this watched movie" });
@@ -110,5 +115,5 @@ export async function updateReviewCommentsByCommentId(req, res) {
     } catch (error) {
         console.error("Error in get Review Comments by movie controller", error);
         res.status(500).json({ message: "Internal server error" });
-    }   
+    }
 }

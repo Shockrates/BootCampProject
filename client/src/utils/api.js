@@ -166,23 +166,24 @@ export async function createReview(userId, movieId, rating, review, watchedAt) {
   }
 }
 
-export async function createComment(watchedMovieId, commenterId, comment){
+export async function createComment(watchedMovieId, commenterId, comment) {
   try {
-      const res = await fetch(`https://bootcampproject-production.up.railway.app/createReviewComment`,
-          {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ watchedMovieId, commenterId, comment })
-          })
+    const res = await fetch(`${URI}/createReviewComment`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ watchedMovieId, commenterId, comment })
+      })
 
-      const { message, savedReviewComment } = await res.json();
-      if (message) {
-          console.log(message);
-      }
-      return savedReviewComment ? savedReviewComment : null;
+    const { message, savedReviewComment } = await res.json();
+    if (message) {
+      console.log(message);
+    }
+    console.log(savedReviewComment);
+    return savedReviewComment ? savedReviewComment : null;
   } catch (error) {
-      console.log("Error:", error.message);
+    console.log("Error:", error.message);
   }
 }

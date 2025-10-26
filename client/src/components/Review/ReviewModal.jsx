@@ -9,7 +9,6 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
 
   const [comments, setComments] = useState([])
   const [message, setMessage] = useState('')
- 
 
   useEffect(() => {
     let mounted = true;
@@ -17,24 +16,27 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
       setMessage('Loading...');
       try {
         const res = await fetch(`https://bootcampproject-production.up.railway.app/getReviewCommentsByWatchedMovie/${review._id}`);
-        const reviewComments  = await res.json();
+        //const res = await fetch(`http://localhost:3000/getReviewCommentsByWatchedMovie/${review._id}`);
+
+        const { message, reviewComments } = await res.json();
 
         if (!mounted) return;
-        if (res.ok ){
-           setComments(reviewComments );
+        if (res.ok) {
+          setComments(reviewComments);
+          return
         }
-        // setMessage(comments);
+        setMessage(message);
       } catch (error) {
         console.log("Error:", error);
         setComments([]);
-       if (!mounted) return;
+        if (!mounted) return;
         setMessage("Showing Data from static JSON");
       }
     }
     if (isOpen) {
-       loadComments();        
+      loadComments();
     }
-   
+
 
   }, [isOpen, review]);
 
@@ -52,9 +54,9 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
           <h3 className="text-xl font-bold">{user.username}'s Review</h3>
           <p
             className="close cursor-pointer text-2xl hover:text-indigo-400 transition"
-            onClick={() => {
-              onClose();
-            }}
+            onClick={
+              onClose
+            }
           >
             &times;
           </p>
@@ -65,15 +67,15 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
         <div className="modal bg-slate-800 rounded-2xl shadow-lg w-[90%] max-w-xl p-6 text-white relative max-h-[85vh] overflow-y-auto">
           <div className="modal-content mt-4">
             <div className="flex flex-row justify-between">
-                <MoviePageDetails movie={review.movieId} user={user} isReview={true} />
-                <div className="">{review.review}</div>
+              <MoviePageDetails movie={review.movieId} user={user} isReview={true} />
+              <div className="">{review.review}</div>
             </div>
-            
+
             <CommentReviewList comments={comments} />
-            { authUser && (
+            {authUser && (
               <CommentReviewForm watchedMovieId={review._id} commenterId={authUser._id} />
             )}
-            
+
           </div>
 
         </div>

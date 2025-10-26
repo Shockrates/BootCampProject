@@ -15,8 +15,13 @@ const FeedList = ({ reviews }) => {
     setIsOpen(true);
   }
 
+  function closeModal() {
+    setReview({});
+    setIsOpen(false)
+  }
 
-  
+
+
   if (!reviews || reviews.length === 0) return <p>No reviews available.</p>
 
 
@@ -32,7 +37,7 @@ const FeedList = ({ reviews }) => {
     }
       <ReviewModal
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={closeModal}
         review={review}
         user={review.userId}
         authUser={user}

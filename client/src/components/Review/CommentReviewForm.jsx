@@ -12,15 +12,15 @@ const CommentReviewForm = ({ watchedMovieId, commenterId }) => {
         console.log(watchedMovieId, " ", commenterId, " ", comment);
         try {
             const reviewComment = await createComment(watchedMovieId, commenterId, comment);
-                  if (!reviewComment) {
-                      setError("Review failed. Please try again");
-                      return;
-                  }
-                  setComment("")
-              } catch (err) {
-                  console.error(err);
-                  setError("An error occured during reviewing this movie. Please wait our team to fix the issue")
-              }
+            if (!reviewComment) {
+                setError("Review failed. Please try again");
+                return;
+            }
+            setComment("")
+        } catch (err) {
+            console.error(err);
+            setError("An error occured during reviewing this movie. Please wait our team to fix the issue")
+        }
     }
 
     return (
