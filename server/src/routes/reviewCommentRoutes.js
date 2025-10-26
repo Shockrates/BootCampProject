@@ -10,4 +10,3 @@ router.get("/getReviewCommentsByWatchedMovie/:watchedMovieId", getReviewComments
 router.put("/UpdateReviewCommentsByCommentId/:commentId", verifyToken, updateReviewCommentsByCommentId); // edit review comment by commentId
 
 export default router; // ES Module export
-
