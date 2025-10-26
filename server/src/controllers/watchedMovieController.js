@@ -59,7 +59,7 @@ export async function getAllWatchedMovies(req, res) {
             .populate('CommentCount') // populate στο virtual
             .populate('LikeCount') // populate στο virtual
             .sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
-        res.status(200).json(watchedMovies);
+        res.status(200).json({watchedMovies});
     }
     catch (error) {
         console.error("Error in getAllWatchedMovies controller", error);
@@ -83,7 +83,7 @@ export async function watchedByUser(req, res) {
         }
 
 
-        res.status(200).json(watchedMovies);
+        res.status(200).json({watchedMovies});
     } catch (error) {
         console.error("Error in getWatchedMoviesByUser controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -137,7 +137,7 @@ export async function getWatchedMoviesByMovieId(req, res) {
     //         return res.status(404).json({ message: "No watched movies found for this watchedMovieID" });
     // }
     
-    res.status(200).json(watchedMovie);}
+    res.status(200).json({watchedMovie});}
     catch (error) {
         console.error("Error in getWatchedMovieByItsId controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -182,7 +182,7 @@ export async function updateReviewByWatchedMovieId(req, res) {
             .populate('CommentCount') // populate στο virtual
             .populate('LikeCount'); // populate στο virtual
         // 6. Return success
-        return res.status(200).json(populatedWatchedMovie);       //5. Return the review
+        return res.status(200).json({populatedWatchedMovie});       //5. Return the review
 
         //7. Catch block
         } catch (error) {

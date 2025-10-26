@@ -66,7 +66,7 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
         }
 
             //4. Return the review comments
-        res.status(200).json(reviewComments);
+        res.status(200).json({reviewComments});
 
             //5. Catch block
     } catch (error) {
@@ -116,7 +116,7 @@ export async function updateReviewCommentsByCommentId(req, res) {
     });
 
     // 6. Return success
-    return res.status(200).json(populatedComment);       //5. Return the review comments
+    return res.status(200).json({populatedComment});       //5. Return the review comments
 
         //6. Catch block
     } catch (error) {
