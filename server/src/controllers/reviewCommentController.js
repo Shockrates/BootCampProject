@@ -78,12 +78,11 @@ export async function getReviewCommentsByWatchedMovie(req, res) {
 
 // Controller function to Update ReviewComment by commentId
 export async function updateReviewCommentsByCommentId(req, res) {
-    //θελω ελεγχο ότι θέλει να αλλάξει comment Που είναι δικό του 
     try {
-        const {comment, userId}= req.body;
+        const {comment}= req.body;//the string to be updated
         const {commentId}  = req.params;
 
-        if (!comment || !userId) {
+        if (!comment ) {
             return res.status(400).json({ message: "Provide a string updated review" });
         }
         if (!commentId) {
@@ -93,20 +92,33 @@ export async function updateReviewCommentsByCommentId(req, res) {
         if (!mongoose.Types.ObjectId.isValid(commentId)) {
             return res.status(400).json({ message: "Invalid commentId format" });
         }
-        // 2. Check if commentId exists and update it
-        const updatedReviewComments = await ReviewComment.findOneAndUpdate({_id: commentId, commenterId:userId},{comment},{new:true})
-            .populate({ path: 'commenterId', select: 'username email' })
-            .lean();    
-            console.log("Review Comments fetched:", updatedReviewComments);
-        //3. If no comments found
-        if (!updatedReviewComments || updatedReviewComments.length === 0) {
-            return res.status(200).json({ message: "No review comments found for this watched movie" });
+
+        // 2. Find the comment first
+        const existingComment = await ReviewComment.findById(commentId);
+        if (!existingComment) {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+        // 2 Authorization check
+        //find the user that made this comment(using the commentId)
+
+        if (existingComment.commenterId.toString() !== req.userId) {
+            return res.status(403).json({ message: "Not allowed to edit this comment." });
         }
 
-        //4. Return the review comments
-        res.status(200).json(updatedReviewComments);
+// 4. Update the comment
+    existingComment.comment = comment;
+    await existingComment.save();
 
-        //5. Catch block
+    // 5. Optionally populate commenter info
+    const populatedComment = await existingComment.populate({
+      path: "commenterId",
+      select: "username email",
+    });
+
+    // 6. Return success
+    return res.status(200).json(populatedComment);       //5. Return the review comments
+
+        //6. Catch block
     } catch (error) {
         console.error("Error in get Review Comments by movie controller", error);
         res.status(500).json({ message: "Internal server error" });

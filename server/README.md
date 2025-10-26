@@ -255,6 +255,40 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "__v": 0
     }
 
+1. **createReviewComment**
+    Description:
+    Updated an existing ReviewComment
+
+    **Method**: PUT
+    **Endpoint**: "/UpdateReviewCommentsByCommentId/:commentId", verifyToken, updateReviewCommentsByCommentId
+
+    ### Required Fields:
+
+    **commentId** – The ID of the comment in the params
+    **comment** - The updated string comment in the body
+    **headers** - In the form of: {"Authorization": `Bearer ${token}` // <-- send the token},
+
+    ### Returns:
+    1. On failure (400) or (500)
+    It returns a JSON with a message e.g: { message: 'Internal server error' } 
+    or (403){"message": "Not allowed to edit this comment."}
+
+    2. On success(200): 
+    A JSON object containing the updated review Comment i.e.:
+    {
+    "_id": "68fe031745e0bd725701a5cd",
+    "watchedMovieId": "68f9e6f0c05801e16abcb34c",
+    "commenterId": {
+        "_id": "68e3e2e2a256bdaf47468be0",
+        "username": "Katerina",
+        "email": "katerina@gmail.com"
+    },
+    "comment": "This is an updated comment using token",
+    "createdAt": "2025-10-26T11:16:39.149Z",
+    "updatedAt": "2025-10-26T11:19:23.475Z",
+    "__v": 0
+}
+
 ## Review Like Endpoints
 
 1. **createReviewLike**

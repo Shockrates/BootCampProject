@@ -14,3 +14,7 @@ export async function getUser (req,res) {
         res.status(500).json({message:"Internal server error"});
     }
 };
+
+export async function getProtectedData (req, res){
+    res.status(200).json({message: 'Protected route accessed successfully!'});
+};
