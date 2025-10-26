@@ -224,7 +224,7 @@ BACKEND for Team A's BootCamp Project for SKG.Education
 
 ## Review Comment Endpoints
 
-1. ## **createReviewComment**
+1. ## createReviewComment
     Description:
     Creates a new record of a ReviewComment for a watchedMovie
 
@@ -255,20 +255,20 @@ BACKEND for Team A's BootCamp Project for SKG.Education
         "__v": 0
     }
 
-1. ## **updateReviewCommentsByCommentId** 
+1. ## updateReviewCommentsByCommentId
     Description:
     Updated an existing ReviewComment
 
     **Method**: PUT
     **Endpoint**: "/UpdateReviewCommentsByCommentId/:commentId", verifyToken, updateReviewCommentsByCommentId
 
-    ### Required Fields:
+    #### Required Fields:
 
     **commentId** – The ID of the comment in the params
     **comment** - The updated string comment in the body
     **headers** - In the form of: {"Authorization": `Bearer ${token}` // <-- send the token},
 
-    ### Returns:
+    #### Returns:
     1. On failure (400) or (500)
     It returns a JSON with a message e.g: { message: 'Internal server error' } 
     or (403){"message": "Not allowed to edit this comment."}
