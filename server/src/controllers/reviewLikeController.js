@@ -43,7 +43,7 @@ export async function createReviewLike(req, res) {
         const savedReviewLike = await reviewLike.save();
 
 
-        res.status(200).json(savedReviewLike);
+        res.status(200).json({savedReviewLike});
     } catch (error) {
         console.error("Error in create Review Like controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -63,7 +63,7 @@ export async function getAllLikesByUserId(req,res){
 
         // if(!likes) return res.status(404).json({message:"Likes not found"});
         
-        res.status(200).json(likes);
+        res.status(200).json({likes});
     } catch (error) {
         console.error("Error in getAllLikesById controller", error);
         res.status(500).json({message:"Internal server error"});
