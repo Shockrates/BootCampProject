@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import reviewsTest from '../../data/watchedMovies.json'
 import FeedList from './FeedList'
 import { fetchReviews } from '../../utils/api'
+import { bus } from '../../utils/eventBus'
 
 const CommunityFeed = () => {
 
@@ -34,6 +35,27 @@ const CommunityFeed = () => {
         console.log(message);
 
     }, []);
+
+    /**
+     * Listen for comment creation
+     */
+    useEffect(() => {
+        const createCommentHandler = ({ watchedMovieId, serverCount }) => {
+            setReviews((prev) =>
+                prev.map((r) =>
+                    r._id === watchedMovieId
+                        ? { ...r, CommentCount: serverCount ?? r.CommentCount + 1 }
+                        : r
+                )
+            );
+        }
+        bus.on("comment:created", createCommentHandler);
+        return () => {
+            bus.off("comment:created", createCommentHandler);
+        }
+    }, [])
+
+
     return (
         <div>
             <h1>

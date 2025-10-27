@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { createComment } from '../../utils/api';
+import { bus } from "../../utils/eventBus";
 
 
 const CommentReviewForm = ({ watchedMovieId, commenterId }) => {
@@ -16,6 +17,10 @@ const CommentReviewForm = ({ watchedMovieId, commenterId }) => {
                 setError("Review failed. Please try again");
                 return;
             }
+            bus.emit("comment:created", {
+                watchedMovieId,
+                serverCount: reviewComment.CommentCount ?? null,
+            });
             setComment("")
         } catch (err) {
             console.error(err);
