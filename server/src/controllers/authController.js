@@ -34,6 +34,11 @@ const { username, email, password, confirmPass, age } = req.body;
     if (!username || !email || !password || !confirmPass || !age) {           //added confirmation password field 
       return res.status(400).json({ message: 'All fields are required' });
     }
+
+    //add in the req.body the acceptTerms 
+    // if(!acceptTerms){ //added accept terms field 
+    //   return res.status(400).json({ message: 'Need to accept terms' });
+    // }
     
     if (password !== confirmPass) {
       return res.status(400).json({ message: 'Passwords do not match' });   //added confirmation password check

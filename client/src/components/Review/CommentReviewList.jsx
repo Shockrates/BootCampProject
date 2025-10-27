@@ -1,8 +1,7 @@
 import React from 'react'
 
 const CommentReviewList = ({ comments }) => {
-    console.log(comments);
-    
+
     if (!comments || comments.length === 0) return <p>No comments available.</p>
     return (
         <div>

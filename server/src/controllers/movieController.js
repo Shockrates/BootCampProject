@@ -9,7 +9,7 @@ export async function getAllMovies(req, res) {
         .populate({ path: 'WatchedMovie', select: 'rating' }).limit(37);
         if (!movies) return res.status(404).json({ message: "Movies not found" });
 
-        res.status(200).json(movies);
+        res.status(200).json({movies});
     } catch (error) {
         console.error("Error in getAllMovies controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -28,7 +28,7 @@ export async function searchMovies(req, res) {
 
         if (!movies) return res.status(404).json({ message: "Movie not found" });
 
-        res.status(200).json(movies);
+        res.status(200).json({movies});
     } catch (error) {
         console.error("Error in searchMovies controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -46,7 +46,7 @@ export async function getMovie(req, res) {
 
         if (!movie) return res.status(404).json({ message: "Movie not found" });
 
-        res.status(200).json(movie);
+        res.status(200).json({movie});
     } catch (error) {
         console.error("Error in searchMovies controller", error);
         res.status(500).json({ message: "Internal server error" });

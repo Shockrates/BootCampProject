@@ -31,12 +31,54 @@ export async function createReviewLike(req, res) {
           return res.status(400).json({ message: "This watchedMovieId does not exist in the WatchedMovieDB" });
         }
 
+        const existingRecord = await ReviewLike.findOne({watchedMovieId, likerId });
+        
+        // 4. Check if this like exists (for this watchedmovie and user)
+        if (existingRecord) {
+            return res.status(400).json({ message: "This user has already liked this watched movie" });
+        }
+
         const reviewLike = new ReviewLike({ watchedMovieId, likerId, like });
 
         const savedReviewLike = await reviewLike.save();
-        res.status(200).json({ savedReviewLike });
+
+
+        res.status(200).json({savedReviewLike});
     } catch (error) {
         console.error("Error in create Review Like controller", error);
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+export async function getAllLikesByUserId(req,res){
+    try {
+
+        const userId = req.params.userId;
+        // 1. Validate ObjectIds 
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ message: "Invalid userId format" });
+        }
+
+        const likes = await ReviewLike.find({likerId : userId}).select("_id").select("watchedMovieId");
+
+        // if(!likes) return res.status(404).json({message:"Likes not found"});
+        
+        res.status(200).json({likes});
+    } catch (error) {
+        console.error("Error in getAllLikesById controller", error);
+        res.status(500).json({message:"Internal server error"});
+    }
+}
+
+    export async function deleteLike(req,res){
+        try {
+            const likeToDelete = await ReviewLike.findByIdAndDelete(req.params.likeId);
+    
+            if(!likeToDelete) return res.status(404).json({message:"This Like was not found"});
+            
+            res.status(200).json({message:"Like deleted successfully"});
+        } catch (error) {
+            console.error("Error in deleted controller", error);
+            res.status(500).json({message:"Internal server error"});
+        }
+    }
