@@ -35,8 +35,8 @@ const FeedListItem = ({ review, onOpen }) => {
             <h3>{review.movieId?.title}</h3>
             <div className="">
               {
-                review.movieId?.genre && review.movieId?.genre.map((g) => (
-                  <span className="">{g} </span>
+                review.movieId?.genre && review.movieId?.genre.map((g, i) => (
+                  <span className="" key={i}>{g} </span>
                 ))
               }
 
