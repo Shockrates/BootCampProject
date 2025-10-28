@@ -56,10 +56,30 @@ const CommunityFeed = () => {
     }, [])
 
 
+    /**
+     * Listen for likes changes
+     */
+    useEffect(() => {
+        const changeLikeHandler = ({ watchedMovieId, delta, serverCount }) => {
+            setReviews((prev) =>
+                prev.map((r) =>
+                    r._id === watchedMovieId
+                        ? { ...r, LikeCount: serverCount ?? r.LikeCount + delta }
+                        : r
+                )
+            );
+        }
+        bus.on("like:changed", changeLikeHandler);
+        return () => {
+            bus.off("like:changed", changeLikeHandler);
+        }
+    }, [])
+
+
     return (
         <div>
             <h1>
-                TESTING FOR CommunityFeed
+                Community
             </h1>
             <FeedList reviews={reviews} />
         </div>

@@ -187,3 +187,63 @@ export async function createComment(watchedMovieId, commenterId, comment) {
     console.log("Error:", error.message);
   }
 }
+
+export async function createLike(watchedMovieId, likerId, like) {
+  try {
+    const res = await fetch(`${URI}/createReviewLike`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ watchedMovieId, likerId, like })
+      })
+
+    const { message, savedReviewLike } = await res.json();
+    if (message) {
+      console.log(message);
+    }
+    console.log(savedReviewLike);
+    return savedReviewLike ? savedReviewLike : null;
+  } catch (error) {
+    console.log("Error:", error.message);
+  }
+}
+
+export async function deleteLike(likeId) {
+  try {
+
+    const res = await fetch(`${URI}/deleteLike/${likeId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+
+    const { likeToDelete, message } = await res.json();
+    if (message) {
+      console.log(message);
+    }
+    return likeToDelete;
+  } catch (error) {
+    console.log("Error:", error.message);
+  }
+}
+
+export const getAllUserLikes = async (userId) => {
+
+  try {
+    const res = await fetch(`${URI}/getAllLikesByUserId/${userId}`);
+    if (!res.ok) {
+      // Throw so the caller knows this was a failure (not just an empty list)
+      throw new Error(`Failed to fetch user likes, (${res.status})`);
+    }
+    const { message, likes } = await res.json();
+    console.log(message);
+
+    return likes;
+  } catch (error) {
+    console.log("Error:", error.message);
+  }
+}

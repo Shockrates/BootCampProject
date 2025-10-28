@@ -47,10 +47,11 @@ const FeedListItem = ({ review, onOpen }) => {
 
         <div className="flex w-full items-end" >
           <div className="user-review flex flex-col m-2 w-full h-1/2 shadow-md shadow-black border-1 p-2 items-start justify-between transition-all hover:bg-stone-800"
-            role="button"
-            onClick={() => onOpen(review)}
+
           >
-            <div className="">
+            <div className="h-full w-full"
+              role="button"
+              onClick={() => onOpen(review)}>
               <Link to={`/profile/${review.userId._id}`}>
                 <h3>
                   {review.userId.username}, {review.userId.age}
@@ -69,9 +70,6 @@ const FeedListItem = ({ review, onOpen }) => {
               <span className='flex items-center gap-2'>
                 <FaComments /> {review.CommentCount} Comments
               </span>
-
-
-
             </div>
           </div>
         </div>

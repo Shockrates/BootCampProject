@@ -30,8 +30,8 @@ export function AuthProvider({ children }) {
         }
     }, [user]);
 
-    const login = (userData) => {
-        setUser(userData);
+    const login = (userData, likes) => {
+        setUser({ ...userData, likes: likes });
     };
 
     const logout = () => {
