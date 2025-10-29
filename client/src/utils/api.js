@@ -200,9 +200,9 @@ export async function createLike(watchedMovieId, likerId, like) {
       })
 
     const { message, savedReviewLike } = await res.json();
-    if (message) {
-      console.log(message);
-    }
+    // if (message) {
+    //   console.log(message);
+    // }
     console.log(savedReviewLike);
     return savedReviewLike ? savedReviewLike : null;
   } catch (error) {
@@ -222,9 +222,9 @@ export async function deleteLike(likeId) {
       })
 
     const { likeToDelete, message } = await res.json();
-    if (message) {
-      console.log(message);
-    }
+    // if (message) {
+    //   console.log(message);
+    // }
     return likeToDelete;
   } catch (error) {
     console.log("Error:", error.message);
