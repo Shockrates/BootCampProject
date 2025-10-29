@@ -134,7 +134,7 @@ body {
 /* Links (app uses Link elements) */
 a,
 .link {
-  @apply text-indigo-600 hover:underline;
+  @apply text-white hover:underline;
 }
 
 /* Dark mode link color */
@@ -156,7 +156,7 @@ h3 {
 /* small accessibility / focus ring for interactive items (buttons/links inside nav etc.) */
 a:focus,
 button:focus {
-  @apply outline-none ring-2 ring-indigo-300;
+  @apply outline-none;
 }
 
 /* Utility: ensure images inside cards don't inherit border radius overflow issues */

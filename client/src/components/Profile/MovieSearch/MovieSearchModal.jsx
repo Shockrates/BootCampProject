@@ -8,15 +8,15 @@ const MovieSearchModal = () => {
 
     return (
         <div className="movie-search text-center">
-        <button onClick={() => setIsOpen(true)} className="register-btn">
-            Search Movies
-        </button>
+            <button onClick={() => setIsOpen(true)} className="register-btn">
+                Search Movies
+            </button>
 
-        <MovieSearch
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
-            maxResults={6}
-        />
+            <MovieSearch
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                maxResults={6}
+            />
         </div>
 
     )

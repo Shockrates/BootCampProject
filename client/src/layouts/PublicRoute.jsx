@@ -16,7 +16,7 @@ const PublicRoute = () => {
     const location = useLocation();
 
     // Get the original intended route from state, fallback to dashboard
-    const from = location.state?.from?.pathname || "/";
+    //const from = location.state?.from?.pathname || "/";
     // if (user) {
     //     // if already logged in, send to dashboard
     //     return <Navigate to={from} replace />;

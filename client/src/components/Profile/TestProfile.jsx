@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 /*import React from 'react'
+=======
+import { useState, useEffect } from 'react'
+>>>>>>> 87a501325bbc52808c66e7eec0b4ffefd170f1c6
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
+import FeedListItem from '../CommunityFeed/FeedListItem'
 import { useAuth } from '../Auth/AuthProvider';
 import { useParams } from 'react-router-dom';
 <<<<<<< HEAD
@@ -74,38 +79,86 @@ const Profile = () => {
   const { user } = useAuth();
   const { id } = useParams();
 
+  const [isOwner, setIsOwner] = useState(false);
+  const [profileUser, setProfileUser] = useState(user);
+  const [watchedMovies, setWatchedMovies] = useState([]);
 
-  const authId = loadUser?._id ?? user?.id ?? null;
-  const isOwner = authId && String(authId) === String(id);
+  useEffect(() => {
+    console.log(id);
+
+    const loadUser = async (userId) => {
+      try {
+        const res = await fetch(`https://bootcampproject-production.up.railway.app/user/${userId}`);
+        const { user } = await res.json();
+        console.log(user.username);
+        setProfileUser(user);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    }
+    const loadWatchedMovies = async (userId) => {
+      try {
+        const res = await fetch(`https://bootcampproject-production.up.railway.app/watchedByUser/${userId}`);
+        const { watchedMovies } = await res.json();
+        setWatchedMovies(watchedMovies);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    }
+
+
+    if (user._id === id) {
+      setIsOwner(true)
+      setProfileUser(user);
+    } else {
+      setIsOwner(false)
+      loadUser(id)
+    }
+    loadWatchedMovies(profileUser._id)
+  }, [id])
+
+
+
+  //const authId = loadUser?._id ?? user?.id ?? null;
+  //const isOwner = authId && String(authId) === String(id);
 
 
   return (
     <div className="max-w-3xl mx-auto mt-8 px-4">
       <h1 className="text-3xl font-bold mb-4 text-white">
-        Profile{isOwner ? '(Your Profile)' : ''}</h1>
+        Profile {isOwner ? '(Your Profile)' : `${profileUser.username}`}
+      </h1>
       <div className="profile">
 
-        <div>Username: {loadUser.username}</div>
-        <div>Age: {loadUser?.age}</div>
-        <div>Email: {loadUser?.email}</div>
+        <div>Username: {profileUser.username}</div>
+        <div>Age: {profileUser?.age}</div>
+        <div>Email: {profileUser?.email}</div>
       </div>
       <section className="my-6">
-        <p className="text-gray-300 mb-4">
-          Welcome to your profile! You can search for movies by clicking the button below:
-        </p>
+
 
         {isOwner && (
           <div>
-            ( //only for logged-in user viewing their own profile)
+            <p className="text-gray-300 mb-4">
+              Welcome to your profile! You can search for movies by clicking the button below:
+            </p>
             <button className="registster-btn">Edit Profile </button>
           </div>
         )
 
         }
 
+        <h1>{isOwner ? 'Your Reviews' : `${profileUser.username}'s Reviews `}</h1>
+
+        {
+          watchedMovies.map((review, index) => (
+
+            <FeedListItem key={index} review={review} />
+
+          ))
+        }
 
 
-        <MovieSearchModal />
       </section>
     </div>
   )
@@ -190,6 +243,7 @@ export default Profile
 
 
 
+<<<<<<< HEAD
 const loadUser = async (userId) => {
   try {
     const res = await fetch(`http://localhost:3000/user/${userId}`);
@@ -203,3 +257,5 @@ const loadUser = async (userId) => {
   }
 }
 >>>>>>> 59d7ac9fad70d872eb3bcd8383880315484504c6
+=======
+>>>>>>> 87a501325bbc52808c66e7eec0b4ffefd170f1c6
