@@ -44,7 +44,7 @@ export async function createReviewLike(req, res) {
         await savedReviewLike.populate({
             path: 'watchedMovieId',
             select: '_id',
-            populate: { path: 'LikeCount' } // populate the virtual on the nested doc
+            populate: { path: 'LikeCount' }
         });
 
 
@@ -83,7 +83,7 @@ export async function deleteLike(req, res) {
         await likeToDelete.populate({
             path: 'watchedMovieId',
             select: '_id',
-            populate: { path: 'LikeCount' } // populate the virtual on the nested doc
+            populate: { path: 'LikeCount' }
         });
         res.status(200).json({ likeToDelete, message: "Like deleted successfully" });
     } catch (error) {
