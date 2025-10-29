@@ -27,6 +27,7 @@ const FeedListItem = ({ review, onOpen }) => {
                 e.currentTarget.alt = "Poster not available";
               }}
               className="block w-full h-auto shadow-sm"
+              width={10}
             />
           </Link>
           <div
@@ -53,9 +54,14 @@ const FeedListItem = ({ review, onOpen }) => {
               role="button"
               onClick={() => onOpen(review)}>
               <Link to={`/profile/${review.userId._id}`}>
-                <h3>
-                  {review.userId.username}, {review.userId.age}
-                </h3>
+                {
+                  review.userId.username && (
+                    <h3>
+                      {review.userId.username}, {review.userId.age}
+                    </h3>
+                  )
+                }
+
               </Link>
 
               {/* Watched at: <span className='text-xs'> {new Date(review.watchedAt).toLocaleDateString("el-GR")}</span> */}
