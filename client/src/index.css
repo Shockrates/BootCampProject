@@ -22,7 +22,7 @@ body {
 
 /* Navbar outer container (full width background) */
 .nav {
-  @apply bg-black shadow-md;
+  @apply bg-black shadow-md       w-screen -mx-[calc((100vw-100%)/2)] relative;
 }
 
 /* Inner wrapper (centers and constrains width) */
@@ -278,3 +278,4 @@ button:focus {
 .modal-btn {
   @apply border-none bg-blue-950 px-2 py-6 rounded-md cursor-pointer shadow-slate-100 text-base
 }
+
