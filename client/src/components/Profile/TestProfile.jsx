@@ -212,7 +212,7 @@ const Profile = () => {
 
   if (loading) return <div>Loading...</div>;
   if (!profileUser) return <div>No user found.</div>;
-    <button on click={() => navigate(-1)}>Go Back</button>
+  <button on click={() => navigate(-1)}>Go Back</button>
 
   const isOwner = !!loggedUser && loggedUser.username === profileUser.username;
 
@@ -238,7 +238,7 @@ const Profile = () => {
 
 export default Profile;
 =======
-// 
+//
 export default Profile
 
 
@@ -256,6 +256,6 @@ const loadUser = async (userId) => {
     console.log("Error:", error);
   }
 }
->>>>>>> 59d7ac9fad70d872eb3bcd8383880315484504c6
-=======
->>>>>>> 87a501325bbc52808c66e7eec0b4ffefd170f1c6
+// >>>>>>> 59d7ac9fad70d872eb3bcd8383880315484504c6
+// =======
+// >>>>>>> 87a501325bbc52808c66e7eec0b4ffefd170f1c6

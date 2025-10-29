@@ -75,38 +75,60 @@ const Profile = () => {
   const [watchedMovies, setWatchedMovies] = useState([]);
 
   useEffect(() => {
-    console.log(id);
-
+    let cancelled = false;
     const loadUser = async (userId) => {
       try {
         const res = await fetch(`https://bootcampproject-production.up.railway.app/user/${userId}`);
         const { user } = await res.json();
-        console.log(user.username);
+        if (cancelled) return;
         setProfileUser(user);
       } catch (error) {
         console.log("Error:", error);
-      }
-    }
-    const loadWatchedMovies = async (userId) => {
-      try {
-        const res = await fetch(`https://bootcampproject-production.up.railway.app/watchedByUser/${userId}`);
-        const { watchedMovies } = await res.json();
-        setWatchedMovies(watchedMovies);
-      } catch (error) {
-        console.log("Error:", error);
+        if (!cancelled) setProfileUser(null);
       }
     }
 
+    if (!user) {
+      setIsOwner(false);
+      setProfileUser(null);
+      return () => { cancelled = true; };
+    }
 
     if (user._id === id) {
       setIsOwner(true)
       setProfileUser(user);
     } else {
       setIsOwner(false)
-      loadUser(id)
+      loadUser(id, user)
+    }
+    return () => { cancelled = true; };
+  }, [id])
+
+  useEffect(() => {
+    if (!profileUser?._id) {
+      setWatchedMovies([]); // optional: clear when no profile user
+      return;
+    }
+
+    let cancelled = false;
+
+    const loadWatchedMovies = async (userId) => {
+      try {
+        const res = await fetch(`https://bootcampproject-production.up.railway.app/watchedByUser/${userId}`);
+        const { watchedMovies } = await res.json();
+        if (cancelled) return;
+        setWatchedMovies(watchedMovies ?? []);
+      } catch (error) {
+        console.log("Error:", error);
+        if (!cancelled) setWatchedMovies([]);
+      }
     }
     loadWatchedMovies(profileUser._id)
-  }, [id])
+    return () => {
+      cancelled = true;
+    }
+  }, [profileUser._id])
+
 
 
 

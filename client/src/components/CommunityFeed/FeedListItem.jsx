@@ -16,7 +16,7 @@ const FeedListItem = ({ review, onOpen }) => {
         <div className="flex flex-col items-end m-2 gap-2">
           <TimeAgo createdAt={review.createdAt} />
           <FaRegBookmark />
-          <RatingIcon rating={review.rating} />
+
         </div>
 
         <div className="review-movie inline-block max-w-[250px] border-4 border-transparent hover:border-[#D26D15] transition-all">
@@ -27,7 +27,6 @@ const FeedListItem = ({ review, onOpen }) => {
                 e.currentTarget.alt = "Poster not available";
               }}
               className="block w-full h-auto shadow-sm"
-              width={10}
             />
           </Link>
           <div
@@ -53,16 +52,20 @@ const FeedListItem = ({ review, onOpen }) => {
             <div className="h-full w-full"
               role="button"
               onClick={() => onOpen(review)}>
-              <Link to={`/profile/${review.userId._id}`}>
-                {
-                  review.userId.username && (
-                    <h3>
-                      {review.userId.username}, {review.userId.age}
-                    </h3>
-                  )
-                }
+              <div className="flex flex-row justify-between">
+                <Link to={`/profile/${review.userId._id}`}>
+                  {
+                    review.userId.username && (
+                      <h3>
+                        {review.userId.username}, {review.userId.age}
+                      </h3>
+                    )
+                  }
 
-              </Link>
+                </Link>
+                <RatingIcon rating={review.rating} />
+              </div>
+
 
               {/* Watched at: <span className='text-xs'> {new Date(review.watchedAt).toLocaleDateString("el-GR")}</span> */}
               <p>{review.review}</p>
