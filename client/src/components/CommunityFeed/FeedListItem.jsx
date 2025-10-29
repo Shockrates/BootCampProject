@@ -1,10 +1,10 @@
 import React from 'react'
 import { Outlet, Navigate, Link } from 'react-router-dom'
 import { FaComments } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
 import { FaRegBookmark } from "react-icons/fa";
 import RatingIcon from './RatingIcon';
 import TimeAgo from '../Helper/TimeAgo';
+import LikeReview from '../Helper/LikeReview';
 
 const FeedListItem = ({ review, onOpen }) => {
   //console.log(review.movieId.genre);
@@ -63,7 +63,8 @@ const FeedListItem = ({ review, onOpen }) => {
 
             <div className="flex flex-row w-full justify-between">
               <span className='flex items-center gap-2'>
-                <FaHeart /> {review.LikeCount} Likes
+                {/* <FaHeart /> {review.LikeCount} Likes */}
+                <LikeReview review={review} />
               </span>
               <span className='flex items-center gap-2'>
                 <FaComments /> {review.CommentCount} Comments

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import CommentReviewForm from './CommentReviewForm';
 import CommentReviewList from './CommentReviewList';
 import MoviePageDetails from '../MoviePage/MoviePageDetails';
+import { bus } from '../../utils/eventBus'
 
 
 const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
@@ -10,36 +11,40 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
   const [comments, setComments] = useState([])
   const [message, setMessage] = useState('')
 
-  useEffect(() => {
-    let mounted = true;
-    const loadComments = async () => {
-      setMessage('Loading...');
-      try {
-        const res = await fetch(`https://bootcampproject-production.up.railway.app/getReviewCommentsByWatchedMovie/${review._id}`);
-        //const res = await fetch(`http://localhost:3000/getReviewCommentsByWatchedMovie/${review._id}`);
-
-        const { message, reviewComments } = await res.json();
-
-        if (!mounted) return;
-        if (res.ok) {
-          setComments(reviewComments);
-          return
-        }
-        setMessage(message);
-      } catch (error) {
-        console.log("Error:", error);
-        setComments([]);
-        if (!mounted) return;
-        setMessage("Showing Data from static JSON");
+  const loadComments = async () => {
+    setMessage('Loading...');
+    try {
+      const res = await fetch(`https://bootcampproject-production.up.railway.app/getReviewCommentsByWatchedMovie/${review._id}`);
+      //const res = await fetch(`http://localhost:3000/getReviewCommentsByWatchedMovie/${review._id}`);
+      const { message, reviewComments } = await res.json();
+      if (res.ok) {
+        setComments(reviewComments);
+        return
       }
+      setMessage(message);
+    } catch (error) {
+      console.log("Error:", error);
+      setComments([]);
+      setMessage("Showing Data from static JSON");
     }
+  }
+
+  useEffect(() => {
     if (isOpen) {
       loadComments();
     }
-
-
   }, [isOpen, review]);
 
+  useEffect(() => {
+    const refresh = ({ watchedMovieId }) => {
+      if (watchedMovieId === review._id) {
+        loadComments()
+      }
+    }
+
+    bus.on("comment:created", refresh)
+    return () => bus.off("comment:created", refresh)
+  }, [review._id])
 
   if (!isOpen) return null;
 

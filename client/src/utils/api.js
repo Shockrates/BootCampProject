@@ -141,7 +141,6 @@ export async function fetchReviews() {
     throw new Error(`Failed to fetch reviews (${res.status})`);
   }
   const { watchedMovies } = await res.json();
-  console.log(watchedMovies);
 
   return watchedMovies;
 }

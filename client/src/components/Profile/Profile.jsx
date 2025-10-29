@@ -2,8 +2,13 @@
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
 import { useAuth } from '../Auth/AuthProvider';
 import { useParams } from 'react-router-dom';
+<<<<<<< HEAD
 import movies from '../../data/movies.json'; 
 import {id} from 'react-router-dom';
+=======
+//import movies from '../../data/movies.json'; 
+//import {id} from 'react-router-dom';
+>>>>>>> 59d7ac9fad70d872eb3bcd8383880315484504c6
 
 const Profile = () => {
   const { user } = useAuth();
@@ -64,15 +69,15 @@ This is for favoritemovies
      </div>
     ) } }   
 
-  const Profile = () => {
+const Profile = () => {
 
-  const { loggedUser } = useAuth();
-  const {id} = useParams();
+  const { user } = useAuth();
+  const { id } = useParams();
 
 
-    const authId = loadUser?._id ?? user?.id ?? null;
-    const isOwner = authId && String(authId) === String(id);
-      
+  const authId = loadUser?._id ?? user?.id ?? null;
+  const isOwner = authId && String(authId) === String(id);
+
 
   return (
     <div className="max-w-3xl mx-auto mt-8 px-4">
@@ -90,12 +95,12 @@ This is for favoritemovies
         </p>
 
         {isOwner && (
-            <div>
+          <div>
             ( //only for logged-in user viewing their own profile)
             <button className="registster-btn">Edit Profile </button>
-            </div>
+          </div>
         )
-         
+
         }
 
 
@@ -104,8 +109,9 @@ This is for favoritemovies
       </section>
     </div>
   )
-}  
+}
 
+<<<<<<< HEAD
   // 
 export default Profile */
 
@@ -178,3 +184,22 @@ const Profile = () => {
 };
 
 export default Profile;
+=======
+// 
+export default Profile
+
+
+
+const loadUser = async (userId) => {
+  try {
+    const res = await fetch(`http://localhost:3000/user/${userId}`);
+
+    const returnedUser = await res.json();
+
+    console.log(user);
+    setUser(returnedUser);
+  } catch (error) {
+    console.log("Error:", error);
+  }
+}
+>>>>>>> 59d7ac9fad70d872eb3bcd8383880315484504c6
