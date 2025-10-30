@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import video from '../../assets/video.mp4';
-import { fetchTopMovies } from '../../utils/api'
+import { fetchTopMoviesKaterina } from '../../utils/api'
 import MoviesTable from './MoviesTable'
 
 
@@ -24,13 +24,13 @@ export default function About() {
         let mounted = true;
         const loadMovies = async () => {
             try {
-                const movies = await fetchTopMovies();
+                const movies = await fetchTopMoviesKaterina();
                 if (!mounted) return;
                 setMovies(movies);
             } catch (error) {
                 console.log("Error:", error);
                 if (!mounted) return;
-                setMovies(moviesTest.slice(0, 1));
+                //setMovies(moviesTest.slice(0, 1));
             }
         }
         loadMovies();
@@ -71,9 +71,7 @@ export default function About() {
                 <h2 className="text-3xl font-bold text-center mb-6">Top Movies</h2>
 
                 {/* Image Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <MoviesTable movies={movies} />
-                </div>
             </div>
         </div>
     );

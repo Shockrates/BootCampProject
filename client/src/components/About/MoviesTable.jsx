@@ -20,7 +20,7 @@ export default function MoviesTable({ movies, message = "" }) {
         <>
             <div className="">{message}</div>
             <div className="cards-grid">
-                {/* Reads only the first 36 movies */
+                {/* Reads only the first 4 movies */
                     movies.map((m, i) => (
                         <MovieTableItem key={i} movie={m} index={i} />
                     ))

@@ -247,3 +247,16 @@ export const getAllUserLikes = async (userId) => {
     console.log("Error:", error.message);
   }
 }
+
+
+export async function fetchTopMoviesKaterina() {
+  const res = await fetch(`${URI}/get4Movies`);
+
+  if (!res.ok) {
+    // Throw so the caller knows this was a failure (not just an empty list)
+    throw new Error(`Failed to fetch top movies (${res.status})`);
+  }
+  const { movies } = await res.json();
+
+  return movies;
+}
