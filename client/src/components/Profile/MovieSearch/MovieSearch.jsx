@@ -2,6 +2,7 @@ import React from 'react'
 import MoviesTable from '../../Dashboard/MoviesTable'
 import { useState, useEffect } from 'react'
 import { searchMovies } from '../../../utils/api'
+import { bus } from "../../../utils/eventBus";
 
 
 const MovieSearch = ({ isOpen, onClose, maxResults = 6 }) => {
@@ -15,11 +16,22 @@ const MovieSearch = ({ isOpen, onClose, maxResults = 6 }) => {
   const [debounceTimeout, setDebounceTimeout] = useState(null);
 
   useEffect(() => {
+    const closeHandler = () => {
+      // run the provided onClose — safely check it exists
+      if (typeof onClose === 'function') onClose();
+    };
+    bus.on('modal:close', closeHandler);
+    return () => bus.off('modal:close', closeHandler);
+  }, [onClose]);
+
+
+  useEffect(() => {
     if (!query.trim()) {
       setMovies([]);
       setError("");
       return;
     }
+
 
     if (debounceTimeout) clearTimeout(debounceTimeout);
 

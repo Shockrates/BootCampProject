@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { bus } from "../../utils/eventBus";
 
 
 /**
@@ -16,7 +17,7 @@ export default function MovieTableItem({ movie, index }) {
 
 
     return (
-        <Link to={`/movie/${movie._id}`} className="movie-card-link" style={{ textDecoration: 'none' }}>
+        <Link to={`/movie/${movie._id}`} className="movie-card-link" style={{ textDecoration: 'none' }} onClick={() => bus.emit("modal:close")}>
             <article className="movie-card" aria-labelledby={`movie-title-${index}`}>
                 <div className="poster-wrap">
                     <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy'

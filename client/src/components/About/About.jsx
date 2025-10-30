@@ -4,14 +4,14 @@ import video from '../../assets/video.mp4';
 import { fetchTopMovies } from '../../utils/api'
 import MoviesTable from './MoviesTable'
 
- 
+
 export default function About() {
     const navigate = useNavigate();
     // const [images, setImages] = useState([]);
 
-     const handleLoginRedirect = () => {
-         navigate('/imdb-top-movies'); // redirect to the login page
-     };
+    const handleLoginRedirect = () => {
+        navigate('/imdb-top-movies'); // redirect to the login page
+    };
 
     // // Fetch 4 images from backend
     // useEffect(() => {
@@ -29,28 +29,28 @@ export default function About() {
     // }, []);
 
     const [movies, setMovies] = useState([])
-    
-        /**
-         * Testing fetching functionality from a JSON Server.
-         * If Json server is running data is set from there
-         * if that fails data is set from static imdb_top_1000.json
-         */
-        useEffect(() => {
-            let mounted = true;
-            const loadMovies = async () => {
-                try {
-                    const movies = await fetchTopMovies(4,  0);
-                    if (!mounted) return;
-                    setMovies(movies);
-                } catch (error) {
-                    console.log("Error:", error);
-                    if (!mounted) return;
-                    setMovies(moviesTest.slice(0, 1));
-                }
+
+    /**
+     * Testing fetching functionality from a JSON Server.
+     * If Json server is running data is set from there
+     * if that fails data is set from static imdb_top_1000.json
+     */
+    useEffect(() => {
+        let mounted = true;
+        const loadMovies = async () => {
+            try {
+                const movies = await fetchTopMovies(4, 0);
+                if (!mounted) return;
+                setMovies(movies);
+            } catch (error) {
+                console.log("Error:", error);
+                if (!mounted) return;
+                setMovies(moviesTest.slice(0, 1));
             }
-            loadMovies();
-        }, []);
-        
+        }
+        loadMovies();
+    }, []);
+
 
     return (
         <div>
