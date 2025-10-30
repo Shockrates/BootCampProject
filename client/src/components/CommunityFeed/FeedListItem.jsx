@@ -68,7 +68,7 @@ const FeedListItem = ({ review, onOpen }) => {
 
 
               {/* Watched at: <span className='text-xs'> {new Date(review.watchedAt).toLocaleDateString("el-GR")}</span> */}
-              <p>{review.review}</p>
+              <p className='truncate-multiline'>{review.review}</p>
             </div>
 
             <div className="flex flex-row w-full justify-between">

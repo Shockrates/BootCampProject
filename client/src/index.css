@@ -167,13 +167,23 @@ button:focus {
 .movie-page {
   @apply flex gap-5 mb-4 items-start flex-wrap
 }
-
 .movie-body {
+  @apply flex flex-col md:flex-row justify-between gap-6
+}
+
+.movie-body-review {
+  @apply flex flex-col
+}
+.movie-poster-container {
   @apply w-3/5 sm:flex-none sm:w-40 md:sm:w-52 lg:sm:w-64 xl:sm:w-80
 }
 
 .movie-poster {
   @apply w-full rounded-lg
+}
+
+.movie-poster-review {
+  @apply w-[200px] rounded-lg
 }
 
 .movie-info {
@@ -277,4 +287,8 @@ button:focus {
 
 .modal-btn {
   @apply border-none bg-blue-950 px-2 py-6 rounded-md cursor-pointer shadow-slate-100 text-base
+}
+
+.truncate-multiline {
+  @apply line-clamp-5 overflow-hidden text-ellipsis;
 }
