@@ -73,7 +73,15 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
           <div className="modal-content mt-4">
             <div className="flex flex-row justify-between">
               <MoviePageDetails movie={review.movieId} user={user} isReview={true} />
-              <div className="">{review.review}</div>
+              
+              <div className="flex flex-col">
+                <h1 style={{ margin: 0 }}>
+                {review.movieId.title}  {review.movieId.year && (<small>({review.movieId.year})</small>)}
+            </h1>
+                <p>
+                  {review.review}
+                  </p> 
+                </div>
             </div>
 
             <CommentReviewList comments={comments} />
