@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
-import FeedListItem from '../CommunityFeed/FeedListItem'
+import FeedList from '../CommunityFeed/FeedList'
 import { useAuth } from '../Auth/AuthProvider';
 import { useParams } from 'react-router-dom';
 //import movies from '../../data/movies.json'; 
@@ -139,7 +139,7 @@ const Profile = () => {
   return (
     <div className="max-w-3xl mx-auto mt-8 px-4">
       <h1 className="text-3xl font-bold mb-4 text-white">
-        Profile {isOwner ? '(Your Profile)' : `${profileUser.username}`}
+        {isOwner ? 'Your Profile' : `${profileUser.username}'s Profile `}
       </h1>
       <div className="profile">
 
@@ -161,16 +161,16 @@ const Profile = () => {
 
         }
 
-        <h1>{isOwner ? 'Your Reviews' : `${profileUser.username}'s Reviews `}</h1>
+        <h1 className='mt-6'>{isOwner ? 'Your Reviews' : `${profileUser.username}'s Reviews `}</h1>
 
-        {
+        {/* {
           watchedMovies.map((review, index) => (
 
             <FeedListItem key={index} review={review} />
 
           ))
-        }
-
+        } */}
+        <FeedList reviews={watchedMovies} isProfile={true} />
 
       </section>
     </div>

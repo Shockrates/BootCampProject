@@ -6,7 +6,7 @@ import RatingIcon from './RatingIcon';
 import TimeAgo from '../Helper/TimeAgo';
 import LikeReview from '../Helper/LikeReview';
 
-const FeedListItem = ({ review, onOpen }) => {
+const FeedListItem = ({ review, onOpen, isProfile = false }) => {
   //console.log(review.movieId.genre);
 
 
@@ -19,7 +19,7 @@ const FeedListItem = ({ review, onOpen }) => {
 
         </div>
 
-        <div className="review-movie inline-block max-w-[250px] border-4 border-transparent hover:border-[#D26D15] transition-all">
+        <div className={`review-movie inline-block max-w-[250px] border-4 border-transparent hover:border-[#D26D15] transition-all ${isProfile ? "w-1/4" : "w-full"} `}>
           <Link to={`/movie/${review.movieId?._id}`}>
             <img src={review.movieId?.poster_url} alt={review.movieId?.title} title={review.movieId?.title} loading='lazy'
               onError={(e) => {
@@ -29,26 +29,30 @@ const FeedListItem = ({ review, onOpen }) => {
               className="block w-full h-auto shadow-sm"
             />
           </Link>
-          <div
-            className="bg-[#D26D15] text-white text-sm font-medium px-3 py-2 break-words top-0"
-          >
-            <h3>{review.movieId?.title}</h3>
-            <div className="">
-              {
-                review.movieId?.genre && review.movieId?.genre.map((g, i) => (
-                  <span className="" key={i}>{g} </span>
-                ))
-              }
+          {!isProfile && (
+            <div
+              className="bg-[#D26D15] text-white text-sm font-medium px-3 py-2 break-words top-0"
+            >
+              <h3>{review.movieId?.title}</h3>
+              <div className="">
+                {
+                  review.movieId?.genre && review.movieId?.genre.map((g, i) => (
+                    <span className="" key={i}>{g} </span>
+                  ))
+                }
+
+              </div>
 
             </div>
+          )}
 
-          </div>
         </div>
 
         <div className="flex w-full items-end" >
-          <div className="user-review flex flex-col m-2 w-full h-1/2 shadow-md shadow-black border-1 p-2 items-start justify-between transition-all hover:bg-stone-800"
+          <div className={`user-review flex flex-col m-2 w-full shadow-md shadow-black border-1 p-2 items-start justify-between transition-all hover:bg-stone-800 ${isProfile ? "h-full" : "h-1/2 "} `}
 
           >
+
             <div className="h-full w-full"
               role="button"
               onClick={() => onOpen(review)}>
@@ -63,6 +67,22 @@ const FeedListItem = ({ review, onOpen }) => {
                   }
 
                 </Link>
+                {isProfile && (
+                  <div
+                    className=" text-white text-sm font-medium break-words bottom-0 w-full"
+                  >
+                    <h3>{review.movieId?.title}</h3>
+                    <div className="">
+                      {
+                        review.movieId?.genre && review.movieId?.genre.map((g, i) => (
+                          <span className="" key={i}>{g} </span>
+                        ))
+                      }
+
+                    </div>
+
+                  </div>
+                )}
                 <RatingIcon rating={review.rating} />
               </div>
 

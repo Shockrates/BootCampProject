@@ -5,7 +5,7 @@ import { searchMovies } from '../../../utils/api'
 import { bus } from "../../../utils/eventBus";
 
 
-const MovieSearch = ({ isOpen, onClose, maxResults = 6 }) => {
+const MovieSearch = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
