@@ -1,21 +1,20 @@
-<<<<<<< HEAD
+
 /*import React from 'react'
-=======
 import { useState, useEffect } from 'react'
->>>>>>> 87a501325bbc52808c66e7eec0b4ffefd170f1c6
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
 import FeedListItem from '../CommunityFeed/FeedListItem'
 import { useAuth } from '../Auth/AuthProvider';
 import { useParams } from 'react-router-dom';
-<<<<<<< HEAD
+
 import movies from '../../data/movies.json'; 
 import {id} from 'react-router-dom';
-=======
+*/
+
 //import movies from '../../data/movies.json'; 
 //import {id} from 'react-router-dom';
->>>>>>> 59d7ac9fad70d872eb3bcd8383880315484504c6
 
-const Profile = () => {
+
+/*const Profile = () => {
   const { user } = useAuth();
 
   return (
@@ -171,7 +170,7 @@ export default Profile */
 
 
 
-
+import React from 'react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../Auth/AuthProvider';
@@ -184,6 +183,14 @@ const Profile = () => {
   const [profileUser, setProfileUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  
+  
+  const getTwoLetters = (name = '') => {
+  if (!name) return '';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return name.slice(0, 2).toUpperCase();
+  }
 
   useEffect(() => {
     const loadByUsername = async (u) => {
@@ -217,6 +224,14 @@ const Profile = () => {
   const isOwner = !!loggedUser && loggedUser.username === profileUser.username;
 
   return (
+
+    <div className="profile flex items-center gap-4">
+      <div
+        className="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center text-lg font-semibold"
+        aria-hidden="true"
+      >
+        {getTwoLetters(profileUser?.username)}
+      </div>
     <div className="max-w-3xl mx-auto mt-8 px-4">
       <h1 className="text-3xl font-bold mb-4 text-white">
         Profile {isOwner ? '(Your Profile)' : ''}
@@ -233,17 +248,13 @@ const Profile = () => {
         <MovieSearchModal />
       </section>
     </div>
+  
   );
-};
 
 export default Profile;
-=======
-//
-export default Profile
 
 
 
-<<<<<<< HEAD
 const loadUser = async (userId) => {
   try {
     const res = await fetch(`http://localhost:3000/user/${userId}`);
@@ -256,6 +267,3 @@ const loadUser = async (userId) => {
     console.log("Error:", error);
   }
 }
-// >>>>>>> 59d7ac9fad70d872eb3bcd8383880315484504c6
-// =======
-// >>>>>>> 87a501325bbc52808c66e7eec0b4ffefd170f1c6
