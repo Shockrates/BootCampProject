@@ -7,8 +7,8 @@
 //  * - Logs errors to the console if the fetch request fails.
 //  */
 
-//const URI = "https://bootcampproject-production.up.railway.app";
-const URI = "http://localhost:3000";
+const URI = "https://bootcampproject-production.up.railway.app";
+//const URI = "http://localhost:3000";
 
 /**
  * Attempts to log in a user by checking email and password against the JSON server.
@@ -129,13 +129,16 @@ export async function searchMovies(query) {
 }
 
 
-export async function fetchReviews() {
-
-  const res = await fetch(`${URI}/getAllWatchedMovies`);
-
+export async function fetchReviews(limit) {
+  const params = new URLSearchParams();
+  if (limit) params.set('limit', limit);
+  const res = await fetch(`${URI}/getAllWatchedMovies/?${params.toString()}`);
+  console.log(params.toString());
   if (!res.ok) {
     // Throw so the caller knows this was a failure (not just an empty list)
     throw new Error(`Failed to fetch reviews (${res.status})`);
+
+
   }
   const { watchedMovies } = await res.json();
 

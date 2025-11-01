@@ -21,8 +21,9 @@ const Navbar = ({ user }) => {
                     </Link>
                     {user && (
                         <>
-                            <Link to="/imdb-top-movies">Dashboard</Link>
-                            <Link to="/about">About</Link>
+                            <Link to="/community">Community</Link>
+                            <Link to="/imdb-top-movies">Movie List</Link>
+                            {/* <Link to="/about">About</Link> */}
                             <MovieSearchModal />
                         </>
                     )}
