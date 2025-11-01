@@ -35,9 +35,9 @@ function App() {
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="about" element={<About />} />
           <Route path="movie/:id" element={<MoviePage />} />
-          {<Route path='profile' element={<Profile />} />}
+          {/*<Route path='profile' element={<Profile />} />*/}
           {<Route path='profile/:id' element={<Profile />} /> }
-          {/* <Route path='profile/:id' element={<TestProfile />} /> */}
+          { <Route path='profile/:id' element={<TestProfile />} /> }
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<CommunityFeed />} />

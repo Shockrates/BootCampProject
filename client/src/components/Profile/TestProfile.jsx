@@ -172,6 +172,8 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '../Auth/AuthProvider';
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
 import { useNavigate } from 'react-router-dom';
+import getAllWatchedMovies from '../../api/movies/getAllWatchedMovies';
+
 
 const Profile = () => {
   const { username } = useParams(); // now uses username from URL
@@ -245,11 +247,9 @@ const Profile = () => {
     </div>
     </div>
   );
-  
 
-};
+
+
+}
 
   export default Profile;
-
-
-
