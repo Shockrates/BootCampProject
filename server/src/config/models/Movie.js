@@ -11,13 +11,20 @@ const movieSchema = new mongoose.Schema({
     poster_url: { type: String, required: true },
 }, { timestamps: true });
 
+// Virtual to associate WatchedMovies with Movie
+movieSchema.virtual('WatchedMovie', {
+    ref: 'WatchedMovie',
+    localField: '_id',
+    foreignField: 'movieId',
+});
+
 movieSchema.virtual('avgRating', {
     ref: 'WatchedMovie',                 // Reference the WatchedMovie model
     localField: '_id',                   // _id of the Movie
     foreignField: 'movieId',             // Field in WatchedMovie that references the Movie
-    justOne: false,                      
-    options: {                     
-    select: 'rating'
+    justOne: false,
+    options: {
+        select: 'rating'
     }
 });
 
@@ -27,4 +34,4 @@ movieSchema.set('toJSON', { virtuals: true });
 
 const Movie = mongoose.model('Movie', movieSchema);
 
-export default Movie ;
+export default Movie;
