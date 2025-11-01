@@ -22,7 +22,7 @@ export async function updateUser (req,res) {
 
         // Extract user ID from params and updated data from body
         const { id } = req.params;
-        const { username, email, password, oldPassword } = req.body;
+        const { username, email, subscription, password, oldPassword } = req.body;
 
         // Check if ID is a valid MongoDB ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -52,11 +52,26 @@ export async function updateUser (req,res) {
             }
             const isMatch = await bcrypt.compare(oldPassword, user.password);
             if (!isMatch) {
-                return res.status(400).json({ message: "Old password is incorrect" });
+                return res.status(403).json({ message: "Old password is incorrect" });
             }
             // Hash new password & update
             const salt = await bcrypt.genSalt(10);
             user.password =  await bcrypt.hash(password, salt);
+        }
+
+        // Update subscription if provided and valid
+        if (subscription && ["free","gold", "platinum"].includes(subscription)){
+            user.subscription = subscription;
+
+            // Update subscription expiration date
+            if (subscription === "free"){
+                user.subExpiresAt = null;
+            }else {
+                const durationDays = 30;
+                const expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + durationDays);
+                user.subExpiresAt=expirationDate;
+            }
         }
 
         // Save updated user
