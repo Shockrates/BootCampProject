@@ -12,6 +12,7 @@ import PublicRoute from './layouts/PublicRoute'
 import AuthRoute from './layouts/AuthRoute'
 import CommunityFeed from './components/CommunityFeed/CommunityFeed'
 import TestProfile from './components/Profile/TestProfile'
+import Home from './components/Home/Home'
 
 /**
  * Main application component.
@@ -33,14 +34,21 @@ function App() {
 
         <Route element={<PrivateRoute />} >
           <Route path="imdb-top-movies" element={<Dashboard />} />
+          <Route path="community" element={<CommunityFeed />} />
           <Route path="about" element={<About />} />
           <Route path="movie/:id" element={<MoviePage />} />
+
           {/*<Route path='profile' element={<Profile />} />*/}
-          {<Route path='profile/:id' element={<Profile />} /> }
+          {/*<Route path='profile/:id' element={<Profile />} /> */}
           { <Route path='profile/:id' element={<TestProfile />} /> }
+
+          {/* <Route path='profile' element={<Profile />} /> */}
+          <Route path='profile/:id' element={<Profile />} />
+          {<Route path='profile/:id' element={<TestProfile />} />}
         </Route>
         <Route element={<PublicRoute />} >
-          <Route index element={<CommunityFeed />} />
+          <Route index element={<Home />} />
+          <Route path="movie/:id" element={<MoviePage />} />
           <Route element={<AuthRoute />} >
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

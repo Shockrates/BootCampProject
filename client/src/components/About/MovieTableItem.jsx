@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import RatingIcon from '../CommunityFeed/RatingIcon';
 
 
 /**
@@ -25,8 +26,12 @@ export default function MovieTableItem({ movie, index }) {
                 </div>
                 <div className="card-body">
                     <h3 className="card-title">{movie.title} <small>({movie.year})</small></h3>
-                    <div className="meta">{genres} • {movie.runtime} • Directed by {movie.director} • {movie.avgRating}</div>
+                    <div className="meta">{genres} • {movie.runtime} • Directed by {movie.director} </div>
+                    {movie.avgRating && (
+                        <RatingIcon rating={movie.avgRating} />
+                    )}
                 </div>
+
             </article>
         </Link>
 
