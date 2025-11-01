@@ -13,6 +13,11 @@ import AuthRoute from './layouts/AuthRoute'
 import CommunityFeed from './components/CommunityFeed/CommunityFeed'
 import TestProfile from './components/Profile/TestProfile'
 import Home from './components/Home/Home'
+import TermsOfUse from './components/Footer/FooterLinks/TermsOfUse'
+import Privacy from './components/Footer/FooterLinks/Privacy'
+import Contact from './components/Footer/FooterLinks/Contact'
+import Cookies from './components/Footer/FooterLinks/Cookies'
+import AboutUs from './components/Footer/FooterLinks/AboutUs'
 
 /**
  * Main application component.
@@ -48,7 +53,11 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
-
+          <Route path="terms" element={<TermsOfUse />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="cookies" element={<Cookies />} />
+          <Route path="aboutUs" element={<AboutUs />} />
         </Route>
 
       </Route>
