@@ -59,7 +59,7 @@ const FeedListItem = ({ review, onOpen, isProfile = false }) => {
               <div className="flex flex-row justify-between">
                 <Link to={`/profile/${review.userId._id}`}>
                   {
-                    review.userId.username && (
+                    review.userId.username && !isProfile && (
                       <h3>
                         {review.userId.username}, {review.userId.age}
                       </h3>

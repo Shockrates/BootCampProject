@@ -11,6 +11,7 @@ import PrivateRoute from './layouts/PrivateRoute'
 import PublicRoute from './layouts/PublicRoute'
 import AuthRoute from './layouts/AuthRoute'
 import CommunityFeed from './components/CommunityFeed/CommunityFeed'
+import TestProfile from './components/Profile/TestProfile'
 
 /**
  * Main application component.
@@ -36,6 +37,7 @@ function App() {
           <Route path="movie/:id" element={<MoviePage />} />
           {/* <Route path='profile' element={<Profile />} /> */}
           <Route path='profile/:id' element={<Profile />} />
+          {/* <Route path='profile/:id' element={<TestProfile />} /> */}
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<CommunityFeed />} />
