@@ -163,15 +163,11 @@ const Profile = () => {
   )
 }
 
-<<<<<<< HEAD
-  // 
 export default Profile */
 
 
 
-
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../Auth/AuthProvider';
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
@@ -183,20 +179,19 @@ const Profile = () => {
   const [profileUser, setProfileUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-
+  
+  
   const getTwoLetters = (name = '') => {
-    if (!name) return '';
-    const parts = name.trim().split(/\s+/);
-    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-    return name.slice(0, 2).toUpperCase();
+  if (!name) return '';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return name.slice(0, 2).toUpperCase();
   }
 
   useEffect(() => {
     const loadByUsername = async (u) => {
       setLoading(true);
       try {
-        // adjust endpoint to match your backend (example: /user/username/:username)
         const res = await fetch(`http://localhost:3000/user/username/${encodeURIComponent(u)}`);
         if (!res.ok) throw new Error('Failed to load user');
         const data = await res.json();
@@ -232,39 +227,29 @@ const Profile = () => {
       >
         {getTwoLetters(profileUser?.username)}
       </div>
-      <div className="max-w-3xl mx-auto mt-8 px-4">
-        <h1 className="text-3xl font-bold mb-4 text-white">
-          Profile {isOwner ? '(Your Profile)' : ''}
-        </h1>
+    <div className="max-w-3xl mx-auto mt-8 px-4">
+      <h1 className="text-3xl font-bold mb-4 text-white">
+        Profile {isOwner ? '(Your Profile)' : ''}
+      </h1>
 
-        <div className="profile">
-          <div>Username: {profileUser.username}</div>
-          <div>Age: {profileUser?.age ?? '—'}</div>
-          <div>Email: {profileUser?.email ?? '—'}</div>
-        </div>
-
-        <section className="my-6">
-          {isOwner && <button className="register-btn">Edit Profile</button>}
-          <MovieSearchModal />
-        </section>
+      <div className="profile">
+        <div>Username: {profileUser.username}</div>
+        <div>Age: {profileUser?.age ?? '—'}</div>
+        <div>Email: {profileUser?.email ?? '—'}</div>
       </div>
+
+      <section className="my-6">
+        {isOwner && <button className="register-btn">Edit Profile</button>}
+        <MovieSearchModal />
+      </section>
     </div>
-
+    </div>
   );
-}
-export default Profile;
+  
+
+};
+
+  export default Profile;
 
 
 
-const loadUser = async (userId) => {
-  try {
-    const res = await fetch(`http://localhost:3000/user/${userId}`);
-
-    const returnedUser = await res.json();
-
-    console.log(returnedUser);
-    //setUser(returnedUser);
-  } catch (error) {
-    console.log("Error:", error);
-  }
-}
