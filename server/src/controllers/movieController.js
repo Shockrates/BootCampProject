@@ -6,8 +6,8 @@ import WatchedMovie from '../config/models/WatchedMovie.js';
 // Controller function to get all movies
 export async function getAllMovies(req, res) {
     try {
-        const movies = await Movie.find().limit(37);
-
+        const movies = await Movie.find()
+        .populate({ path: 'WatchedMovie', select: 'rating' }).limit(37);
         if (!movies) return res.status(404).json({ message: "Movies not found" });
 
         res.status(200).json({movies});
