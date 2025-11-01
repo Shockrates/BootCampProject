@@ -22,7 +22,7 @@ export async function updateUser (req,res) {
 
         // Extract user ID from params and updated data from body
         const { id } = req.params;
-        const { username, email, subscription, password, oldPassword } = req.body;
+        const { username, age, email, subscription, password, oldPassword } = req.body;
 
         // Check if ID is a valid MongoDB ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -35,6 +35,9 @@ export async function updateUser (req,res) {
 
         // Update username if provided
         if(username) user.username = username;
+
+        // Update age if provided
+        if(age) user.age = age;
 
         // Update email if provided and not already taken
         if (email && email !== user.email) {
