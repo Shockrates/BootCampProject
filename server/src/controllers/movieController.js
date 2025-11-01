@@ -83,7 +83,7 @@ export async function get4Movies(req, res) {
     // Step 4: Attach average rating to each movie
     const moviesWithRating = movies.map(movie => {
       const found = avgRatings.find(r => r._id.toString() === movie._id.toString());
-      return { ...movie, averageRating: found?.avgRating || 0 };
+      return { ...movie, avgRating: found?.avgRating || 0 };
     });
 
     // Step 5: Return result
@@ -171,7 +171,7 @@ export async function getTopXMovies(req, res) {
     if (genre) {
       const genreMatchStage = {
         $match: {
-          "movie.genre": genre
+         "movie.genre": { $in: [genre] }
         }
       };
       // We insert before $replaceRoot to use "movie.genre"

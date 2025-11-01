@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import video from '../../assets/video.mp4';
-import { fetchTopMoviesKaterina } from '../../utils/api'
+import { fetchTopMoviesKaterina,fetchTopXMovies } from '../../utils/api'
 import MoviesTable from './MoviesTable'
+import FilterBar from './FilterBar'
+import { useSearchParams } from "react-router-dom"
 
 
 export default function About() {
@@ -14,6 +16,10 @@ export default function About() {
     };
 
     const [movies, setMovies] = useState([])
+    const [filteredMovies, setFilteredMovies] = useState([])
+
+    const [params] = useSearchParams()
+    const genre = params.get("genre") // single source of truth for filter
 
     /**
      * Testing fetching functionality from a JSON Server.
@@ -35,6 +41,24 @@ export default function About() {
         }
         loadMovies();
     }, []);
+    useEffect(() => {
+        let mounted = true;
+        const normalizedGenre = genre 
+        ? genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase() : undefined;
+
+        const loadFilteredMovies = async () => {
+        try {
+            const filteredMovies = await fetchTopXMovies(4, normalizedGenre);
+            if (!mounted) return;
+            setFilteredMovies(filteredMovies);
+        } catch (error) {
+            console.log("Error:", error);
+        }
+        }
+        loadFilteredMovies();
+
+        return () => { mounted = false }
+        }, [genre]); // <-- dependency on genre
 
 
     return (
@@ -68,11 +92,24 @@ export default function About() {
 
             {/* Title for the Image Grid */}
             <div className="max-w-6xl mx-auto my-12 px-4">
-                <h2 className="text-3xl font-bold text-center mb-6">Top Movies</h2>
-
+                <h2 className="text-3xl font-bold text-center mb-6">Top Rated Movies by ReelTalk Users</h2>
                 {/* Image Grid */}
                     <MoviesTable movies={movies} />
             </div>
+            {/* Title for the Genre Image Grid */}
+            <div className="max-w-6xl mx-auto my-12 px-4">
+                <h2 className="text-3xl font-bold text-center mb-6">
+                    {genre? `Top Rated ${genre[0].toUpperCase() + genre.slice(1)} Movies by ReelTalk Users`
+                    : "Top Rated Movies by ReelTalk Users"}
+                </h2>
+                <FilterBar/>
+                {/* Image Grid */}
+                    <MoviesTable movies={filteredMovies} />
+            </div>
+             
+
         </div>
+       
+
     );
 }

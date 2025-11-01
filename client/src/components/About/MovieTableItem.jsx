@@ -25,7 +25,7 @@ export default function MovieTableItem({ movie, index }) {
                 </div>
                 <div className="card-body">
                     <h3 className="card-title">{movie.title} <small>({movie.year})</small></h3>
-                    <div className="meta">{genres} • {movie.runtime} • Directed by {movie.director}• {movie.averageRating}</div>
+                    <div className="meta">{genres} • {movie.runtime} • Directed by {movie.director} • {movie.avgRating}</div>
                 </div>
             </article>
         </Link>

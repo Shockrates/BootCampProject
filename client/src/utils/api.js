@@ -7,8 +7,8 @@
 //  * - Logs errors to the console if the fetch request fails.
 //  */
 
-const URI = "https://bootcampproject-production.up.railway.app";
-//const URI = "http://localhost:3000";
+//const URI = "https://bootcampproject-production.up.railway.app";
+const URI = "http://localhost:3000";
 
 /**
  * Attempts to log in a user by checking email and password against the JSON server.
@@ -41,13 +41,10 @@ export const loginRequest = async (email, password) => {
   } catch (error) {
     console.log("Error:", error);
   }
-
 }
 
 export const registerRequest = async (username, email, password, confirmPass, age) => {
   try {
-
-
     const res = await fetch(`${URI}/register`,
       {
         method: 'POST',
@@ -258,5 +255,18 @@ export async function fetchTopMoviesKaterina() {
   }
   const { movies } = await res.json();
 
+  return movies;
+}
+export async function fetchTopXMovies(limit = 36, genre) {
+  const params = new URLSearchParams();
+  if (genre) params.set('genre', genre);
+
+  const res = await fetch(`${URI}/getTopMovies/${limit}?${params.toString()}`);
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch top movies (${res.status})`);
+  }
+
+  const { movies } = await res.json();
   return movies;
 }

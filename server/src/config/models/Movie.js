@@ -11,7 +11,7 @@ const movieSchema = new mongoose.Schema({
     poster_url: { type: String, required: true },
 }, { timestamps: true });
 
-movieSchema.virtual('averageRating', {
+movieSchema.virtual('avgRating', {
     ref: 'WatchedMovie',                 // Reference the WatchedMovie model
     localField: '_id',                   // _id of the Movie
     foreignField: 'movieId',             // Field in WatchedMovie that references the Movie
