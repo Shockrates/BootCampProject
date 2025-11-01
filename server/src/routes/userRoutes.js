@@ -2,7 +2,7 @@ import express from "express";
 import User from "../config/models/User.js";
 import Movie from "../config/models/Movie.js";
 import WatchedMovie from "../config/models/WatchedMovie.js"
-import { getUser } from "../controllers/userController.js";
+import { getUser, updateUser } from "../controllers/userController.js";
 import { loginUser, registerUser } from "../controllers/authController.js";
 
 const router = express.Router();
@@ -10,6 +10,7 @@ const router = express.Router();
 router.post("/login", loginUser);
 router.post("/register", registerUser);
 router.get("/user/:id", getUser);
+router.put("/user/:id", updateUser);
 
 // router.put("/:id", updateMovies);
 
