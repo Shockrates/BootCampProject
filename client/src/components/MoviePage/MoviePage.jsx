@@ -34,7 +34,7 @@ const MoviePage = () => {
     }
     loadMovies();
 
-  }, []);
+  }, [id]);
 
   //Tranforms the genres table to a string
   //const genres = (movie?.genre || []).join(', ')
@@ -58,7 +58,7 @@ const MoviePage = () => {
       {/* Movie details block */}
       {movie && (
         <div className='movie-page'>
-          <MoviePageDetails user={user} movie={movie}/>
+          <MoviePageDetails user={user} movie={movie} />
         </div>
       )}
     </article>

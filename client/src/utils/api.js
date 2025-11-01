@@ -200,9 +200,9 @@ export async function createLike(watchedMovieId, likerId, like) {
       })
 
     const { message, savedReviewLike } = await res.json();
-    // if (message) {
-    //   console.log(message);
-    // }
+    if (!res.ok) {
+      console.log(message);
+    }
     console.log(savedReviewLike);
     return savedReviewLike ? savedReviewLike : null;
   } catch (error) {
@@ -222,9 +222,9 @@ export async function deleteLike(likeId) {
       })
 
     const { likeToDelete, message } = await res.json();
-    // if (message) {
-    //   console.log(message);
-    // }
+    if (!res.ok) {
+      console.log(message);
+    }
     return likeToDelete;
   } catch (error) {
     console.log("Error:", error.message);
@@ -246,4 +246,17 @@ export const getAllUserLikes = async (userId) => {
   } catch (error) {
     console.log("Error:", error.message);
   }
+}
+
+
+export async function fetchTopMoviesKaterina() {
+  const res = await fetch(`${URI}/get4Movies`);
+
+  if (!res.ok) {
+    // Throw so the caller knows this was a failure (not just an empty list)
+    throw new Error(`Failed to fetch top movies (${res.status})`);
+  }
+  const { movies } = await res.json();
+
+  return movies;
 }

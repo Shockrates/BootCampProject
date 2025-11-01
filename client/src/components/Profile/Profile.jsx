@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
-import FeedListItem from '../CommunityFeed/FeedListItem'
+import FeedList from '../CommunityFeed/FeedList'
 import { useAuth } from '../Auth/AuthProvider';
 import { useParams } from 'react-router-dom';
 //import movies from '../../data/movies.json'; 
@@ -75,38 +75,60 @@ const Profile = () => {
   const [watchedMovies, setWatchedMovies] = useState([]);
 
   useEffect(() => {
-    console.log(id);
-
+    let cancelled = false;
     const loadUser = async (userId) => {
       try {
         const res = await fetch(`https://bootcampproject-production.up.railway.app/user/${userId}`);
         const { user } = await res.json();
-        console.log(user.username);
+        if (cancelled) return;
         setProfileUser(user);
       } catch (error) {
         console.log("Error:", error);
-      }
-    }
-    const loadWatchedMovies = async (userId) => {
-      try {
-        const res = await fetch(`https://bootcampproject-production.up.railway.app/watchedByUser/${userId}`);
-        const { watchedMovies } = await res.json();
-        setWatchedMovies(watchedMovies);
-      } catch (error) {
-        console.log("Error:", error);
+        if (!cancelled) setProfileUser(null);
       }
     }
 
+    if (!user) {
+      setIsOwner(false);
+      setProfileUser(null);
+      return () => { cancelled = true; };
+    }
 
     if (user._id === id) {
       setIsOwner(true)
       setProfileUser(user);
     } else {
       setIsOwner(false)
-      loadUser(id)
+      loadUser(id, user)
+    }
+    return () => { cancelled = true; };
+  }, [id])
+
+  useEffect(() => {
+    if (!profileUser?._id) {
+      setWatchedMovies([]); // optional: clear when no profile user
+      return;
+    }
+
+    let cancelled = false;
+
+    const loadWatchedMovies = async (userId) => {
+      try {
+        const res = await fetch(`https://bootcampproject-production.up.railway.app/watchedByUser/${userId}`);
+        const { watchedMovies } = await res.json();
+        if (cancelled) return;
+        setWatchedMovies(watchedMovies ?? []);
+      } catch (error) {
+        console.log("Error:", error);
+        if (!cancelled) setWatchedMovies([]);
+      }
     }
     loadWatchedMovies(profileUser._id)
-  }, [id])
+    return () => {
+      cancelled = true;
+    }
+  }, [profileUser._id])
+
 
 
 
@@ -117,7 +139,7 @@ const Profile = () => {
   return (
     <div className="max-w-3xl mx-auto mt-8 px-4">
       <h1 className="text-3xl font-bold mb-4 text-white">
-        Profile {isOwner ? '(Your Profile)' : `${profileUser.username}`}
+        {isOwner ? 'Your Profile' : `${profileUser.username}'s Profile `}
       </h1>
       <div className="profile">
 
@@ -139,16 +161,16 @@ const Profile = () => {
 
         }
 
-        <h1>{isOwner ? 'Your Reviews' : `${profileUser.username}'s Reviews `}</h1>
+        <h1 className='mt-6'>{isOwner ? 'Your Reviews' : `${profileUser.username}'s Reviews `}</h1>
 
-        {
+        {/* {
           watchedMovies.map((review, index) => (
 
             <FeedListItem key={index} review={review} />
 
           ))
-        }
-
+        } */}
+        <FeedList reviews={watchedMovies} isProfile={true} />
 
       </section>
     </div>

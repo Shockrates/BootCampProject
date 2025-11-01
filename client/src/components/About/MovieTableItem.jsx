@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { bus } from "../../utils/eventBus";
 
 
 /**
@@ -10,14 +9,11 @@ import { bus } from "../../utils/eventBus";
  * - Uses React Router <Link> to navigate to the corresponding MoviePage.
  * - Optimized for lazy loading of images for performance.
  */
-
-
 export default function MovieTableItem({ movie, index }) {
     const genres = (movie.genre || []).join(', ')
 
-
     return (
-        <Link to={`/movie/${movie._id}`} className="movie-card-link" style={{ textDecoration: 'none' }} onClick={() => bus.emit("modal:close")}>
+        <Link to={`/movie/${movie._id}`} className="movie-card-link" style={{ textDecoration: 'none' }}>
             <article className="movie-card" aria-labelledby={`movie-title-${index}`}>
                 <div className="poster-wrap">
                     <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy'
@@ -27,11 +23,9 @@ export default function MovieTableItem({ movie, index }) {
                         }}
                     />
                 </div>
-
-
                 <div className="card-body">
                     <h3 className="card-title">{movie.title} <small>({movie.year})</small></h3>
-                    <div className="meta">{genres} • {movie.runtime} • Directed by {movie.director}</div>
+                    <div className="meta">{genres} • {movie.runtime} • Directed by {movie.director}• {movie.averageRating}</div>
                 </div>
             </article>
         </Link>

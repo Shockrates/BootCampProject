@@ -77,6 +77,7 @@ export async function watchedByUser(req, res) {
 
         const watchedMovies = await WatchedMovie.find({ userId: user })
             .populate({ path: 'movieId', select: 'title poster_url genre runtime' })
+            .populate({ path: 'userId', select: 'username' })
         //.lean();
         if (!watchedMovies || watchedMovies.length === 0) {
             return res.status(404).json({ message: "No watched movies found for this user" });
