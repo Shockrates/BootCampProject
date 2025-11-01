@@ -2,7 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import useAuth from './AuthProvider';
 import { Link } from 'react-router-dom';
-import { loginRequest } from '../../utils/api'
+import { loginRequest, getAllUserLikes } from '../../utils/api'
+
 
 
 /**
@@ -39,7 +40,10 @@ const Login = () => {
                 return;
             }
 
-            login(user);
+            const userLikes = await getAllUserLikes(user._id);
+            console.log("Likes:", userLikes);
+
+            login(user, userLikes);
         } catch (err) {
             console.error(err);
             setError("Login failed. Try again.");

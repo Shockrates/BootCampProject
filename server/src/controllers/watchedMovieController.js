@@ -54,12 +54,12 @@ export async function getAllWatchedMovies(req, res) {
         const watchedMovies = (await WatchedMovie.find()
             .skip(skip)
             .limit(limit)
-            .populate({ path: 'movieId', select: 'title poster_url genre' })
+            .populate({ path: 'movieId' })
             .populate({ path: 'userId', select: 'username email age' })
             .populate('CommentCount') // populate στο virtual
             .populate('LikeCount') // populate στο virtual
             .sort({ createdAt: -1 })); //-1 will sort in desc. order (newest first)
-        res.status(200).json({watchedMovies});
+        res.status(200).json({ watchedMovies });
     }
     catch (error) {
         console.error("Error in getAllWatchedMovies controller", error);
@@ -77,13 +77,14 @@ export async function watchedByUser(req, res) {
 
         const watchedMovies = await WatchedMovie.find({ userId: user })
             .populate({ path: 'movieId', select: 'title poster_url genre runtime' })
-            //.lean();
+            .populate({ path: 'userId', select: 'username' })
+        //.lean();
         if (!watchedMovies || watchedMovies.length === 0) {
             return res.status(404).json({ message: "No watched movies found for this user" });
         }
 
 
-        res.status(200).json({watchedMovies});
+        res.status(200).json({ watchedMovies });
     } catch (error) {
         console.error("Error in getWatchedMoviesByUser controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -92,23 +93,24 @@ export async function watchedByUser(req, res) {
 
 //to update comments count on feed when a new comment is done 
 export async function getWatchedMovieByItsId(req, res) {
-    try{
-    const {givenWatchedMovieId} = req.params;
+    try {
+        const { givenWatchedMovieId } = req.params;
 
-    if (!givenWatchedMovieId) {
-            return res.status(400).json({ message: "WatchedMovie ID is required" });         
-    }                                                                     
+        if (!givenWatchedMovieId) {
+            return res.status(400).json({ message: "WatchedMovie ID is required" });
+        }
 
-    const watchedMovie = await WatchedMovie.findById( givenWatchedMovieId)
+        const watchedMovie = await WatchedMovie.findById(givenWatchedMovieId)
             .populate({ path: 'movieId', select: 'title poster_url genre' })
             .populate({ path: 'userId', select: 'username email age' })
             .populate('CommentCount') // populate στο virtual
             .populate('LikeCount') // populate στο virtual
-    if (!watchedMovie ) {
+        if (!watchedMovie) {
             return res.status(404).json({ message: "No watched movies found for this watchedMovieID" });
+        }
+
+        res.status(200).json({ watchedMovie });
     }
-    
-    res.status(200).json({watchedMovie});}
     catch (error) {
         console.error("Error in getWatchedMovieByItsId controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -117,27 +119,28 @@ export async function getWatchedMovieByItsId(req, res) {
 
 //Function to return all the watchedMovies that have review for the given MovieId to use it to the movie profile  
 export async function getWatchedMoviesByMovieId(req, res) {
-    try{
-    const {movieId} = req.params;
+    try {
+        const { movieId } = req.params;
 
-    if (!movieId) {
-            return res.status(400).json({ message: "Movie ID is required" });         
-    }   
-    // 1 . Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(movieId)) {
-        return res.status(400).json({ message: "Invalid movieId format" });
-    }                                                                  
+        if (!movieId) {
+            return res.status(400).json({ message: "Movie ID is required" });
+        }
+        // 1 . Validate ObjectId
+        if (!mongoose.Types.ObjectId.isValid(movieId)) {
+            return res.status(400).json({ message: "Invalid movieId format" });
+        }
 
-    const watchedMovie = await WatchedMovie.find({movieId:movieId})
+        const watchedMovie = await WatchedMovie.find({ movieId: movieId })
             .populate({ path: 'movieId', select: 'title poster_url genre' })
             .populate({ path: 'userId', select: 'username email age' })
             .populate('CommentCount') // populate στο virtual
             .populate('LikeCount') // populate στο virtual
-    // if (!watchedMovie ) {
-    //         return res.status(404).json({ message: "No watched movies found for this watchedMovieID" });
-    // }
-    
-    res.status(200).json({watchedMovie});}
+        // if (!watchedMovie ) {
+        //         return res.status(404).json({ message: "No watched movies found for this watchedMovieID" });
+        // }
+
+        res.status(200).json({ watchedMovie });
+    }
     catch (error) {
         console.error("Error in getWatchedMovieByItsId controller", error);
         res.status(500).json({ message: "Internal server error" });
@@ -147,10 +150,10 @@ export async function getWatchedMoviesByMovieId(req, res) {
 // Controller function to Update review by watchedMovieId
 export async function updateReviewByWatchedMovieId(req, res) {
     try {
-        const {review}= req.body;//the string to be updated
-        const {watchedMovieId}  = req.params;
+        const { review } = req.body;//the string to be updated
+        const { watchedMovieId } = req.params;
 
-        if (!review ) {
+        if (!review) {
             return res.status(400).json({ message: "Provide a string updated review" });
         }
         if (!watchedMovieId) {
@@ -182,11 +185,11 @@ export async function updateReviewByWatchedMovieId(req, res) {
             .populate('CommentCount') // populate στο virtual
             .populate('LikeCount'); // populate στο virtual
         // 6. Return success
-        return res.status(200).json({populatedWatchedMovie});       //5. Return the review
+        return res.status(200).json({ populatedWatchedMovie });       //5. Return the review
 
         //7. Catch block
-        } catch (error) {
+    } catch (error) {
         console.error("Error in editing review", error);
         res.status(500).json({ message: "Internal server error" });
-    }   
+    }
 }

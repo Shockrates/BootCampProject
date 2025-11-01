@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { bus } from "../../utils/eventBus";
+import RatingIcon from '../CommunityFeed/RatingIcon';
 
 
 /**
@@ -16,7 +18,7 @@ export default function MovieTableItem({ movie, index }) {
 
 
     return (
-        <Link to={`/movie/${movie._id}`} className="movie-card-link" style={{ textDecoration: 'none' }}>
+        <Link to={`/movie/${movie._id}`} className="movie-card-link" style={{ textDecoration: 'none' }} onClick={() => bus.emit("modal:close")}>
             <article className="movie-card" aria-labelledby={`movie-title-${index}`}>
                 <div className="poster-wrap">
                     <img src={movie.poster_url} alt={movie.title} title={movie.title} loading='lazy'
@@ -31,6 +33,9 @@ export default function MovieTableItem({ movie, index }) {
                 <div className="card-body">
                     <h3 className="card-title">{movie.title} <small>({movie.year})</small></h3>
                     <div className="meta">{genres} • {movie.runtime} • Directed by {movie.director}</div>
+                    {movie.avgRating && (
+                        <RatingIcon rating={movie.avgRating} />
+                    )}
                 </div>
             </article>
         </Link>

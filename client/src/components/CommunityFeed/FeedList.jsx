@@ -3,7 +3,7 @@ import FeedListItem from './FeedListItem'
 import ReviewModal from '../Review/ReviewModal';
 import { useAuth } from '../Auth/AuthProvider'
 
-const FeedList = ({ reviews }) => {
+const FeedList = ({ reviews, isProfile = false, isTable = false }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [review, setReview] = useState({});
@@ -27,11 +27,11 @@ const FeedList = ({ reviews }) => {
 
   return (
 
-    <div>{
+    <div className={isTable ? "cards-grid" : ""}>{
       /* Reads reviews */
       reviews.map((review, index) => (
 
-        <FeedListItem key={index} review={review} onOpen={openModal} />
+        <FeedListItem key={index} review={review} onOpen={openModal} isProfile={isProfile} />
 
       ))
     }
