@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import video from '../../assets/video.mp4';
-import { fetchTopMoviesKaterina, fetchTopXMovies } from '../../utils/api'
+import { fetchTopXMovies } from '../../utils/api'
 import MoviesTable from '../Dashboard/MoviesTable'
 import FilterBar from './FilterBar'
 import { useSearchParams } from "react-router-dom"
@@ -48,8 +48,10 @@ export default function Home() {
     }, []);
     useEffect(() => {
         let mounted = true;
-        const normalizedGenre = genre
-            ? genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase() : undefined;
+        const normalizedGenre = genre && genre.toLowerCase() !== "all"
+            ? genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase()
+            : undefined;
+
 
         const loadFilteredMovies = async () => {
             try {
@@ -85,7 +87,7 @@ export default function Home() {
     return (
         <div>
             {/* Video Section */}
-            <div className='video-container w-screen -mx-[calc((100vw-100%)/2)] relative'>
+            <div className='video-container w-screen h-[75vh] overflow-hidden -mx-[calc((100vw-100%)/2)] relative'>
                 <video
                     controls
                     src={video}
@@ -95,7 +97,7 @@ export default function Home() {
                     loop
                     muted
                     playsInline
-                    className='w-full h-auto'
+                    className='absolute inset-0 w-full h-full object-cover z-0'
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 space-y-4">
                     <h1 className="text-white text-4xl font-bold">This is Reel Talk</h1>
@@ -117,16 +119,19 @@ export default function Home() {
             </div>
 
             {/* Title for the Image Grid */}
-            <div className="max-w-6xl mx-auto my-12 px-4">
+            {/* <div className="max-w-6xl mx-auto my-12 px-4">
                 <h2 className="text-3xl font-bold text-center mb-6">Top Rated Movies by ReelTalk Users</h2>
-                {/* Image Grid */}
                 <MoviesTable movies={movies} />
-            </div>
+            </div> */}
             {/* Title for the Genre Image Grid */}
             <div className="max-w-6xl mx-auto my-12 px-4">
                 <h2 className="text-3xl font-bold text-center mb-6">
-                    {genre ? `Top Rated ${genre[0].toUpperCase() + genre.slice(1)} Movies by ReelTalk Users`
+                    {genre && genre.toLowerCase() !== "all"
+                        ? `Top Rated ${genre[0].toUpperCase() + genre.slice(1)} Movies by ReelTalk Users`
                         : "Top Rated Movies by ReelTalk Users"}
+
+                    {/* {genre ? `Top Rated ${genre[0].toUpperCase() + genre.slice(1)} Movies by ReelTalk Users`
+                        : "Top Rated Movies by ReelTalk Users"} */}
                 </h2>
                 <FilterBar />
                 {/* Image Grid */}

@@ -13,6 +13,12 @@ import AuthRoute from './layouts/AuthRoute'
 import CommunityFeed from './components/CommunityFeed/CommunityFeed'
 import TestProfile from './components/Profile/TestProfile'
 import Home from './components/Home/Home'
+import TermsOfUse from './components/Footer/FooterLinks/TermsOfUse'
+import Privacy from './components/Footer/FooterLinks/Privacy'
+import Contact from './components/Footer/FooterLinks/Contact'
+import Cookies from './components/Footer/FooterLinks/Cookies'
+import AboutUs from './components/Footer/FooterLinks/AboutUs'
+import Subscription from './components/Profile/Subscription'
 
 
 /**
@@ -37,15 +43,14 @@ function App() {
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="community" element={<CommunityFeed />} />
           <Route path="about" element={<About />} />
+          <Route path="subscription/:tier" element={<Subscription />} />
           <Route path="movie/:id" element={<MoviePage />} />
 
-          {/*<Route path='profile' element={<Profile />} />*/}
           {/*<Route path='profile/:id' element={<Profile />} /> */}
-          { <Route path='profile/:id' element={<TestProfile />} /> }
+          {/* { <Route path='profile/:id' element={<TestProfile />} /> } */}
 
-          {/* <Route path='profile' element={<Profile />} /> */}
           <Route path='profile/:id' element={<Profile />} />
-          {<Route path='profile/:id' element={<TestProfile />} />}
+          {/* {<Route path='profile/:id' element={<TestProfile />} />} */}
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<Home />} />
@@ -54,7 +59,11 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
-
+          <Route path="terms" element={<TermsOfUse />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="cookies" element={<Cookies />} />
+          <Route path="aboutUs" element={<AboutUs />} />
         </Route>
 
       </Route>

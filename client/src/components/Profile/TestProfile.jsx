@@ -3,7 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Auth/AuthProvider';
 import MovieSearchModal from './MovieSearch/MovieSearchModal';
 import FeedListItem from '../CommunityFeed/FeedListItem';
-import getAllWatchedMovies from '../../api/movies/getAllWatchedMovies';
+
+
+
 
 const TestProfile = () => {
   const { username } = useParams();
@@ -20,6 +22,16 @@ const TestProfile = () => {
     if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
     return name.slice(0, 2).toUpperCase();
   };
+
+  const getAllWatchedMovies = async (userId) => {
+    try {
+      const res = await fetch(`https://bootcampproject-production.up.railway.app/watchedByUser/${userId}`);
+      const { watchedMovies } = await res.json();
+      return watchedMovies;
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
 
   useEffect(() => {
     const loadByUsername = async (u) => {

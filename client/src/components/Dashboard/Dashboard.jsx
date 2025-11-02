@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MoviesTable from './MoviesTable'
 import { fetchTopMovies } from '../../utils/api'
-import moviesTest from '../../data/movies.json'
+
 
 /**
  * Dashboard component.
@@ -35,8 +35,6 @@ export default function Dashboard() {
             } catch (error) {
                 console.log("Error:", error);
                 if (!mounted) return;
-                setMovies(moviesTest.slice(0, 36));
-                setMessage("Showing Data from static JSON");
             }
         }
         loadMovies();

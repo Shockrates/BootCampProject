@@ -3,6 +3,8 @@ import logo from '../../assets/ReelTalk.png'
 import MovieSearchModal from '../Profile/MovieSearch/MovieSearchModal';
 import { useAuth } from "../../components/Auth/AuthProvider"
 import { Link } from 'react-router-dom'
+import ShowSubscription from './ShowSubscription';
+
 
 
 const Navbar = ({ user }) => {
@@ -39,6 +41,7 @@ const Navbar = ({ user }) => {
                     ) : (
                         <>
                             <Link to={`/profile/${user._id}`}> {user.username} Profile</Link>
+                            <ShowSubscription subscription={user.subscription} />
                             <button onClick={handleLogout}>
                                 Logout
                             </button>

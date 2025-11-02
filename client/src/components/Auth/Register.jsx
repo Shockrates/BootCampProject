@@ -4,6 +4,7 @@ import useAuth from './AuthProvider';
 import { Link } from 'react-router-dom';
 import { registerRequest } from '../../utils/api'
 import Terms from './Terms';
+import SelectSubscription from './SelectSubscription';
 
 /**
  * Register component (under construction).
@@ -13,7 +14,7 @@ import Terms from './Terms';
  * - Uses a controlled form similar to Login component.
  */
 const Register = () => {
-    const [credentials, setCredentials] = useState({ username: "", email: "", password: "", confirmPass: "", age: "", acceptTerms: false});
+    const [credentials, setCredentials] = useState({ username: "", email: "", password: "", confirmPass: "", age: "", acceptTerms: false, subscription: "free" });
     const [error, setError] = useState("");
     const [showTerms, setShowTerms] = useState(false);
 
@@ -28,8 +29,9 @@ const Register = () => {
         const email = credentials.email.trim();
         const password = credentials.password;
         const confirmPass = credentials.confirmPass;
-        const age = credentials.age; 
+        const age = credentials.age;
         const acceptTerms = credentials.acceptTerms;
+        const subscription = credentials.subscription;
 
         if (!username || !email || !password || !confirmPass || !age) {
             setError("Please fill in all fields");
@@ -47,7 +49,7 @@ const Register = () => {
         }
 
         try {
-            const user = await registerRequest(username, email, password, confirmPass, age, acceptTerms);//TODO
+            const user = await registerRequest(username, email, password, confirmPass, age, acceptTerms, subscription);//TODO
             if (!user) {
                 setError("An error occured");
                 return;
@@ -56,15 +58,16 @@ const Register = () => {
         } catch (err) {
             console.error(err);
             setError("An error occured during registration. Please try again");
-            }
         }
+    }
 
 
     const handleChange = (e) => {
-    const { name, type, value, checked } = e.target;
-    setCredentials((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,}))
+        const { name, type, value, checked } = e.target;
+        setCredentials((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }))
     }
     return (
         <div className="register-container">
@@ -152,6 +155,13 @@ const Register = () => {
                         </div>
                     </div>
 
+                    <SelectSubscription
+                        selected={credentials.subscription}
+                        setSelected={(value) =>
+                            setCredentials((prev) => ({ ...prev, subscription: value }))
+                        }
+                    />
+
                     <div className="flex items-center gap-2 mt-2">
                         <input
                             id="acceptTerms"
@@ -164,11 +174,11 @@ const Register = () => {
                         <label htmlFor="acceptTerms" className="text-sm text-gray-200">
                             I agree to the{" "}
                             <button
-                            type="button"
-                            onClick={() => setShowTerms(true)}
-                            className="text-indigo-400 hover:text-indigo-300 underline"
+                                type="button"
+                                onClick={() => setShowTerms(true)}
+                                className="text-indigo-400 hover:text-indigo-300 underline"
                             >
-                            Terms and Conditions
+                                Terms and Conditions
                             </button>
                         </label>
                     </div>
@@ -189,17 +199,17 @@ const Register = () => {
 
             {showTerms && (
                 <Terms
-                title="Terms and Conditions"
-                onClose={() => setShowTerms(false)}
-                onConfirm={() => {
-                    setCredentials((prev) => ({ ...prev, acceptTerms: true }));
-                    setShowTerms(false);
-                }}
-                confirmText="Accept"
+                    title="Terms and Conditions"
+                    onClose={() => setShowTerms(false)}
+                    onConfirm={() => {
+                        setCredentials((prev) => ({ ...prev, acceptTerms: true }));
+                        setShowTerms(false);
+                    }}
+                    confirmText="Accept"
                 >
-                <p>
-                    Terms you have to accept
-                </p>
+                    <p>
+                        Terms you have to accept
+                    </p>
                 </Terms>
             )}
         </div>

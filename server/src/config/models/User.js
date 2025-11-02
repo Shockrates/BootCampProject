@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true, hashed: true },
     age: { type: Number, required: true },
     watchedMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
+    subscription: { type: String, enum: ['free', 'gold', 'diamond'], default: 'free' },
+    subExpiresAt: { type: Date, default: null }
 }, { timestamps: true });
     
 // Hash password before saving

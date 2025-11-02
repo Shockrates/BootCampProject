@@ -19,10 +19,13 @@ body {
 }
 
 /* Layout */
+.app {
+  @apply min-h-screen
+}
 
 /* Navbar outer container (full width background) */
 .nav {
-  @apply bg-black shadow-md       w-screen -mx-[calc((100vw-100%)/2)] relative;
+  @apply bg-black shadow-md w-screen -mx-[calc((100vw-100%)/2)] relative;
 }
 
 /* Inner wrapper (centers and constrains width) */
@@ -167,6 +170,7 @@ button:focus {
 .movie-page {
   @apply flex gap-5 mb-4 items-start flex-wrap
 }
+
 .movie-body {
   @apply flex flex-col md:flex-row justify-between gap-6
 }
@@ -174,6 +178,7 @@ button:focus {
 .movie-body-review {
   @apply flex flex-col
 }
+
 .movie-poster-container {
   @apply w-3/5 sm:flex-none sm:w-40 md:sm:w-52 lg:sm:w-64 xl:sm:w-80
 }
@@ -291,4 +296,8 @@ button:focus {
 
 .truncate-multiline {
   @apply line-clamp-5 overflow-hidden text-ellipsis;
+}
+
+.truncate-multiline-short {
+  @apply line-clamp-2 overflow-hidden text-ellipsis;
 }
