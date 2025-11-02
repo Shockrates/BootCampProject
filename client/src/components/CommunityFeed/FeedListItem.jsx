@@ -5,6 +5,7 @@ import { FaRegBookmark } from "react-icons/fa";
 import RatingIcon from './RatingIcon';
 import TimeAgo from '../Helper/TimeAgo';
 import LikeReview from '../Helper/LikeReview';
+import AddToWatchlist from '../Helper/AddToWatchlist';
 
 const FeedListItem = ({ review, onOpen, isProfile = false }) => {
   //console.log(review.movieId.genre);
@@ -17,7 +18,8 @@ const FeedListItem = ({ review, onOpen, isProfile = false }) => {
 
           <TimeAgo createdAt={review.createdAt} />
 
-          <FaRegBookmark />
+          {/* <FaRegBookmark /> */}
+          <AddToWatchlist movie={review.movieId} />
 
         </div>
         {!isProfile && (
