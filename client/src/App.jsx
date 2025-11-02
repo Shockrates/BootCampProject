@@ -20,6 +20,7 @@ import Cookies from './components/Footer/FooterLinks/Cookies'
 import AboutUs from './components/Footer/FooterLinks/AboutUs'
 import Subscription from './components/Profile/Subscription'
 
+
 /**
  * Main application component.
  * Configures routing for the app using react-router-dom:
@@ -45,11 +46,11 @@ function App() {
           <Route path="subscription/:tier" element={<Subscription />} />
           <Route path="movie/:id" element={<MoviePage />} />
 
-          {/*<Route path='profile/:id' element={<Profile />} /> */}
-          {/* { <Route path='profile/:id' element={<TestProfile />} /> } */}
+          {<Route path='profile/:id' element={<Profile />} /> }
+          {/* <Route path='profile/:id' element={<TestProfile />} /> */} 
 
-          <Route path='profile/:id' element={<Profile />} />
-          {/* {<Route path='profile/:id' element={<TestProfile />} />} */}
+         { <Route path='profile/:id' element={<Profile />} /> }
+         {/*<Route path='profile/:id' element={<TestProfile />} />*/} 
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<Home />} />
