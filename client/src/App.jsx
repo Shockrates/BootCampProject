@@ -47,10 +47,10 @@ function App() {
           <Route path="movie/:id" element={<MoviePage />} />
 
           {/*<Route path='profile/:id' element={<Profile />} /> */}
-          {/* { <Route path='profile/:id' element={<TestProfile />} /> } */}
+          { <Route path='profile/:id' element={<TestProfile />} /> } 
 
-          <Route path='profile/:id' element={<Profile />} />
-          {/* {<Route path='profile/:id' element={<TestProfile />} />} */}
+         {/*  <Route path='profile/:id' element={<Profile />} /> */}
+         {<Route path='profile/:id' element={<TestProfile />} />} 
         </Route>
         <Route element={<PublicRoute />} >
           <Route index element={<Home />} />
