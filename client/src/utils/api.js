@@ -7,7 +7,7 @@
 //  * - Logs errors to the console if the fetch request fails.
 //  */
 
-URI = "https://bootcampproject-production.up.railway.app";
+const URI = "https://bootcampproject-production.up.railway.app";
 //const URI = "http://localhost:3000";
 
 /**
