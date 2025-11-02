@@ -14,6 +14,7 @@ import CommunityFeed from './components/CommunityFeed/CommunityFeed'
 import TestProfile from './components/Profile/TestProfile'
 import Home from './components/Home/Home'
 
+
 /**
  * Main application component.
  * Configures routing for the app using react-router-dom:
