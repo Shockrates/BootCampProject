@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom"
 
 const GENRES = [
+  "all",
   "action",
   "animation",
   "drama",
