@@ -6,8 +6,8 @@ import WatchedMovie from '../config/models/WatchedMovie.js';
 // Controller function to get all movies
 export async function getAllMovies(req, res) {
   try {
-    const movies = await Movie.find().limit(37);
-
+    const movies = await Movie.find()
+      .populate({ path: 'WatchedMovie', select: 'rating' }).limit(37);
     if (!movies) return res.status(404).json({ message: "Movies not found" });
 
     res.status(200).json({ movies });
@@ -97,14 +97,9 @@ export async function get4Movies(req, res) {
 export async function getTopXMovies(req, res) {
   const limit = parseInt(req.params.limit, 10) || 4;
   const genre = req.query.genre;
+
   try {
     const pipeline = [
-      /**
-       * Groups all reviews by their movieId.
-       * _id becomes the group key (here, the movieId of the movie).
-       * avgRating: calculates the average rating of all reviews in that group using the $avg accumulator.
-       * reviewCount: counts how many reviews are in that group using $sum: 1.
-       */
       {
         $group: {
           _id: "$movieId",
@@ -112,20 +107,6 @@ export async function getTopXMovies(req, res) {
           reviewCount: { $sum: 1 }
         }
       },
-      /**
-       * Sorts the grouped results by average rating, descending (-1).
-       */
-      { $sort: { avgRating: -1, reviewCount: -1 } },
-      /**
-       * Takes only the top limit results after sorting.
-       */
-      { $limit: limit },
-      /**
-       * Performs a join between the current pipeline documents and the movies collection.
-       * localField: "_id" is the _id we grouped by earlier (the movie’s _id).
-       * foreignField: "_id" is the _id field in the movies collection.
-       * as: "movie" puts the matched movie(s) in a new array field called "movie".
-       */
       {
         $lookup: {
           from: "movies",
@@ -134,28 +115,27 @@ export async function getTopXMovies(req, res) {
           as: "movie"
         }
       },
-      /**
-       * Converts the movie array (from $lookup) into a single object.
-       * If a movie was found, it just unwraps it
-       */
       { $unwind: "$movie" },
-      /**
-       * Merge avgRating & reviewCount into the movie object
-       */
       {
         $addFields: {
           "movie.avgRating": "$avgRating",
           "movie.reviewCount": "$reviewCount"
         }
       },
-      /**
-       * Replace the root document with the movie object
-       */
       { $replaceRoot: { newRoot: "$movie" } },
-      /**
-       * Shapes the final output — selects only the fields you want to return.
-       * include avgRating/reviewCount
-       */
+
+      // <-- genre filter
+      ...(genre ? [{
+        $match: {
+          genre: { $in: [genre] }
+        }
+      }] : []),
+
+      // sort
+      { $sort: { avgRating: -1, reviewCount: -1 } },
+
+      { $limit: limit },
+
       {
         $project: {
           avgRating: 1,
@@ -174,18 +154,99 @@ export async function getTopXMovies(req, res) {
       }
     ];
 
-    if (genre) {
-      const genreMatchStage = {
-        $match: {
-          "movie.genre": { $in: [genre] }
-        }
-      };
-      // We insert before $replaceRoot to use "movie.genre"
-      pipeline.splice(pipeline.findIndex(st => st.$replaceRoot), 0, genreMatchStage);
-    }
     const moviesWithAvgRating = await WatchedMovie.aggregate(pipeline).exec();
     res.json({ movies: moviesWithAvgRating });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
+
+// export async function getTopXMovies(req, res) {
+//   const limit = parseInt(req.params.limit, 10) || 4;
+//   const genre = req.query.genre;
+//   try {
+//      const pipeline = [
+//       /**
+//        * Groups all reviews by their movieId.
+//        * _id becomes the group key (here, the movieId of the movie).
+//        * avgRating: calculates the average rating of all reviews in that group using the $avg accumulator.
+//        * reviewCount: counts how many reviews are in that group using $sum: 1.
+//        */
+//       { $group: {
+//           _id: "$movieId",
+//           avgRating: { $avg: "$rating" },
+//           reviewCount: { $sum: 1 }
+//       }},
+//       /**
+//        * Sorts the grouped results by average rating, descending (-1).
+//        */
+//       { $sort: { avgRating: -1, reviewCount: -1 }},
+//       /**
+//        * Takes only the top limit results after sorting.
+//        */
+//       { $limit: limit },
+//       /**
+//        * Performs a join between the current pipeline documents and the movies collection.
+//        * localField: "_id" is the _id we grouped by earlier (the movie’s _id).
+//        * foreignField: "_id" is the _id field in the movies collection.
+//        * as: "movie" puts the matched movie(s) in a new array field called "movie".
+//        */
+//       { $lookup: {
+//           from: "movies",
+//           localField: "_id",
+//           foreignField: "_id",
+//           as: "movie"
+//       }},
+//       /**
+//        * Converts the movie array (from $lookup) into a single object.
+//        * If a movie was found, it just unwraps it
+//        */
+//       { $unwind: "$movie" },
+//       /**
+//        * Merge avgRating & reviewCount into the movie object
+//        */
+//       {
+//         $addFields: {
+//           "movie.avgRating": "$avgRating",
+//           "movie.reviewCount": "$reviewCount"
+//         }
+//       },
+//       /**
+//        * Replace the root document with the movie object
+//        */
+//       { $replaceRoot: { newRoot: "$movie" } },
+//       /**
+//        * Shapes the final output — selects only the fields you want to return.
+//        * include avgRating/reviewCount
+//        */
+//       { $project: {
+//           avgRating: 1,
+//           reviewCount: 1,
+//           title: 1,
+//           runtime: 1,
+//           director: 1,
+//           year: 1,
+//           genre: 1,
+//           description: 1,
+//           poster_url: 1,
+//           createdAt: 1,
+//           updatedAt: 1,
+//           __v: 1
+//       }}
+//     ];
+
+//     if (genre) {
+//       const genreMatchStage = {
+//         $match: {
+//          "movie.genre": { $in: [genre] }
+//         }
+//       };
+//       // We insert before $replaceRoot to use "movie.genre"
+//       pipeline.splice(pipeline.findIndex(st => st.$replaceRoot), 0, genreMatchStage);
+//     }
+//     const moviesWithAvgRating= await WatchedMovie.aggregate(pipeline).exec();
+//     res.json({movies:moviesWithAvgRating});
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// }
