@@ -165,38 +165,35 @@ export async function getTopXMovies(req, res) {
 //   const limit = parseInt(req.params.limit, 10) || 4;
 //   const genre = req.query.genre;
 //   try {
-//      const pipeline = [
+//     const pipeline = [
 //       /**
 //        * Groups all reviews by their movieId.
 //        * _id becomes the group key (here, the movieId of the movie).
 //        * avgRating: calculates the average rating of all reviews in that group using the $avg accumulator.
 //        * reviewCount: counts how many reviews are in that group using $sum: 1.
 //        */
-//       { $group: {
+//       {
+//         $group: {
 //           _id: "$movieId",
 //           avgRating: { $avg: "$rating" },
 //           reviewCount: { $sum: 1 }
-//       }},
-//       /**
-//        * Sorts the grouped results by average rating, descending (-1).
-//        */
-//       { $sort: { avgRating: -1, reviewCount: -1 }},
-//       /**
-//        * Takes only the top limit results after sorting.
-//        */
-//       { $limit: limit },
+//         }
+//       },
+
 //       /**
 //        * Performs a join between the current pipeline documents and the movies collection.
 //        * localField: "_id" is the _id we grouped by earlier (the movie’s _id).
 //        * foreignField: "_id" is the _id field in the movies collection.
 //        * as: "movie" puts the matched movie(s) in a new array field called "movie".
 //        */
-//       { $lookup: {
+//       {
+//         $lookup: {
 //           from: "movies",
 //           localField: "_id",
 //           foreignField: "_id",
 //           as: "movie"
-//       }},
+//         }
+//       },
 //       /**
 //        * Converts the movie array (from $lookup) into a single object.
 //        * If a movie was found, it just unwraps it
@@ -216,10 +213,19 @@ export async function getTopXMovies(req, res) {
 //        */
 //       { $replaceRoot: { newRoot: "$movie" } },
 //       /**
+//    * Sorts the grouped results by average rating, descending (-1).
+//    */
+//       { $sort: { avgRating: -1, reviewCount: -1 } },
+//       /**
+//        * Takes only the top limit results after sorting.
+//        */
+//       { $limit: limit },
+//       /**
 //        * Shapes the final output — selects only the fields you want to return.
 //        * include avgRating/reviewCount
 //        */
-//       { $project: {
+//       {
+//         $project: {
 //           avgRating: 1,
 //           reviewCount: 1,
 //           title: 1,
@@ -232,20 +238,23 @@ export async function getTopXMovies(req, res) {
 //           createdAt: 1,
 //           updatedAt: 1,
 //           __v: 1
-//       }}
+//         }
+//       }
 //     ];
 
 //     if (genre) {
 //       const genreMatchStage = {
 //         $match: {
-//          "movie.genre": { $in: [genre] }
+//           "movie.genre": { $in: [genre] }
 //         }
 //       };
 //       // We insert before $replaceRoot to use "movie.genre"
 //       pipeline.splice(pipeline.findIndex(st => st.$replaceRoot), 0, genreMatchStage);
 //     }
-//     const moviesWithAvgRating= await WatchedMovie.aggregate(pipeline).exec();
-//     res.json({movies:moviesWithAvgRating});
+
+
+//     const moviesWithAvgRating = await WatchedMovie.aggregate(pipeline).exec();
+//     res.json({ movies: moviesWithAvgRating });
 //   } catch (error) {
 //     res.status(500).json({ error: error.message });
 //   }

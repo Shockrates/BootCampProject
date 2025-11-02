@@ -297,3 +297,7 @@ button:focus {
 .truncate-multiline {
   @apply line-clamp-5 overflow-hidden text-ellipsis;
 }
+
+.truncate-multiline-short {
+  @apply line-clamp-2 overflow-hidden text-ellipsis;
+}

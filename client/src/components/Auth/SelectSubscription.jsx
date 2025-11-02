@@ -1,7 +1,7 @@
 //import { useState } from "react";
-import free from '../../assets/free.jpg'
-import diamond from '../../assets/diamond.jpg'
-import gold from '../../assets/gold.jpg'
+import free from '../../assets/free.png'
+import diamond from '../../assets/diamond.png'
+import gold from '../../assets/gold.png'
 
 
 

@@ -18,6 +18,7 @@ import Privacy from './components/Footer/FooterLinks/Privacy'
 import Contact from './components/Footer/FooterLinks/Contact'
 import Cookies from './components/Footer/FooterLinks/Cookies'
 import AboutUs from './components/Footer/FooterLinks/AboutUs'
+import Subscription from './components/Profile/Subscription'
 
 /**
  * Main application component.
@@ -41,6 +42,7 @@ function App() {
           <Route path="imdb-top-movies" element={<Dashboard />} />
           <Route path="community" element={<CommunityFeed />} />
           <Route path="about" element={<About />} />
+          <Route path="subscription/:tier" element={<Subscription />} />
           <Route path="movie/:id" element={<MoviePage />} />
 
           {/*<Route path='profile/:id' element={<Profile />} /> */}

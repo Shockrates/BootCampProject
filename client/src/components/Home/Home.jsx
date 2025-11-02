@@ -48,9 +48,9 @@ export default function Home() {
     }, []);
     useEffect(() => {
         let mounted = true;
-            const normalizedGenre = genre && genre.toLowerCase() !== "all"
-        ? genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase()
-        : undefined;
+        const normalizedGenre = genre && genre.toLowerCase() !== "all"
+            ? genre.charAt(0).toUpperCase() + genre.slice(1).toLowerCase()
+            : undefined;
 
 
         const loadFilteredMovies = async () => {
@@ -126,7 +126,7 @@ export default function Home() {
             {/* Title for the Genre Image Grid */}
             <div className="max-w-6xl mx-auto my-12 px-4">
                 <h2 className="text-3xl font-bold text-center mb-6">
-                      {genre && genre.toLowerCase() !== "all"
+                    {genre && genre.toLowerCase() !== "all"
                         ? `Top Rated ${genre[0].toUpperCase() + genre.slice(1)} Movies by ReelTalk Users`
                         : "Top Rated Movies by ReelTalk Users"}
 
