@@ -16,7 +16,7 @@ export default function FilterBar() {
   const current = params.get("genre") // <--- THIS is where current comes from
 
   return (
-    <nav className="flex gap-3 overflow-x-auto py-3 px-2 border-b border-neutral-800 no-scrollbar">
+    <nav className="flex justify-center gap-3 overflow-x-auto py-3 px-2 border-b border-neutral-800 no-scrollbar">
       {GENRES.map(g => (
         <Link
           key={g}
