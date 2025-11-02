@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import video from '../../assets/VideoHome.mp4';
+import video from '../../assets/video.mp4';
 import { fetchTopXMovies } from '../../utils/api'
 import MoviesTable from '../Dashboard/MoviesTable'
 import FilterBar from './FilterBar'
