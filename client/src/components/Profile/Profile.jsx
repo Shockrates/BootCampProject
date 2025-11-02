@@ -3,6 +3,7 @@ import MovieSearchModal from './MovieSearch/MovieSearchModal';
 import FeedList from '../CommunityFeed/FeedList'
 import { useAuth } from '../Auth/AuthProvider';
 import { useParams } from 'react-router-dom';
+import FeedListCarusel from '../Home/FeedListCarusel';
 //import movies from '../../data/movies.json'; 
 //import {id} from 'react-router-dom';
 
@@ -170,7 +171,7 @@ const Profile = () => {
 
           ))
         } */}
-        <FeedList reviews={watchedMovies} isProfile={true} />
+        <FeedListCarusel reviews={watchedMovies} isProfile={true} />
 
       </section>
     </div>

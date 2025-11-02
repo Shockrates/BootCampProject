@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import video from '../../assets/video.mp4';
 import { fetchTopXMovies } from '../../utils/api'
 import MoviesTable from '../Dashboard/MoviesTable'
+import MovieTableItem from '../Dashboard/MovieTableItem';
 import FilterBar from './FilterBar'
 import { useSearchParams } from "react-router-dom"
 import useAuth from '../Auth/AuthProvider';
 import { fetchReviews } from '../../utils/api'
 import FeedList from '../CommunityFeed/FeedList'
+import FeedListCarousel from './FeedListCarusel';
+import Carousel from '../Helper/Carousel';
 
 
 export default function Home() {
@@ -35,7 +38,7 @@ export default function Home() {
         const loadMovies = async () => {
             try {
                 //const movies = await fetchTopMoviesKaterina();
-                const movies = await fetchTopXMovies(4);
+                const movies = await fetchTopXMovies(24);
                 if (!mounted) return;
                 setMovies(movies);
             } catch (error) {
@@ -55,7 +58,7 @@ export default function Home() {
 
         const loadFilteredMovies = async () => {
             try {
-                const filteredMovies = await fetchTopXMovies(4, normalizedGenre);
+                const filteredMovies = await fetchTopXMovies(24, normalizedGenre);
                 if (!mounted) return;
                 setFilteredMovies(filteredMovies);
             } catch (error) {
@@ -71,7 +74,7 @@ export default function Home() {
         let mounted = true;
         const loadReviews = async () => {
             try {
-                const reviews = await fetchReviews(4);
+                const reviews = await fetchReviews();
                 if (!mounted) return;
                 setReviews(reviews);
 
@@ -135,13 +138,17 @@ export default function Home() {
                 </h2>
                 <FilterBar />
                 {/* Image Grid */}
-                <MoviesTable movies={filteredMovies} />
+                {/* <MoviesTable movies={filteredMovies} /> */}
+                <Carousel items={filteredMovies} visibleCount={4}>
+                    {(mapItem, index) => <MovieTableItem key={index} movie={mapItem} index={index} />}
+                </Carousel>
             </div>
 
             <div className="max-w-6xl mx-auto my-12 px-4">
                 <h2 className="text-3xl font-bold text-center mb-6">Recent Reviews</h2>
                 {/* Image Grid */}
-                <FeedList reviews={reviews} isProfile={true} isTable={true} />
+                {/* <FeedList reviews={reviews} isProfile={true} isTable={true} /> */}
+                <FeedListCarousel reviews={reviews} isProfile={true} isTable={true} />
             </div>
 
 

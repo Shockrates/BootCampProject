@@ -11,12 +11,11 @@ const FeedListItem = ({ review, onOpen, isProfile = false }) => {
 
 
   return (
-    <div className="flex flex-col border-b-2  text-slate-50 bg-stone-900 m-4 p-2 " >
+    <div className={`flex flex-col border-b-2  text-slate-50 bg-stone-900 ${isProfile ? "" : "m-4 p-2"}`} >
       <div className={`review-items flex ${isProfile ? "flex-col" : "flex-col sm:flex-row"}`}>
-        <div className="flex flex-col items-end m-2 gap-2">
-          {!isProfile && (
-            <TimeAgo createdAt={review.createdAt} />
-          )}
+        <div className={`flex items-end m-2 gap-2 ${isProfile ? "flex-row" : "flex-col"}`}>
+
+          <TimeAgo createdAt={review.createdAt} />
 
           <FaRegBookmark />
 
