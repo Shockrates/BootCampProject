@@ -28,7 +28,7 @@ export default function Dashboard() {
         const loadMovies = async () => {
             setMessage('Loading...');
             try {
-                const movies = await fetchTopMovies(37, 0);
+                const movies = await fetchTopMovies(36, 0);
                 if (!mounted) return;
                 setMovies(movies);
                 setMessage("Showing Data from Backend Server");
