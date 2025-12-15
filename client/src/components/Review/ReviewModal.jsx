@@ -14,8 +14,8 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
   const loadComments = async () => {
     setMessage('Loading...');
     try {
-      const res = await fetch(`https://bootcampproject-production.up.railway.app/getReviewCommentsByWatchedMovie/${review._id}`);
-      //const res = await fetch(`http://localhost:3000/getReviewCommentsByWatchedMovie/${review._id}`);
+      //const res = await fetch(`https://bootcampproject-production.up.railway.app/getReviewCommentsByWatchedMovie/${review._id}`);
+      const res = await fetch(`http://localhost:3000/getReviewCommentsByWatchedMovie/${review._id}`);
       const { message, reviewComments } = await res.json();
       if (res.ok) {
         setComments(reviewComments);
@@ -73,15 +73,15 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
           <div className="modal-content mt-4">
             <div className="flex flex-row justify-between">
               <MoviePageDetails movie={review.movieId} user={user} isReview={true} />
-              
+
               <div className="flex flex-col">
                 <h1 style={{ margin: 0 }}>
-                {review.movieId.title}  {review.movieId.year && (<small>({review.movieId.year})</small>)}
-            </h1>
+                  {review.movieId.title}  {review.movieId.year && (<small>({review.movieId.year})</small>)}
+                </h1>
                 <p>
                   {review.review}
-                  </p> 
-                </div>
+                </p>
+              </div>
             </div>
 
             <CommentReviewList comments={comments} />

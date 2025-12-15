@@ -24,7 +24,7 @@ const Profile = () => {
     let cancelled = false;
     const loadUser = async (userId) => {
       try {
-        const res = await fetch(`https://bootcampproject-production.up.railway.app/user/${userId}`);
+        const res = await fetch(`http://localhost:3000/user/${userId}`);
         const { user } = await res.json();
         if (cancelled) return;
         setProfileUser(user);
@@ -60,7 +60,7 @@ const Profile = () => {
 
     const loadWatchedMovies = async (userId) => {
       try {
-        const res = await fetch(`https://bootcampproject-production.up.railway.app/watchedByUser/${userId}`);
+        const res = await fetch(`http://localhost:3000/watchedByUser/${userId}`);
         const { watchedMovies } = await res.json();
         if (cancelled) return;
         setWatchedMovies(watchedMovies ?? []);
