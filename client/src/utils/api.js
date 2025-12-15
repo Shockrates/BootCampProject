@@ -8,8 +8,8 @@
 //  */
 
 //const URI = "https://bootcampproject-production.up.railway.app";
-const URI = "http://localhost:3000";
-
+//const URI = "http://localhost:3000";
+const URI = "https://reel-talk-server-bfnrnvg9t-shockrates-projects.vercel.app";
 /**
  * Attempts to log in a user by checking email and password against the JSON server.
  *

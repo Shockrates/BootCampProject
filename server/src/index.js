@@ -16,15 +16,20 @@ const port = process.env.PORT || 3000;
 connectDB();
 
 // Middleware
-app.use(cors());
+//app.use(cors());
+app.use(cors({
+  origin: "*", // tighten later if needed
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express.json()); // For parsing JSON bodies
 
-//an kanei request sto parakatw anoigei to notesRoutes kai xtypaei ekeines tis routes
+
 app.use("/", userRoutes);
-app.use("/",movieRoutes);
-app.use("/",watchedMovieRoutes);
-app.use("/",reviewCommentRoutes);
-app.use("/",reviewLikeRoutes);
+app.use("/", movieRoutes);
+app.use("/", watchedMovieRoutes);
+app.use("/", reviewCommentRoutes);
+app.use("/", reviewLikeRoutes);
 
 // Test route
 app.get('/', (req, res) => {
