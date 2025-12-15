@@ -36,6 +36,8 @@ app.get('/', (req, res) => {
   res.send('Hello from your Node.js server with Express!');
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server listening on port ${port}`);
+// });
+
+export default app;
