@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import FeedListCarusel from '../Home/FeedListCarusel';
 import Carousel from '../Helper/Carousel';
 import MovieTableItem from '../Dashboard/MovieTableItem';
+import { fetchUserReviews, fetchUser } from '../../utils/api';
 //import movies from '../../data/movies.json'; 
 //import {id} from 'react-router-dom';
 
@@ -24,8 +25,7 @@ const Profile = () => {
     let cancelled = false;
     const loadUser = async (userId) => {
       try {
-        const res = await fetch(`http://localhost:3000/user/${userId}`);
-        const { user } = await res.json();
+        const user = await fetchUser(userId);
         if (cancelled) return;
         setProfileUser(user);
       } catch (error) {
@@ -58,10 +58,9 @@ const Profile = () => {
 
     let cancelled = false;
 
-    const loadWatchedMovies = async (userId) => {
+    const loadUserReviews = async (userId) => {
       try {
-        const res = await fetch(`http://localhost:3000/watchedByUser/${userId}`);
-        const { watchedMovies } = await res.json();
+        const watchedMovies = await fetchUserReviews(userId)
         if (cancelled) return;
         setWatchedMovies(watchedMovies ?? []);
       } catch (error) {
@@ -69,7 +68,7 @@ const Profile = () => {
         if (!cancelled) setWatchedMovies([]);
       }
     }
-    loadWatchedMovies(profileUser._id)
+    loadUserReviews(profileUser._id)
     return () => {
       cancelled = true;
     }

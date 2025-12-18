@@ -4,6 +4,7 @@ import CommentReviewForm from './CommentReviewForm';
 import CommentReviewList from './CommentReviewList';
 import MoviePageDetails from '../MoviePage/MoviePageDetails';
 import { bus } from '../../utils/eventBus'
+import { fetchReviewComments } from '../../utils/api';
 
 
 const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
@@ -14,13 +15,8 @@ const ReviewModal = ({ isOpen, onClose, review, user, authUser }) => {
   const loadComments = async () => {
     setMessage('Loading...');
     try {
-      //const res = await fetch(`https://bootcampproject-production.up.railway.app/getReviewCommentsByWatchedMovie/${review._id}`);
-      const res = await fetch(`http://localhost:3000/getReviewCommentsByWatchedMovie/${review._id}`);
-      const { message, reviewComments } = await res.json();
-      if (res.ok) {
-        setComments(reviewComments);
-        return
-      }
+      const comments = await fetchReviewComments(review._id);
+      setComments(comments);
       setMessage(message);
     } catch (error) {
       console.log("Error:", error);

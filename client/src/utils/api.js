@@ -9,7 +9,7 @@
 
 //const URI = "https://bootcampproject-production.up.railway.app";
 //const URI = "http://localhost:3000";
-const URI = "https://reel-talk-server-bfnrnvg9t-shockrates-projects.vercel.app";
+const URI = "https://reel-talk-server.vercel.app";
 /**
  * Attempts to log in a user by checking email and password against the JSON server.
  *
@@ -63,6 +63,17 @@ export const registerRequest = async (username, email, password, confirmPass, ag
 
 }
 
+export async function fetchUser(userId) {
+  const res = await fetch(`${URI}/${userId}`);
+  //const res = await fetch(`http://localhost:3000/user/${userId}`);
+  if (!res.ok) {
+    // Throw so the caller knows this was a failure 
+    throw new Error(`Failed to fetch User (${res.status})`);
+  }
+  const { user } = await res.json();
+  return user;
+}
+
 /**
  * Fetch the top N movies from the JSON server.
  * Only supports pagination via `start` and `limit`.
@@ -75,10 +86,6 @@ export async function fetchTopMovies(limit = 36, start = 0) {
   const params = new URLSearchParams();
   params.set('_start', String(start));
   params.set('_limit', String(limit));
-
-  //Code for testing in json server
-  //const url = `${URI}/movies?${params.toString()}`;
-  //const res = await fetch(url);
 
   const res = await fetch(`${URI}/getAllMovies`);
 
@@ -145,6 +152,17 @@ export async function fetchReviews(limit) {
   return watchedMovies;
 }
 
+export async function fetchUserReviews(userId) {
+  const res = await fetch(`${URI}/watchedByUser/${userId}`);
+  if (!res.ok) {
+    // Throw so the caller knows this was a failure (not just an empty list)
+    throw new Error(`Failed to fetch review comments, (${res.status})`);
+  }
+  //const res = await fetch(`http://localhost:3000/watchedByUser/${userId}`);
+  const { watchedMovies } = await res.json();
+  return watchedMovies;
+}
+
 export async function createReview(userId, movieId, rating, review, watchedAt) {
   try {
 
@@ -187,6 +205,17 @@ export async function createComment(watchedMovieId, commenterId, comment) {
     console.log("Error:", error.message);
   }
 }
+
+export async function fetchReviewComments(reviewId) {
+  const res = await fetch(`${URI}/getReviewCommentsByWatchedMovie/${reviewId}`);
+  if (!res.ok) {
+    // Throw so the caller knows this was a failure (not just an empty list)
+    throw new Error(`Failed to fetch review comments, (${res.status})`);
+  }
+  const { reviewComments } = await res.json();
+  return reviewComments;
+}
+
 
 export async function createLike(watchedMovieId, likerId, like) {
   try {
